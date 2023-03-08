@@ -12,6 +12,12 @@ Project{
         name: { return FileInfo.baseName(sourceDirectory) }
 
         files: [
+            'src/gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.cpp',
+            'src/gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h',
+            'src/gameObjects/abstractEnemy/abstractEnemy.cpp',
+            'src/gameObjects/abstractEnemy/abstractEnemy.h',
+            'src/gameObjects/gameObject.cpp',
+            'src/gameObjects/gameObject.h',
             'src/gameObjects/player/Player.cpp',
             'src/gameObjects/player/Player.h',
             'src/main.cpp',
@@ -19,12 +25,20 @@ Project{
             'src/ofApp.h',
             'src/scenes/game_scene.cpp',
             'src/scenes/game_scene.h',
+            'src/scenes/game_scene/game_scene.cpp',
+            'src/scenes/game_scene/game_scene.h',
+            'src/scenes/mainMenu_sceme/mainMenu_scene.cpp',
+            'src/scenes/mainMenu_sceme/mainMenu_scene.h',
             'src/scenes/mainMenu_scene.cpp',
             'src/scenes/mainMenu_scene.h',
             'src/scenes/pause_scene.cpp',
             'src/scenes/pause_scene.h',
+            'src/scenes/pause_scene/pause_scene.cpp',
+            'src/scenes/pause_scene/pause_scene.h',
             'src/scenes/score_scene.cpp',
             'src/scenes/score_scene.h',
+            'src/scenes/score_scene/score_scene.cpp',
+            'src/scenes/score_scene/score_scene.h',
         ]
 
         of.addons: [

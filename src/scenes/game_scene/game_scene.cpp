@@ -8,11 +8,6 @@
     }
 
 
-        //DrawScene function
-    //*****************************************************
-    void Game_scene::drawScene(){
-        ofSetBackgroundColor(118);
-    }
 
 
         //UpdateScene function
@@ -21,4 +16,13 @@
      
 
 
+    }
+
+
+        //DrawScene function
+    //*****************************************************
+    void Game_scene::drawScene(){
+        ofSetBackgroundColor(118);
+
+        this->enemy.draw();
     }
