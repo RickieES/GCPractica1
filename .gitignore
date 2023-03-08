@@ -42,6 +42,9 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+# Workspace personalizations
+*.code-workspace
+
 # Local History for Visual Studio Code
 .history/
 
