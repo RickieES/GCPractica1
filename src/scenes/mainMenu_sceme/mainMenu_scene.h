@@ -33,12 +33,19 @@ class MainMenu_scene {
 			int signPlayButtonPosY;
 			ofEvent<glm::vec2> playButton_clicEvent;
 
-			string exitButton;
-			int signExitButtonWidht;
-			int signExitButtonHeight;
-			int signExitButtonPosX;
-			int signExitButtonPosY;
-			ofEvent<glm::vec2> exitButton_clicEvent;
+			string pauseButton;
+			int signPauseButtonWidht;
+			int signPauseButtonHeight;
+			int signPauseButtonPosX;
+			int signPauseButtonPosY;
+			ofEvent<glm::vec2> pauseButton_clicEvent;
+
+			string scoreButton;
+			int signScoreButtonWidht;
+			int signScoreButtonHeight;
+			int signScoreButtonPosX;
+			int signScoreButtonPosY;
+			ofEvent<glm::vec2> scoreButton_clicEvent;
 
 
 

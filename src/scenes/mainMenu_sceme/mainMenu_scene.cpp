@@ -23,18 +23,24 @@
             this->buttonFont.setLineHeight(34.0f);
             this->buttonFont.setLetterSpacing(1.035);
 
-            this->playButton = "Play";
+            this->playButton = "Scenary";
 			this->signPlayButtonWidht = 3*(ofGetWidth()/10);
 			this->signPlayButtonHeight = 0.5*(ofGetHeight()/10);
 			this->signPlayButtonPosX = 3.5*(ofGetWidth()/10);
 			this->signPlayButtonPosY = 3.5*(ofGetHeight()/10);
 
-            this->exitButton = "Exit";
-			this->signExitButtonWidht = 3*(ofGetWidth()/10);
-			this->signExitButtonHeight = 0.5*(ofGetHeight()/10);
-			this->signExitButtonPosX = 3.5*(ofGetWidth()/10);
-			this->signExitButtonPosY = 4.5*(ofGetHeight()/10);
-            
+            this->pauseButton = "Enemy";
+			this->signPauseButtonWidht = 3*(ofGetWidth()/10);
+			this->signPauseButtonHeight = 0.5*(ofGetHeight()/10);
+			this->signPauseButtonPosX = 3.5*(ofGetWidth()/10);
+			this->signPauseButtonPosY = 4.0*(ofGetHeight()/10);
+
+            this->scoreButton = "Player";
+			this->signScoreButtonWidht = 3*(ofGetWidth()/10);
+			this->signScoreButtonHeight = 0.5*(ofGetHeight()/10);
+			this->signScoreButtonPosX = 3.5*(ofGetWidth()/10);
+			this->signScoreButtonPosY = 4.5*(ofGetHeight()/10);
+
         return;
     }
 
@@ -47,14 +53,17 @@
         ofSetColor(160, 171, 43);
         ofDrawRectangle(this->signTitlePosX, this->signTitlePosY, this->signTitleWidht, this->signTitleHeight);
         ofDrawRectangle(this->signMenuPosX, this->signMenuPosY, this->signMenuWidht, this->signMenuHeight);
+        
         ofSetColor(145, 65, 12);
         ofDrawRectangle(this->signPlayButtonPosX, this->signPlayButtonPosY, this->signPlayButtonWidht, this->signPlayButtonHeight);
-        ofDrawRectangle(this->signExitButtonPosX, this->signExitButtonPosY, this->signExitButtonWidht, this->signExitButtonHeight);
+        ofDrawRectangle(this->signPauseButtonPosX, this->signPauseButtonPosY, this->signPauseButtonWidht, this->signPauseButtonHeight);
+        ofDrawRectangle(this->signScoreButtonPosX, this->signScoreButtonPosY, this->signScoreButtonWidht, this->signScoreButtonHeight);
        
         ofSetColor(0,0,0);
         this->titleFont.drawString(this->title, this->signTitlePosX + this->signTitlePosX/10, this->signTitlePosY + this->signTitleHeight/1.5 );
         this->titleFont.drawString(this->playButton, this->signPlayButtonPosX, this->signPlayButtonPosY + this->signPlayButtonHeight);
-        this->titleFont.drawString(this->exitButton, this->signExitButtonPosX, this->signExitButtonPosY + this->signExitButtonHeight);
+        this->titleFont.drawString(this->pauseButton, this->signPauseButtonPosX, this->signPauseButtonPosY + this->signPauseButtonWidht);
+        this->titleFont.drawString(this->scoreButton, this->signScoreButtonPosX, this->signScoreButtonPosY + this->signScoreButtonHeight);
 
         return;
     }

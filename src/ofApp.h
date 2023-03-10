@@ -14,7 +14,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 		void changeScene_eventFunction();
-
+		void mousePressed(int x, int y, int button);
 		
 		MainMenu_scene mainMenu_scene;
 		Game_scene game_scene;
@@ -22,10 +22,10 @@ class ofApp : public ofBaseApp{
 		Score_scene score_scene;
 
 		enum ControllerScenes {
-			mainMenu,
-			game,
-			pause,
-			score
+			mainMenu, // Menú principal
+			game,     // En testing, escenario
+			pause,    // En testing, enemigo
+			score     // En testing, jugador
 		};
 		ControllerScenes controller;
 
