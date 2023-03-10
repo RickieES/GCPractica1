@@ -46,6 +46,6 @@ void ofApp::draw(){
 
 
 
-void ofApp::changeExcene_eventFunction(){
+void ofApp::changeScene_eventFunction(){
 
 }

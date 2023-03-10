@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ofxGui.h"
+//#include "ofxGui.h"
 #include "ofMain.h"
 #include "gameObjects/player/Player.h"
 #include "scenes/game_scene/game_scene.h"
@@ -13,7 +13,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-		void changeExcene_eventFunction();
+		void changeScene_eventFunction();
 
 		
 		MainMenu_scene mainMenu_scene;

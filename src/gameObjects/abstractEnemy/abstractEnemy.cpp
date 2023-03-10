@@ -23,14 +23,6 @@
         // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
     //*****************************************************
 
-    string AbstractEnemy::getId(){
-        return this->id;
-    }
-    void AbstractEnemy::setId(string value){
-        this->id = value;
-        return;
-    }
-
     int AbstractEnemy::getPosX(){
         return this->posX;
     }
@@ -82,7 +74,7 @@
     unsigned AbstractEnemy::getSpeed(){
         return this->speed;
     }
-    unsigned AbstractEnemy::setSpeed(unsigned value){
+    void AbstractEnemy::setSpeed(unsigned value){
         this->speed = value;
         return;
     }

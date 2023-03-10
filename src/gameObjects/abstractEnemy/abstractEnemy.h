@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
 #include "ofMain.h"
+#include "../gameObject.h"
 using namespace std;
 
-class AbstractEnemy {
+class AbstractEnemy: public GameObject {
 	
 	private: 
-		string id;
+
 		int posX;
 		int posY;
 		int limitUp;
@@ -17,20 +18,18 @@ class AbstractEnemy {
 
 
 	public:
-		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed){
-			this->limitUp = nLimitUp;
-			this->limitDown = nLimitDown;
-			this->limitLeft = nLimitLeft;
-			this->limitRight = nLimitRight;
-			this->speed = nSpeed;
+		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed):
+			GameObject(){
+			this->setLimitUp(nLimitUp);
+			this->setLimitDown(nLimitDown);
+			this->setLimitRight(nLimitRight);
+			this->setLimitLeft(nLimitLeft);
 		}
 
-		virtual void setup();
-		virtual void draw();
-		virtual void update();
+		virtual void setup() override;
+		virtual void draw() override;
+		virtual void update() override;
 
-		string getId();
-		void setId(string value);
 		int getPosX();
 		void setPosX(int value);
 		int getPosY();
@@ -44,7 +43,7 @@ class AbstractEnemy {
 		int getLimitRight();
 		void setLimitRight(int value);
 		unsigned getSpeed();
-		unsigned setSpeed(unsigned value);
+		void setSpeed(unsigned value);
 
 
 

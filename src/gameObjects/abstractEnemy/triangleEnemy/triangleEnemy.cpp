@@ -1,11 +1,11 @@
-#include "rectangleEnemy.h" 
+#include "triangleEnemy.h" 
 
 
         //Setup function
     //*****************************************************
-    void RectangleEnemy::setup() {
+    void TriangleEnemy::setup() {
         this->setPosX(this->getPosX()-this->getSpeed());
-        if(this->getPosX() + this->getWidth() <= this->getLimitLeft()){
+        if(this->getPosX() + this->getLongSide() <= this->getLimitLeft()){
             //TODO lanzar excepción llegada al final
         }
 
@@ -15,7 +15,7 @@
 
         //Draw function
     //*****************************************************
-    void RectangleEnemy::draw(){
+    void TriangleEnemy::draw(){
         printf("HOLA RectangleEnemy Draw\n");
  
         ofSetColor(255, 0, 0);
@@ -23,7 +23,7 @@
         
         ofPushMatrix();
             ofTranslate(this->getPosX(), this->getPosY());
-            ofDrawRectangle(this->getPosX(), this->getPosY(), this->getWidth(), this->getHeight());
+            //TODO Pintar triangulo
         ofPopMatrix();
         
 
@@ -33,7 +33,7 @@
 
         //Update function
     //*****************************************************
-    void RectangleEnemy::update(){
+    void TriangleEnemy::update(){
         return;
     }
 
@@ -42,18 +42,10 @@
     //*****************************************************
         // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
     //*****************************************************
-    long RectangleEnemy::getWidth(){
-        return this->width;
+    long TriangleEnemy::getLongSide(){
+        return this->longSide;
     }
-    void RectangleEnemy::setWidth(long value){
-        this->width = value;
-        return;
-    }
-
-    long RectangleEnemy::getHeight(){
-        return this->heigth;
-    }
-    void RectangleEnemy::setHeight(long value){
-        this->heigth = value;
+    void TriangleEnemy::setLongSide(long value){
+        this->longSide = value;
         return;
     }
