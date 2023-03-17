@@ -8,6 +8,7 @@ Player::Player() {
 // Constructor con tipos simples
 //*************************************************************
 Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
+	this->facing = Orientation::NORTH;
 	this->rotationSpeed = 2;
 	this->radius = 50;
     this->canyonLength = 50;
@@ -19,6 +20,8 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
 
 	ofPoint point2(this->bodyPos.x, this->bodyPos.y);
 	canyonBase.arc(point2, 100, 100, 0, 180, 100);
+	cout << "Constructor Body pos x, y: " << bodyPos.x << " - " << bodyPos.y << "\n";
+	cout << "Constructor Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 // Constructor con tipos reales
@@ -55,7 +58,9 @@ int Player::getRadius() {
  * Sets canyon length to a maximum of 150
 */
 void Player::setCanyonLength(int cl) {
-	this->canyonLength = max(150, cl);
+	cout << "set Canyon Length, cl: " << cl << "\n";
+	this->canyonLength = max(50, min(150, cl));
+	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 int Player::getCanyonLength() {
@@ -66,7 +71,9 @@ int Player::getCanyonLength() {
  * Sets canyon width to a maximum of 300
 */
 void Player::setCanyonWidth(int cw) {
-	this->canyonWidth = max(300, cw);
+	cout << "set Canyon Width, cw: " << cw << "\n";
+	this->canyonWidth = max(8, min(300, cw));
+	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 int Player::getCanyonWidth() {
@@ -149,51 +156,56 @@ int Player::getCanyonAngle() {
 //*************************************************************
 void Player::draw() {
     // TODO: incluir en una matriz de transformación
-	// ofPushMatrix();
-	// ofTranslate(this->bodyPos.x, this->bodyPos.y, 0);
-	ofSetColor(this->mainColor);
     // TODO: hacer un degradado de color;
-	ofFill();
-	// this->canyonBase.draw();
-    // ofDrawCircle(bodyPos, radius);
-    // TODO: incluir en una matriz de transformación
-	// ofPushMatrix();
-	// ofRotateDeg(this->canyonAngle, 0, 0, 1);
-	// ofPopMatrix();
-	// ofPopMatrix();
-	this->canyonBase.lineTo(bodyPos.x, bodyPos.y);
-	ofPoint point2(bodyPos.x + radius, bodyPos.y);
+	ofPushMatrix();
+	ofTranslate(this->bodyPos.x, this->bodyPos.y, 0);
+	if (this->facing == Orientation::NORTH) {
+	 	ofRotateDeg(180);
+	}
+	ofSetColor(this->mainColor);
+	this->canyonBase.lineTo(0, 0);
+	ofPoint point2(radius, 0);
 	this->canyonBase.arc(point2, radius, radius, 0, 180);
 	ofSetColor(mainColor);
 	ofFill();
 	this->canyonBase.draw();
+
+    // TODO: incluir en una matriz de transformación
+	// ofPushMatrix();
+	// ofRotateDeg(this->canyonAngle, 0, 0, 1);
 	ofSetColor(this->altColor);
 	ofFill();
-	ofDrawRectangle(bodyPos.x + radius - (canyonWidth / 2), bodyPos.y + radius - 5,
+	ofDrawRectangle(radius - (canyonWidth / 2), radius - 5,
 					canyonWidth, canyonLength);
-	cout << "Body pos x, y: " << bodyPos.x << " - " << bodyPos.y << "\n";
-	cout << "Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
-	return;
+	// ofPopMatrix();
+	ofPopMatrix();
 }
 
 
 // pmUpdate Function
 //*************************************************************
 void Player::update(){
+
 }
 
 
 // MoveLeft Function
 //*************************************************************
 void Player::moveLeft(){
-    this->bodyPos.x = this->bodyPos.x - this->rotationSpeed;
-	return;
+	if (this->facing == Orientation::NORTH) {
+	    this->canyonAngle =  max(200, this->canyonAngle - radius);
+	} else {
+	    this->canyonAngle =  min(160, this->canyonAngle + radius);
+	}
 }
 
 
 // MoveRight Function
 //*************************************************************
 void Player::moveRight(){
-	this->bodyPos.x = this->bodyPos.x + this->rotationSpeed;
-	return;
+	if (this->facing == Orientation::NORTH) {
+	    this->canyonAngle =  max(20, this->canyonAngle - radius);
+	} else {
+	    this->canyonAngle -=  min(340, this->canyonAngle + radius);
+	}
 };

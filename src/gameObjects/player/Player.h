@@ -50,4 +50,6 @@ class Player {
 		void update();
 		void moveLeft();
 		void moveRight();
+
+        enum class Orientation {NORTH, SOUTH} facing;
 };
