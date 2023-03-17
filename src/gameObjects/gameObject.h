@@ -7,6 +7,7 @@ class GameObject {
 	
 	private: 
 		string id;
+		ofPoint refPoint;
 
 	public:
 		GameObject(){
@@ -19,4 +20,12 @@ class GameObject {
 
 		string getId();
 		void setId(string value);
+        void setRefPoint(ofPoint rp);
+        void setRefPointX(int x);
+        void setRefPointY(int y);
+        ofPoint getRefPoint();
+        int getRefPointX();
+        int getRefPointY();
+
+		virtual bool collidesWith(GameObject ogo);
 };

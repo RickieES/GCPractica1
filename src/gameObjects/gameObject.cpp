@@ -31,3 +31,32 @@
         this->id = value;
         return;
     }
+
+    void GameObject::setRefPoint(ofPoint rp) {
+        this->refPoint = rp;
+    }
+
+    void GameObject::setRefPointX(int x) {
+        this->refPoint.x = x;
+    }
+
+    void GameObject::setRefPointY(int y) {
+        this->refPoint.y = y;
+    }
+
+    ofPoint GameObject::getRefPoint() {
+        return this->refPoint;
+    }
+
+    int GameObject::getRefPointX() {
+        return this->refPoint.x;
+    }
+
+    int GameObject::getRefPointY() {
+        return this->refPoint.y;
+    }
+
+    bool GameObject::collidesWith(GameObject ogo) {
+        return ((this->refPoint.x == ogo.getRefPointX())
+                && (this->refPoint.y == ogo.getRefPointY()));
+    }
