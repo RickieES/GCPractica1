@@ -13,23 +13,23 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
 	this->radius = 50;
     this->canyonLength = 50;
     this->canyonWidth = 8;
-	this->bodyPos.x = xCenter;
-	this->bodyPos.y = yCenter;
+	this->setRefPointX(xCenter);
+	this->setRefPointY(yCenter);
     this->canyonAngle = canyonAngle;
-    this->mainColor = ofColor(r % 256, g % 256, b % 256);
+	this->setColor(r, g , b);
 
-	ofPoint point2(this->bodyPos.x, this->bodyPos.y);
+	ofPoint point2(this->getRefPointX(), this->getRefPointY());
 	canyonBase.arc(point2, 100, 100, 0, 180, 100);
 }
 
 // Constructor con tipos reales
 //*************************************************************
-Player::Player(ofPoint playerPos, int canyonAngle = 0, ofColor mainColor) {
-	this->bodyPos = playerPos;
+Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor) {
+	this->setRefPoint(playerPos);
     this->canyonAngle = canyonAngle;
-    this->mainColor = mainColor;
+    this->setColor(mainColor);
 
-	ofPoint point2(this->bodyPos.x, this->bodyPos.y);
+	ofPoint point2(this->getRefPointX(), this->getRefPointY());
 	canyonBase.arc(point2, 100, 100, 0, 180, 100);
 }
 
@@ -78,68 +78,12 @@ int Player::getCanyonWidth() {
 	return this->canyonWidth;
 }
 
-void Player::setMainColor(ofColor mc) {
-	this->mainColor = mc;
-}
-
-ofColor Player::getMainColor() {
-	return this->mainColor;
-}
-
 void Player::setAltColor(ofColor ac) {
 	this->altColor = ac;
 }
 
 ofColor Player::getAltColor() {
 	return this->altColor;
-}
-
-void Player::setBodyPos(ofPoint bp) {
-	this->bodyPos = bp;
-}
-
-void Player::setBodyPosX(int x) {
-	this->bodyPos.x = x;
-}
-
-void Player::setBodyPosY(int y) {
-	this->bodyPos.y = y;
-}
-
-ofPoint Player::getBodyPos() {
-	return this->bodyPos;
-}
-
-int Player::getBodyPosX() {
-	return this->bodyPos.x;
-}
-
-int Player::getBodyPosY() {
-	return this->bodyPos.y;
-}
-
-void Player::setCanyonEdgePos(ofPoint cep) {
-	this->canyonEdgePos = cep;
-}
-
-void Player::setCanyonEdgePosX(int cepx) {
-	this->canyonEdgePos.x = cepx;
-}
-
-void Player::setCanyonEdgePosY(int cepy) {
-	this->canyonEdgePos.y = cepy;
-}
-
-ofPoint Player::getCanyonEdgePos() {
-	return this->canyonEdgePos;
-}
-
-int Player::getCanyonEdgePosX() {
-	return this->canyonEdgePos.x;
-}
-
-int Player::getCanyonEdgePosY() {
-	return this->canyonEdgePos.y;
 }
 
 void Player::setCanyonAngle(int ca) {
@@ -155,7 +99,7 @@ int Player::getCanyonAngle() {
 void Player::draw() {
     // TODO: hacer un degradado de color;
 	ofPushMatrix();
-	ofTranslate(this->bodyPos.x, this->bodyPos.y, 0);
+	ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
 	if (this->facing == Orientation::NORTH) {
 	 	ofRotateDeg(180);
 	}
@@ -169,11 +113,11 @@ void Player::draw() {
 					canyonWidth, canyonLength);
 	ofPopMatrix();
 
-	ofSetColor(this->mainColor);
+	ofSetColor(this->getColor());
 	this->canyonBase.lineTo(0, 0);
 	ofPoint point2(radius, 0);
 	this->canyonBase.arc(point2, radius, radius, 0, 180);
-	this->canyonBase.setColor(mainColor);
+	this->canyonBase.setColor(this->getColor());
 	ofFill();
 	this->canyonBase.draw();
 	ofPopMatrix();
