@@ -34,8 +34,8 @@
  
         ofSetBackgroundColor(118);
         ofSetColor(255, 255, 255);
-        ofDrawRectangle(this->limitGameLeft, this->limitGameUp, ofGetWidth(), this->limitGameUp);
-       // ofDrawRectangle(this->limitGameLeft, this->limitGameDown);
+        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameUp(), ofGetWidth(), this->getLimitGameUp());
+        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameDown(), ofGetWidth(), ofGetHeight()-this->getLimitGameDown());
 
         return;
     }
@@ -46,34 +46,50 @@
         // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
     //*****************************************************
 
-	int Game_scene::getLimitGameUp(){
+	unsigned Game_scene::getLimitGameUp(){
         return this->limitGameUp;
     }
-	void Game_scene::setLimitGameUp(int value){
+	void Game_scene::setLimitGameUp(unsigned value){
         this->limitGameUp = value;
         return;
     }
 
-	int Game_scene::getLimitGameDown(){
+	unsigned Game_scene::getLimitGameDown(){
         return this->limitGameDown;
     }
-	void Game_scene::setLimitGameDown(int value){
+	void Game_scene::setLimitGameDown(unsigned value){
         this->limitGameDown = value;
         return;
     }
 
-	int Game_scene::getLimitGameLeft(){
+	unsigned Game_scene::getLimitGameLeft(){
         return this->limitGameLeft;
     }
-	void Game_scene::setLimitGameLeft(int value){
+	void Game_scene::setLimitGameLeft(unsigned value){
         this->limitGameLeft = value;
         return;
     }
 
-	int Game_scene::getLimitGameRight(){
+	unsigned Game_scene::getLimitGameRight(){
         return this->limitGameRight;
     }
-	void Game_scene::setLimitGameRight(int value){
+	void Game_scene::setLimitGameRight(unsigned value){
+        this->limitGameRight = value;
+        return;
+    }
+
+	unsigned Game_scene::getLifeBarWidth(){
+        return this->limitGameRight;
+    }
+	void Game_scene::setLifeBarWidth(unsigned value){
+        this->limitGameRight = value;
+        return;
+    }
+    
+	unsigned Game_scene::getLifeBarHeight(){
+        return this->limitGameRight;
+    }
+	void Game_scene::setLifeBarHeight(unsigned value){
         this->limitGameRight = value;
         return;
     }
