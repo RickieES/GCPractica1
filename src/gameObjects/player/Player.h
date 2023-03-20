@@ -2,7 +2,7 @@
 #include "ofMain.h"
 
 class Player {
-        ofPolyline canyonBase;
+        ofPath canyonBase;
 		int rotationSpeed = 2;
 		int radius = 50;
         int canyonLength = 50;
@@ -17,7 +17,7 @@ class Player {
 	public:
         Player();
         Player(int x, int y, int canyonAngle, int r, int g, int b);
-		Player(ofPoint playerPos, int canyonAngle, ofColor = ofColor::blue);
+		Player(ofPoint playerPos, int canyonAngle = 0, ofColor = ofColor::blue);
 
         void setRotationSpeed(int rs);
         int getRotationSpeed();

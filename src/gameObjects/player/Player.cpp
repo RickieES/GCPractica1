@@ -20,13 +20,11 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
 
 	ofPoint point2(this->bodyPos.x, this->bodyPos.y);
 	canyonBase.arc(point2, 100, 100, 0, 180, 100);
-	cout << "Constructor Body pos x, y: " << bodyPos.x << " - " << bodyPos.y << "\n";
-	cout << "Constructor Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 // Constructor con tipos reales
 //*************************************************************
-Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor) {
+Player::Player(ofPoint playerPos, int canyonAngle = 0, ofColor mainColor) {
 	this->bodyPos = playerPos;
     this->canyonAngle = canyonAngle;
     this->mainColor = mainColor;
@@ -55,11 +53,11 @@ int Player::getRadius() {
 }
 
 /**
- * Sets canyon length to a maximum of 150
+ * Sets canyon length to a maximum of 100
 */
 void Player::setCanyonLength(int cl) {
 	cout << "set Canyon Length, cl: " << cl << "\n";
-	this->canyonLength = max(50, min(150, cl));
+	this->canyonLength = max(30, min(100, cl));
 	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
@@ -68,11 +66,11 @@ int Player::getCanyonLength() {
 }
 
 /**
- * Sets canyon width to a maximum of 300
+ * Sets canyon width to a maximum of 30
 */
 void Player::setCanyonWidth(int cw) {
 	cout << "set Canyon Width, cw: " << cw << "\n";
-	this->canyonWidth = max(8, min(300, cw));
+	this->canyonWidth = max(8, min(30, cw));
 	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
@@ -155,29 +153,29 @@ int Player::getCanyonAngle() {
 // pmDraw Function
 //*************************************************************
 void Player::draw() {
-    // TODO: incluir en una matriz de transformación
     // TODO: hacer un degradado de color;
 	ofPushMatrix();
 	ofTranslate(this->bodyPos.x, this->bodyPos.y, 0);
 	if (this->facing == Orientation::NORTH) {
 	 	ofRotateDeg(180);
 	}
+
+ 	ofPushMatrix();
+	ofTranslate(radius, radius - 5, 0);
+	ofRotateDeg(this->canyonAngle, 0, 0, 1);
+ 	ofSetColor(this->altColor);
+	ofFill();
+	ofDrawRectangle(0 - (canyonWidth / 2), 0,
+					canyonWidth, canyonLength);
+	ofPopMatrix();
+
 	ofSetColor(this->mainColor);
 	this->canyonBase.lineTo(0, 0);
 	ofPoint point2(radius, 0);
 	this->canyonBase.arc(point2, radius, radius, 0, 180);
-	ofSetColor(mainColor);
+	this->canyonBase.setColor(mainColor);
 	ofFill();
 	this->canyonBase.draw();
-
-    // TODO: incluir en una matriz de transformación
-	// ofPushMatrix();
-	// ofRotateDeg(this->canyonAngle, 0, 0, 1);
-	ofSetColor(this->altColor);
-	ofFill();
-	ofDrawRectangle(radius - (canyonWidth / 2), radius - 5,
-					canyonWidth, canyonLength);
-	// ofPopMatrix();
 	ofPopMatrix();
 }
 
@@ -192,20 +190,12 @@ void Player::update(){
 // MoveLeft Function
 //*************************************************************
 void Player::moveLeft(){
-	if (this->facing == Orientation::NORTH) {
-	    this->canyonAngle =  max(200, this->canyonAngle - radius);
-	} else {
-	    this->canyonAngle =  min(160, this->canyonAngle + radius);
-	}
+    this->canyonAngle =  max(-80, this->canyonAngle - this->getRotationSpeed());
 }
 
 
 // MoveRight Function
 //*************************************************************
 void Player::moveRight(){
-	if (this->facing == Orientation::NORTH) {
-	    this->canyonAngle =  max(20, this->canyonAngle - radius);
-	} else {
-	    this->canyonAngle -=  min(340, this->canyonAngle + radius);
-	}
+    this->canyonAngle =  min(80, this->canyonAngle + this->getRotationSpeed());
 };
