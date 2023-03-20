@@ -9,7 +9,6 @@
         //Draw function
     //*****************************************************
     void GameObject::draw(){
-        printf("DRAW GameObject\n");
         return;
     }
 
@@ -57,6 +56,18 @@
     }
 
     bool GameObject::collidesWith(GameObject ogo) {
-        return ((this->refPoint.x == ogo.getRefPointX())
-                && (this->refPoint.y == ogo.getRefPointY()));
+        return ((this->refPoint.x == ogo.getRefPointX()) && (this->refPoint.y == ogo.getRefPointY()));
+    }
+
+    ofColor GameObject::getColor(){
+        return this->color;
+    }
+
+    void GameObject::setColor(ofColor value){
+        this->color = value;
+        return;
+    }
+    void GameObject::setColor(int r, int g, int b){
+        this->color = ofColor(r%256, g%256, b%256);
+        return;
     }

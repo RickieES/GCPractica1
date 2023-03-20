@@ -9,7 +9,7 @@ void ofApp::setup(){
 	ofSetWindowTitle("Defend Death Star");
 	ofSetFrameRate(60);
 	
-	this->controller = mainMenu;
+	this->controller = game;
 	this->mainMenu_scene.setupScene();
 	this->game_scene.setupScene();
 	this->pause_scene.setupScene();
