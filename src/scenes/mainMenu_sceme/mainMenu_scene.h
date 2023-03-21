@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 #include "ofMain.h"
+#include "ofxGui.h"
 using namespace std;
+
+//typedef void (ofApp::*changeScene)();
 
 class MainMenu_scene {
 	public:
@@ -11,6 +14,10 @@ class MainMenu_scene {
 		void setupScene();
 		void drawScene();
 		void updateScene();
+
+        ofxPanel mainPanel;
+        ofxButton startGame_button;
+        void test();
 
 		string title;
 		ofTrueTypeFont	titleFont;

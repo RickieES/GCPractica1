@@ -1,9 +1,15 @@
-#include "mainMenu_scene.h" 
+#include "mainMenu_scene.h"
  
 
         //SetupScene function
     //*****************************************************
     void MainMenu_scene::setupScene(){
+
+        //startGame_button.addListener(this, &MainMenu_scene::test);
+
+        mainPanel.setup();
+        mainPanel.add(startGame_button.setup("start", 200, 200));
+
 
         this->signTitleWidht = 5*(ofGetWidth()/10);
         this->signTitleHeight = 1*(ofGetHeight()/10);
@@ -48,22 +54,27 @@
         //DrawScene function
     //*****************************************************
     void MainMenu_scene::drawScene(){
-        ofBackground(114, 156, 212);
-        ofFill();
-        ofSetColor(160, 171, 43);
-        ofDrawRectangle(this->signTitlePosX, this->signTitlePosY, this->signTitleWidht, this->signTitleHeight);
-        ofDrawRectangle(this->signMenuPosX, this->signMenuPosY, this->signMenuWidht, this->signMenuHeight);
+        mainPanel.draw();
+//        ofSetColor(ofColor::red);
+//        ofDrawRectangle(0, 0, 200, 200);
+
+
+//        ofBackground(114, 156, 212);
+//        ofFill();
+//        ofSetColor(160, 171, 43);
+//        ofDrawRectangle(this->signTitlePosX, this->signTitlePosY, this->signTitleWidht, this->signTitleHeight);
+//        ofDrawRectangle(this->signMenuPosX, this->signMenuPosY, this->signMenuWidht, this->signMenuHeight);
         
-        ofSetColor(145, 65, 12);
-        ofDrawRectangle(this->signPlayButtonPosX, this->signPlayButtonPosY, this->signPlayButtonWidht, this->signPlayButtonHeight);
-        ofDrawRectangle(this->signPauseButtonPosX, this->signPauseButtonPosY, this->signPauseButtonWidht, this->signPauseButtonHeight);
-        ofDrawRectangle(this->signScoreButtonPosX, this->signScoreButtonPosY, this->signScoreButtonWidht, this->signScoreButtonHeight);
+//        ofSetColor(145, 65, 12);
+//        ofDrawRectangle(this->signPlayButtonPosX, this->signPlayButtonPosY, this->signPlayButtonWidht, this->signPlayButtonHeight);
+//        ofDrawRectangle(this->signPauseButtonPosX, this->signPauseButtonPosY, this->signPauseButtonWidht, this->signPauseButtonHeight);
+//        ofDrawRectangle(this->signScoreButtonPosX, this->signScoreButtonPosY, this->signScoreButtonWidht, this->signScoreButtonHeight);
        
-        ofSetColor(0,0,0);
-        this->titleFont.drawString(this->title, this->signTitlePosX + this->signTitlePosX/10, this->signTitlePosY + this->signTitleHeight/1.5 );
-        this->titleFont.drawString(this->playButton, this->signPlayButtonPosX, this->signPlayButtonPosY + this->signPlayButtonHeight);
-        this->titleFont.drawString(this->pauseButton, this->signPauseButtonPosX, this->signPauseButtonPosY + this->signPauseButtonWidht);
-        this->titleFont.drawString(this->scoreButton, this->signScoreButtonPosX, this->signScoreButtonPosY + this->signScoreButtonHeight);
+//        ofSetColor(0,0,0);
+//        this->titleFont.drawString(this->title, this->signTitlePosX + this->signTitlePosX/10, this->signTitlePosY + this->signTitleHeight/1.5 );
+//        this->titleFont.drawString(this->playButton, this->signPlayButtonPosX, this->signPlayButtonPosY + this->signPlayButtonHeight);
+//        this->titleFont.drawString(this->pauseButton, this->signPauseButtonPosX, this->signPauseButtonPosY + this->signPauseButtonWidht);
+//        this->titleFont.drawString(this->scoreButton, this->signScoreButtonPosX, this->signScoreButtonPosY + this->signScoreButtonHeight);
 
         return;
     }
@@ -73,4 +84,9 @@
     //*****************************************************
     void MainMenu_scene::updateScene(){
         
+    }
+
+
+    void MainMenu_scene::test(){
+        ofBackground(ofColor::red);
     }

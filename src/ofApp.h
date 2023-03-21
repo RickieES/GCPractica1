@@ -27,8 +27,7 @@ class ofApp : public ofBaseApp{
 			pause,    // En testing, enemigo
 			score     // En testing, jugador
 		};
+
 		ControllerScenes controller;
-
-
 		
 };
