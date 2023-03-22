@@ -12,7 +12,7 @@ int Bullet::getSpeed() {
 
 // pmDraw Function
 //*************************************************************
-void Player::draw() {
+void Bullet::draw() {
 	ofPushMatrix();
 	ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
 

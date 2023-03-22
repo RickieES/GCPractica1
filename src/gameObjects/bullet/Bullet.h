@@ -9,4 +9,5 @@ class Bullet: public GameObject {
     public:
         void setSpeed(int s);
         int getSpeed();
+        void draw();
 };
