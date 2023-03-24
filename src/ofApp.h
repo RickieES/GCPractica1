@@ -4,7 +4,7 @@
 #include "ofMain.h"
 #include "gameObjects/player/Player.h"
 #include "scenes/game_scene/game_scene.h"
-#include "scenes/mainMenu_sceme/mainMenu_scene.h"
+#include "scenes/mainMenu_scene/mainMenu_scene.h"
 #include "scenes/pause_scene/pause_scene.h"
 #include "scenes/score_scene/score_scene.h"
 
