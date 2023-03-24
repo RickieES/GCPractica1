@@ -18,13 +18,19 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
     this->canyonAngle = canyonAngle;
 	this->setColor(r, g , b);
 
-	ofPoint point2(this->getRefPointX(), this->getRefPointY());
-	canyonBase.arc(point2, 100, 100, 0, 180, 100);
+	// ofPoint point2(this->getRefPointX(), this->getRefPointY());
+	// canyonBase.arc(point2, 100, 100, 0, 180, 100);
+	this->canyonBase.lineTo(0, 0);
+	ofPoint point2(radius, 0);
+	this->canyonBase.arc(point2, radius, radius, 0, 180);
+	this->canyonBase.setColor(this->getColor());
+	// ofFill();
 }
 
 // Constructor con tipos reales
 //*************************************************************
 Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor) {
+	this->facing = Orientation::NORTH;
 	this->setRefPoint(playerPos);
     this->canyonAngle = canyonAngle;
     this->setColor(mainColor);
@@ -114,11 +120,11 @@ void Player::draw() {
 	ofPopMatrix();
 
 	ofSetColor(this->getColor());
-	this->canyonBase.lineTo(0, 0);
-	ofPoint point2(radius, 0);
-	this->canyonBase.arc(point2, radius, radius, 0, 180);
-	this->canyonBase.setColor(this->getColor());
-	ofFill();
+	// this->canyonBase.lineTo(0, 0);
+	// ofPoint point2(radius, 0);
+	// this->canyonBase.arc(point2, radius, radius, 0, 180);
+	// this->canyonBase.setColor(this->getColor());
+	// ofFill();
 	this->canyonBase.draw();
 	ofPopMatrix();
 }
