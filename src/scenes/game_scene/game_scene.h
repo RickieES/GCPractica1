@@ -5,6 +5,7 @@
 #include "../../gameObjects/gameObject.h"
 #include "../../gameObjects/abstractEnemy/abstractEnemy.h"
 #include "../../gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h"
+#include "../../gameObjects/player/Player.h"
 #include "../abstractScene.h"
 using namespace std;
 
@@ -22,10 +23,16 @@ class Game_scene: public AbstractScene {
 		unsigned lifeBarWidth;
 		unsigned lifeBarHeight;
 
+        Player player_up;
+        Player player_down;
+
 	public:
 		virtual void setupScene() override;
 		virtual void drawScene() override;
 		virtual void updateScene() override;
+
+        void drawPlayers();
+        void drawUI();
 
 		unsigned getLimitGameUp();
 		void setLimitGameUp(unsigned value);

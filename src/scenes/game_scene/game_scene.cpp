@@ -6,6 +6,8 @@
     void Game_scene::setupScene(){
         AbstractScene::setupScene();
 
+        ofSetBackgroundColor(118);
+
         this->setLimitGameUp((ofGetHeight()*25)/100);
         this->setLimitGameDown((ofGetHeight()*75)/100);
         this->setLimitGameLeft(0);
@@ -14,6 +16,12 @@
         this->setLifeBarCoords((ofGetWidth()*10)/100, (ofGetHeight()*10)/100, 0 );
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
+
+        player_up = Player(ofPoint(ofGetWidth()*0.3, 0), -90, ofColor::red);
+        player_up.facing = Player::Orientation::SOUTH;
+        player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 90, ofColor::blue);
+//        player_down.facing = Player::Orientation::NORTH;
+
         return;
     }
 
@@ -35,15 +43,35 @@
     //*****************************************************
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
- 
-        ofSetBackgroundColor(118);
-        ofSetColor(0);
-        ofDrawRectangle(this->getLimitGameLeft(), 0, ofGetWidth(), this->getLimitGameUp());
-        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameDown(), ofGetWidth(), ofGetHeight()-this->getLimitGameDown());
 
-        ofSetColor(255, 0, 0);
-        ofDrawRectangle(this->getLifeBarCoords().x, this->getLifeBarCoords().y, this->getLifeBarWidth(), this->getLifeBarHeight());
+
+ 
+
+//        ofSetColor(0);
+//        ofDrawRectangle(this->getLimitGameLeft(), 0, ofGetWidth(), this->getLimitGameUp());
+//        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameDown(), ofGetWidth(), ofGetHeight()-this->getLimitGameDown());
+
+//        ofSetColor(255, 0, 0);
+//        ofDrawRectangle(this->getLifeBarCoords().x, this->getLifeBarCoords().y, this->getLifeBarWidth(), this->getLifeBarHeight());
+
+        drawPlayers();
+//        drawUI();
+
+        ofSetColor(ofColor::white);
+        ofDrawBitmapString(ofGetFrameRate(), 20, 20);
+
         return;
+    }
+
+
+    void Game_scene::drawPlayers(){
+        player_up.draw();
+        player_down.draw();
+    }
+
+
+    void Game_scene::drawUI(){
+
     }
 
 
