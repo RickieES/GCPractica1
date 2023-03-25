@@ -17,9 +17,9 @@
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
 
-        player_up = Player(ofPoint(ofGetWidth()*0.3, 0), -90, ofColor::red);
+        player_up = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
         player_up.facing = Player::Orientation::SOUTH;
-        player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 90, ofColor::blue);
+        player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
 //        player_down.facing = Player::Orientation::NORTH;
 
         return;
@@ -32,9 +32,27 @@
     //*****************************************************
     void Game_scene::updateScene(){
         AbstractScene::updateScene();
+
+        // TODO: Pasar a funcion (simplemente encapsular)
+        if (ofGetKeyPressed('a')){
+            player_up.moveLeft();
+        }
+
+        if (ofGetKeyPressed('d')){
+            player_up.moveRight();
+        }
+
+        if (ofGetKeyPressed('j')){
+            player_down.moveLeft();
+        }
+
+        if (ofGetKeyPressed('l')){
+            player_down.moveRight();
+        }
 /* 
         RectangleEnemy *enemy = new RectangleEnemy(100, 1500, 0, ofGetWidth(), 1, 200, 100);
         gameObjectList.push_back( enemy ); */
+
         return;
     }
 
@@ -43,6 +61,9 @@
     //*****************************************************
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
+
+
+
 
 
  

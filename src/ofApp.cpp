@@ -25,6 +25,17 @@ void ofApp::setup(){
 	//Update function
 //*****************************************************
 void ofApp::update(){
+
+    if(this->controller==mainMenu){
+        this->mainMenu_scene.updateScene();
+    }else if(this->controller==game){
+        this->game_scene.updateScene();
+    }else if(this->controller==pause){
+        this->pause_scene.updateScene();
+    }else if(this->controller==score){
+        this->score_scene.updateScene();
+    }
+
 	return;
 }
 
