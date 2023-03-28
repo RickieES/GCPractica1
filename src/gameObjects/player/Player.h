@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "../gameObject.h"
+#include "../bullet/Bullet.h"
 
 class Player: public GameObject {
         ofPath canyonBase;
@@ -13,9 +14,11 @@ class Player: public GameObject {
         int canyonAngle;
 
 	public:
+        enum class Orientation {NORTH, SOUTH} facing;
+
         Player();
-        Player(int x, int y, int canyonAngle, int r, int g, int b);
-		Player(ofPoint playerPos, int canyonAngle, ofColor);
+        Player(int x, int y, int canyonAngle, int r, int g, int b, Orientation initFacing = Orientation::NORTH);
+		Player(ofPoint playerPos, int canyonAngle, ofColor, Orientation initFacing = Orientation::NORTH);
 
         void setRotationSpeed(int rs);
         int getRotationSpeed();
@@ -34,6 +37,5 @@ class Player: public GameObject {
 		void update();
 		void moveLeft();
 		void moveRight();
-
-        enum class Orientation {NORTH, SOUTH} facing;
+        Bullet * shoot();
 };

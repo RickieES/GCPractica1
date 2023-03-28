@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ofMain.h"
+#include "../bullet/Bullet.h"
 
 // Constructor vacío
 Player::Player() {
@@ -7,8 +8,9 @@ Player::Player() {
 
 // Constructor con tipos simples
 //*************************************************************
-Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
-	this->facing = Orientation::NORTH;
+Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b,
+				Orientation initFacing) {
+	this->facing = initFacing;
 	this->rotationSpeed = 2;
 	this->radius = 50;
     this->canyonLength = 50;
@@ -18,19 +20,17 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b) {
     this->canyonAngle = canyonAngle;
 	this->setColor(r, g , b);
 
-	// ofPoint point2(this->getRefPointX(), this->getRefPointY());
-	// canyonBase.arc(point2, 100, 100, 0, 180, 100);
 	this->canyonBase.lineTo(0, 0);
 	ofPoint point2(radius, 0);
 	this->canyonBase.arc(point2, radius, radius, 0, 180);
 	this->canyonBase.setColor(this->getColor());
-	// ofFill();
 }
 
 // Constructor con tipos reales
 //*************************************************************
-Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor) {
-	this->facing = Orientation::NORTH;
+Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor,
+				Orientation initFacing) {
+	this->facing = initFacing;
 	this->setRefPoint(playerPos);
     this->canyonAngle = canyonAngle;
     this->setColor(mainColor);
@@ -62,9 +62,7 @@ int Player::getRadius() {
  * Sets canyon length to a maximum of 100
 */
 void Player::setCanyonLength(int cl) {
-	cout << "set Canyon Length, cl: " << cl << "\n";
 	this->canyonLength = max(30, min(100, cl));
-	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 int Player::getCanyonLength() {
@@ -75,9 +73,7 @@ int Player::getCanyonLength() {
  * Sets canyon width to a maximum of 30
 */
 void Player::setCanyonWidth(int cw) {
-	cout << "set Canyon Width, cw: " << cw << "\n";
 	this->canyonWidth = max(8, min(30, cw));
-	cout << "set Canyon width and length, radius: " << canyonWidth << " - " << canyonLength << " - " << radius << "\n";
 }
 
 int Player::getCanyonWidth() {
@@ -149,3 +145,10 @@ void Player::moveLeft(){
 void Player::moveRight(){
     this->canyonAngle =  min(80, this->canyonAngle + this->getRotationSpeed());
 };
+
+Bullet * Player::shoot() {
+	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius, radius + canyonLength - 5, 0);
+	
+	Bullet *b = new Bullet(bulletInitial, 1, 1);
+	return b;
+}

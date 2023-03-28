@@ -4,10 +4,18 @@
 
 class Bullet: public GameObject {
     private:
-        int speed;
+        float speedX;
+        float speedY;
+        float floatPosX;
+        float floatPosY;
     
     public:
-        void setSpeed(int s);
-        int getSpeed();
+        Bullet(ofPoint initialPos, float speedX, float speedY);
+
+        void setSpeedX(float sx);
+        float getSpeedX();
+        void setSpeedY(float sy);
+        float getSpeedY();
         void draw();
+        void update();
 };

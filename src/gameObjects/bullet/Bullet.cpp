@@ -1,14 +1,38 @@
 #include "Bullet.h"
 #include "ofMain.h"
 
-
-void Bullet::setSpeed(int s) {
-    this->speed = s;
+Bullet::Bullet(ofPoint initialPos, float speedX, float speedY) {
+    this->setRefPointX(initialPos.x);
+    this->setRefPointY(initialPos.y);
+    floatPosX = initialPos.x;
+    floatPosY = initialPos.y;
+    this->setSpeedX(speedX);
+    this->setSpeedY(speedY);
 }
 
-int Bullet::getSpeed() {
-    return this->speed;
+void Bullet::setSpeedX(float sx) {
+    this->speedX = sx;
+}
+
+float Bullet::getSpeedX() {
+    return this->speedX;
 };
+
+void Bullet::setSpeedY(float sy) {
+    this->speedY = sy;
+}
+
+float Bullet::getSpeedY() {
+    return this->speedY;
+};
+
+void Bullet::update() {
+    this->floatPosX += this->speedX;
+    this->floatPosY += this->speedY;
+
+    this->setRefPointX((int) this->floatPosX);
+    this->setRefPointY((int) this->floatPosY);
+}
 
 // pmDraw Function
 //*************************************************************
