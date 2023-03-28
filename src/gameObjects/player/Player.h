@@ -17,8 +17,8 @@ class Player: public GameObject {
         enum class Orientation {NORTH, SOUTH} facing;
 
         Player();
-        Player(int x, int y, int canyonAngle, int r, int g, int b, Orientation initFacing = Orientation::NORTH);
-		Player(ofPoint playerPos, int canyonAngle, ofColor, Orientation initFacing = Orientation::NORTH);
+        Player(int x, int y, int cannonAngle, int r, int g, int b, Orientation initFacing = Orientation::NORTH);
+		Player(ofPoint playerPos, int cannonAngle, ofColor, Orientation initFacing = Orientation::NORTH);
 
         void setRotationSpeed(int rs);
         int getRotationSpeed();

@@ -8,7 +8,7 @@ Player::Player() {
 
 // Constructor con tipos simples
 //*************************************************************
-Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b,
+Player::Player(int xCenter, int yCenter, int cannonAngle, int r, int g, int b,
 				Orientation initFacing) {
 	this->facing = initFacing;
 	this->rotationSpeed = 2;
@@ -17,7 +17,7 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b,
     this->cannonWidth = 8;
 	this->setRefPointX(xCenter);
 	this->setRefPointY(yCenter);
-    this->cannonAngle = canyonAngle;
+    this->cannonAngle = cannonAngle;
 	this->setColor(r, g , b);
 
 	this->cannonBase.lineTo(0, 0);
@@ -28,11 +28,11 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b,
 
 // Constructor con tipos reales
 //*************************************************************
-Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor,
+Player::Player(ofPoint playerPos, int cannonAngle, ofColor mainColor,
 				Orientation initFacing) {
 	this->facing = initFacing;
 	this->setRefPoint(playerPos);
-    this->cannonAngle = canyonAngle;
+    this->cannonAngle = cannonAngle;
     this->setColor(mainColor);
 
 	ofPoint point2(this->getRefPointX(), this->getRefPointY());
