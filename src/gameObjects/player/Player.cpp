@@ -13,17 +13,17 @@ Player::Player(int xCenter, int yCenter, int canyonAngle, int r, int g, int b,
 	this->facing = initFacing;
 	this->rotationSpeed = 2;
 	this->radius = 50;
-    this->canyonLength = 50;
-    this->canyonWidth = 8;
+    this->cannonLength = 50;
+    this->cannonWidth = 8;
 	this->setRefPointX(xCenter);
 	this->setRefPointY(yCenter);
-    this->canyonAngle = canyonAngle;
+    this->cannonAngle = canyonAngle;
 	this->setColor(r, g , b);
 
-	this->canyonBase.lineTo(0, 0);
+	this->cannonBase.lineTo(0, 0);
 	ofPoint point2(radius, 0);
-	this->canyonBase.arc(point2, radius, radius, 0, 180);
-	this->canyonBase.setColor(this->getColor());
+	this->cannonBase.arc(point2, radius, radius, 0, 180);
+	this->cannonBase.setColor(this->getColor());
 }
 
 // Constructor con tipos reales
@@ -32,11 +32,11 @@ Player::Player(ofPoint playerPos, int canyonAngle, ofColor mainColor,
 				Orientation initFacing) {
 	this->facing = initFacing;
 	this->setRefPoint(playerPos);
-    this->canyonAngle = canyonAngle;
+    this->cannonAngle = canyonAngle;
     this->setColor(mainColor);
 
 	ofPoint point2(this->getRefPointX(), this->getRefPointY());
-	canyonBase.arc(point2, 100, 100, 0, 180, 100);
+	cannonBase.arc(point2, 100, 100, 0, 180, 100);
 }
 
 /**
@@ -50,34 +50,15 @@ int Player::getRotationSpeed() {
 	return this->rotationSpeed;
 };
 
+/**
+ * Sets radius (to a minimum of 0 and a maximum of 359)
+*/
 void Player::setRadius(int r) {
 	this->radius = min(359, max(0, r));
 }
 
 int Player::getRadius() {
 	return this->radius;
-}
-
-/**
- * Sets canyon length to a maximum of 100
-*/
-void Player::setCanyonLength(int cl) {
-	this->canyonLength = max(30, min(100, cl));
-}
-
-int Player::getCanyonLength() {
-	return this->canyonLength;
-}
-
-/**
- * Sets canyon width to a maximum of 30
-*/
-void Player::setCanyonWidth(int cw) {
-	this->canyonWidth = max(8, min(30, cw));
-}
-
-int Player::getCanyonWidth() {
-	return this->canyonWidth;
 }
 
 void Player::setAltColor(ofColor ac) {
@@ -88,13 +69,69 @@ ofColor Player::getAltColor() {
 	return this->altColor;
 }
 
-void Player::setCanyonAngle(int ca) {
-	this->canyonAngle = ca;
+/**
+ * Sets cannon length to a minimum of 30 and a maximum of 100
+*/
+void Player::setCannonLength(int cl) {
+	this->cannonLength = max(30, min(100, cl));
 }
 
-int Player::getCanyonAngle() {
-	return this->canyonAngle;
+int Player::getCannonLength() {
+	return this->cannonLength;
 }
+
+/**
+ * Sets cannon width to a minimum of 8 and a maximum of 30
+*/
+void Player::setCannonWidth(int cw) {
+	this->cannonWidth = max(8, min(30, cw));
+}
+
+int Player::getCannonWidth() {
+	return this->cannonWidth;
+}
+
+/**
+ * Sets cannon angle
+*/
+void Player::setCannonAngle(int ca) {
+	this->cannonAngle = ca;
+}
+
+int Player::getCannonAngle() {
+	return this->cannonAngle;
+}
+
+[[deprecated]]
+void Player::setCanyonLength(int cl) {
+	this->setCannonLength(cl);
+}
+
+[[deprecated]]
+int Player::getCanyonLength() {
+	return this->getCannonLength();
+}
+
+[[deprecated]]
+void Player::setCanyonWidth(int cw) {
+	this->setCannonWidth(cw);
+}
+
+[[deprecated]]
+int Player::getCanyonWidth() {
+	return this->getCannonWidth();
+}
+
+[[deprecated]]
+void Player::setCanyonAngle(int ca) {
+	this->setCannonAngle(ca);
+}
+
+[[deprecated]]
+int Player::getCanyonAngle() {
+	return this->getCannonAngle();
+}
+
 
 // pmDraw Function
 //*************************************************************
@@ -108,11 +145,11 @@ void Player::draw() {
 
  	ofPushMatrix();
 	ofTranslate(radius, radius - 5, 0);
-	ofRotateDeg(this->canyonAngle, 0, 0, 1);
+	ofRotateDeg(this->cannonAngle, 0, 0, 1);
  	ofSetColor(this->altColor);
 	ofFill();
-	ofDrawRectangle(0 - (canyonWidth / 2), 0,
-					canyonWidth, canyonLength);
+	ofDrawRectangle(0 - (cannonWidth / 2), 0,
+					cannonWidth, cannonLength);
 	ofPopMatrix();
 
 	ofSetColor(this->getColor());
@@ -121,7 +158,7 @@ void Player::draw() {
 	// this->canyonBase.arc(point2, radius, radius, 0, 180);
 	// this->canyonBase.setColor(this->getColor());
 	// ofFill();
-	this->canyonBase.draw();
+	this->cannonBase.draw();
 	ofPopMatrix();
 }
 
@@ -136,18 +173,18 @@ void Player::update(){
 // MoveLeft Function
 //*************************************************************
 void Player::moveLeft(){
-    this->canyonAngle =  max(-80, this->canyonAngle - this->getRotationSpeed());
+    this->cannonAngle =  max(-80, this->cannonAngle - this->getRotationSpeed());
 }
 
 
 // MoveRight Function
 //*************************************************************
 void Player::moveRight(){
-    this->canyonAngle =  min(80, this->canyonAngle + this->getRotationSpeed());
+    this->cannonAngle =  min(80, this->cannonAngle + this->getRotationSpeed());
 };
 
 Bullet * Player::shoot() {
-	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius, radius + canyonLength - 5, 0);
+	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius, radius + cannonLength - 5, 0);
 	
 	Bullet *b = new Bullet(bulletInitial, 1, 1);
 	return b;

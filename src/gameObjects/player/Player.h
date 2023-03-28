@@ -4,14 +4,14 @@
 #include "../bullet/Bullet.h"
 
 class Player: public GameObject {
-        ofPath canyonBase;
+        ofPath cannonBase;
 		int rotationSpeed = 2;
 		int radius = 50;
-        int canyonLength = 50;
-        int canyonWidth = 8;
+        int cannonLength = 50;
+        int cannonWidth = 8;
 
         ofColor altColor;
-        int canyonAngle;
+        int cannonAngle;
 
 	public:
         enum class Orientation {NORTH, SOUTH} facing;
@@ -24,13 +24,25 @@ class Player: public GameObject {
         int getRotationSpeed();
         void setRadius(int r);
         int getRadius();
-        void setCanyonLength(int cl);
-        int getCanyonLength();
-        void setCanyonWidth(int cw);
-        int getCanyonWidth();
         void setAltColor(ofColor ac);
         ofColor getAltColor();
+        void setCannonLength(int cl);
+        int getCannonLength();
+        void setCannonWidth(int cw);
+        int getCannonWidth();
+        void setCannonAngle(int ca);
+        int getCannonAngle();
+        [[deprecated]]
+        void setCanyonLength(int cl);
+        [[deprecated]]
+        int getCanyonLength();
+        [[deprecated]]
+        void setCanyonWidth(int cw);
+        [[deprecated]]
+        int getCanyonWidth();
+        [[deprecated]]
         void setCanyonAngle(int ca);
+        [[deprecated]]
         int getCanyonAngle();
 
 		void draw();
