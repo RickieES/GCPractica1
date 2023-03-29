@@ -12,6 +12,10 @@ Project{
         name: { return FileInfo.baseName(sourceDirectory) }
 
         files: [
+            'src/builders/AbstractBuilder.cpp',
+            'src/builders/AbstractBuilder.h',
+            'src/builders/builderEnemies/BuilderEnemies.cpp',
+            'src/builders/builderEnemies/BuilderEnemies.h',
             'src/gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.cpp',
             'src/gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h',
             'src/gameObjects/abstractEnemy/abstractEnemy.cpp',
