@@ -7,14 +7,13 @@ using namespace std;
 class RectangleEnemy: public AbstractEnemy{
 	
 	private: 
-		long width;
-		long heigth;
-
+		float width;
+		float heigth;
 
 	public:
-		RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed, unsigned nWidth, unsigned nHeight):
-			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nSpeed){
-					
+		RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed, float nWidth, float nHeight):
+			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed){
+				
 				this->setPosX(nLimitRight);
 				this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);          		
 		}
@@ -23,10 +22,10 @@ class RectangleEnemy: public AbstractEnemy{
 		virtual void draw() override;
 		virtual void update() override;
 
-		long getWidth();
-		void setWidth(long value);
-		long getHeight();
-		void setHeight(long value);
+		float getWidth();
+		void setWidth(float value);
+		float getHeight();
+		void setHeight(float value);
 
 
 

@@ -22,6 +22,23 @@
     //*****************************************************
         // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
     //*****************************************************
+    int AbstractEnemy::getSpeed(){
+        return this->speed;
+    }
+    void AbstractEnemy::setSpeed(int value){
+        this->speed = value;
+        return;
+    }
+
+    ofColor AbstractEnemy::getColor(){
+        return this->color;
+    }
+    void AbstractEnemy::setColor(ofColor value){
+        this->color = value;
+        return;
+    }
+
+
 
     int AbstractEnemy::getPosX(){
         return this->posX;
@@ -71,10 +88,3 @@
         return;
     }
 
-    unsigned AbstractEnemy::getSpeed(){
-        return this->speed;
-    }
-    void AbstractEnemy::setSpeed(unsigned value){
-        this->speed = value;
-        return;
-    }

@@ -42,18 +42,18 @@
     //*****************************************************
         // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
     //*****************************************************
-    long RectangleEnemy::getWidth(){
+    float RectangleEnemy::getWidth(){
         return this->width;
     }
-    void RectangleEnemy::setWidth(long value){
+    void RectangleEnemy::setWidth(float value){
         this->width = value;
         return;
     }
 
-    long RectangleEnemy::getHeight(){
+    float RectangleEnemy::getHeight(){
         return this->heigth;
     }
-    void RectangleEnemy::setHeight(long value){
+    void RectangleEnemy::setHeight(float value){
         this->heigth = value;
         return;
     }

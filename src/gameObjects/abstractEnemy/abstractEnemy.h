@@ -7,6 +7,8 @@ using namespace std;
 class AbstractEnemy: public GameObject {
 	
 	private: 
+		ofColor color;
+		int speed;
 
 		int posX;
 		int posY;
@@ -14,12 +16,15 @@ class AbstractEnemy: public GameObject {
 		int limitDown;
 		int limitLeft;
 		int limitRight;
-		unsigned speed;
 
 
 	public:
-		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed):
+		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed):
 			GameObject(){
+
+			this->setColor(nColor);
+			this->setSpeed(nSpeed);
+
 			this->setLimitUp(nLimitUp);
 			this->setLimitDown(nLimitDown);
 			this->setLimitRight(nLimitRight);
@@ -29,6 +34,11 @@ class AbstractEnemy: public GameObject {
 		virtual void setup() override;
 		virtual void draw() override;
 		virtual void update() override;
+
+		ofColor getColor();
+		void setColor(ofColor value);
+		int getSpeed();
+		void setSpeed(int value);
 
 		int getPosX();
 		void setPosX(int value);
@@ -42,8 +52,6 @@ class AbstractEnemy: public GameObject {
 		void setLimitLeft(int value);
 		int getLimitRight();
 		void setLimitRight(int value);
-		unsigned getSpeed();
-		void setSpeed(unsigned value);
 
 
 
