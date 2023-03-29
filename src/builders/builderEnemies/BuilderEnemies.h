@@ -7,9 +7,17 @@
 class BuilderEnemies: public AbstractBuilder {
     
     public:
-        virtual list<GameObject*> setupBuilder(list<GameObject*> actualGameObjects) override;
+        virtual GameObject setupBuilder() override;
 
-
-
+		enum class enemyType {
+			square,         // Enemigo cuadrado
+			triangle,       // Enemigo triangulo
+			circle,         // Enemigo circulo
+		};
+        
+		enum class colourType {
+			color1,         // Color correspondiento con el player 1
+			color2,         // Color correspondiento con el player 1
+		};
 
 };

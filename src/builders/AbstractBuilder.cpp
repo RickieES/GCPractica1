@@ -3,8 +3,8 @@
 
         //setupBuilder function
     //*****************************************************
-    list<GameObject*> AbstractBuilder::setupBuilder(list<GameObject*> actualGameObjects) {
-        list<GameObject*> result;
+    GameObject AbstractBuilder::setupBuilder() {
+        GameObject result = GameObject();
 
         return result;
     }

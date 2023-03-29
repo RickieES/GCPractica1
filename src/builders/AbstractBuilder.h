@@ -5,5 +5,10 @@
 class AbstractBuilder{
     
     public:
-        virtual list<GameObject*> setupBuilder(list<GameObject*> actualGameObjects);
+        virtual GameObject setupBuilder();
+
+
+    
+
+
 };
