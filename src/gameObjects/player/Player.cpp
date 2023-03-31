@@ -2,6 +2,29 @@
 #include "ofMain.h"
 #include "../bullet/Bullet.h"
 
+
+void Player::initMembers(int ca) {
+	this->rotationSpeed = 2;
+	this->radius = 50;
+    this->cannonLength = 50;
+    this->cannonWidth = 8;
+    this->cannonAngle = cannonAngle;
+
+	// La posición de la forma ofPath influye en su dibujo
+	// this->cannonBase.lineTo(0, 0);
+	// ofPoint point2(radius * 2, 0);
+	this->cannonBase.lineTo(0 - radius * 2, 0);
+	ofPoint point2(0, 0);
+	this->cannonBase.arc(point2, radius, radius, 0, 180);
+	this->cannonBase.setColor(this->getColor());
+
+	cout << "GO ID: " << this->getId() << "\n";
+	cout << "facing: " << ((this->facing == Player::Orientation::NORTH) ? "North" : "South") << "\n";
+	cout << "xCenter, yCenter: " << this->getRefPointX()<< ", " << this->getRefPointY() << "\n";
+	cout << "Cannon l, w, a: " << this->getCannonLength() << ", " << this->getCannonWidth() << ", " << this->getCannonAngle() << "\n";
+	cout << "Color r, g, b: " << this->getColor().r << ", " << this->getColor().g << ", " << this->getColor().b << "\n";
+}
+
 // Constructor vacío
 Player::Player() {
 }
@@ -11,19 +34,10 @@ Player::Player() {
 Player::Player(int xCenter, int yCenter, int cannonAngle, int r, int g, int b,
 				Orientation initFacing) {
 	this->facing = initFacing;
-	this->rotationSpeed = 2;
-	this->radius = 50;
-    this->cannonLength = 50;
-    this->cannonWidth = 8;
 	this->setRefPointX(xCenter);
 	this->setRefPointY(yCenter);
-    this->cannonAngle = cannonAngle;
 	this->setColor(r, g , b);
-
-	this->cannonBase.lineTo(0, 0);
-	ofPoint point2(radius, 0);
-	this->cannonBase.arc(point2, radius, radius, 0, 180);
-	this->cannonBase.setColor(this->getColor());
+	initMembers(cannonAngle);
 }
 
 // Constructor con tipos reales
@@ -32,11 +46,8 @@ Player::Player(ofPoint playerPos, int cannonAngle, ofColor mainColor,
 				Orientation initFacing) {
 	this->facing = initFacing;
 	this->setRefPoint(playerPos);
-    this->cannonAngle = cannonAngle;
     this->setColor(mainColor);
-
-	ofPoint point2(this->getRefPointX(), this->getRefPointY());
-	cannonBase.arc(point2, 100, 100, 0, 180, 100);
+	initMembers(cannonAngle);
 }
 
 /**
@@ -136,29 +147,32 @@ int Player::getCanyonAngle() {
 // pmDraw Function
 //*************************************************************
 void Player::draw() {
-    // TODO: hacer un degradado de color;
 	ofPushMatrix();
-	ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
-	if (this->facing == Orientation::NORTH) {
-	 	ofRotateDeg(180);
+	{ // Desplazamiento de la base del cañón, el nuevo 0, 0 es el centro
+		ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
+		// Descomentar líneas siguientes para ver el punto de referencia
+		// de la matriz
+		// ofSetColor(ofColor::lightYellow);
+		// ofDrawCircle(0, 0, 15);
+
+		// Por defecto dibujamos hacia abajo. La orientación norte gira 180º
+		if (this->facing == Orientation::NORTH) {
+			ofRotateDeg(180);
+		}
+
+		ofPushMatrix();
+		{ // Desplazamiento del cañón en sí
+			ofTranslate(0, radius - 5, 0);
+			ofRotateDeg(this->cannonAngle, 0, 0, 1);
+			ofSetColor(this->altColor);
+			ofFill();
+			ofDrawRectangle(0 - (cannonWidth / 2), 0, cannonWidth, cannonLength);
+		}
+		ofPopMatrix();
+
+		ofSetColor(this->getColor());
+		this->cannonBase.draw();
 	}
-
- 	ofPushMatrix();
-	ofTranslate(radius, radius - 5, 0);
-	ofRotateDeg(this->cannonAngle, 0, 0, 1);
- 	ofSetColor(this->altColor);
-	ofFill();
-	ofDrawRectangle(0 - (cannonWidth / 2), 0,
-					cannonWidth, cannonLength);
-	ofPopMatrix();
-
-	ofSetColor(this->getColor());
-	// this->canyonBase.lineTo(0, 0);
-	// ofPoint point2(radius, 0);
-	// this->canyonBase.arc(point2, radius, radius, 0, 180);
-	// this->canyonBase.setColor(this->getColor());
-	// ofFill();
-	this->cannonBase.draw();
 	ofPopMatrix();
 }
 

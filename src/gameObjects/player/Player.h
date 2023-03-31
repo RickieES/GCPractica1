@@ -4,6 +4,7 @@
 #include "../bullet/Bullet.h"
 
 class Player: public GameObject {
+        void initMembers(int ca);
         ofPath cannonBase;
 		int rotationSpeed = 2;
 		int radius = 50;
