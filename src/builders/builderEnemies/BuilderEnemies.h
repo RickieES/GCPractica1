@@ -45,7 +45,8 @@ class BuilderEnemies {
 		int selectSpeed(SpeedType speedType);
 		
     public:
-        GameObject build();
+		// FIXME: constructor por defecto comentado porque no devuelve objeto
+        // GameObject build();
         GameObject build(ColorType colourType, EnemyType enemyType, SizeType sizeType, SpeedType speedType);
 
 		ofColor getColor1();

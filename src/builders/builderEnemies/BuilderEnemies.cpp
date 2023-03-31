@@ -1,11 +1,12 @@
 #include "BuilderEnemies.h"
 
 
-        //setupBuilder function 1
+	// FIXME: constructor por defecto comentado porque no devuelve objeto
+    //setupBuilder function 1
     //*****************************************************
-    GameObject BuilderEnemies::build() {
-
-    }
+    // GameObject BuilderEnemies::build() {
+    // 
+    // }
 
 
         //setupBuilder function 2
@@ -16,10 +17,12 @@
         
         switch (enemyType){
             case EnemyType::square:
+                // FIXME: el builder siempre debe devolver un objeto,
+                // por lo que hasta que se complete comento el break
+                // break;
+            default:
                 result = new RectangleEnemy(this->getLimitUp(), this->getLimitDown(), this->getLimitLeft(), this->getLimitRight(),
                                             this->selectColor(colorType), this->selectSpeed(speedType), this->selectSquareSize_width(sizeType), this->selectSquareSize_height(sizeType));
-                break;
-            default:
                 break;
         }
 

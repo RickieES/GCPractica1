@@ -11,8 +11,9 @@ class TriangleEnemy: public AbstractEnemy{
 
 
 	public:
-		TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed, unsigned nWidth, unsigned nHeight):
-			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nSpeed){
+		TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed,
+					  ofColor nColor, unsigned nWidth, unsigned nHeight):
+			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed){
 					
 				this->setPosX(nLimitRight);
 				this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);          		
