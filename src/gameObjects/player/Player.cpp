@@ -8,7 +8,7 @@ void Player::initMembers(int ca) {
 	this->radius = 50;
     this->cannonLength = 50;
     this->cannonWidth = 8;
-    this->cannonAngle = cannonAngle;
+    this->cannonAngle = ca;
 
 	// La posición de la forma ofPath influye en su dibujo
 	// this->cannonBase.lineTo(0, 0);
@@ -18,11 +18,11 @@ void Player::initMembers(int ca) {
 	this->cannonBase.arc(point2, radius, radius, 0, 180);
 	this->cannonBase.setColor(this->getColor());
 
-	cout << "GO ID: " << this->getId() << "\n";
-	cout << "facing: " << ((this->facing == Player::Orientation::NORTH) ? "North" : "South") << "\n";
-	cout << "xCenter, yCenter: " << this->getRefPointX()<< ", " << this->getRefPointY() << "\n";
-	cout << "Cannon l, w, a: " << this->getCannonLength() << ", " << this->getCannonWidth() << ", " << this->getCannonAngle() << "\n";
-	cout << "Color r, g, b: " << this->getColor().r << ", " << this->getColor().g << ", " << this->getColor().b << "\n";
+	// cout << "Player ID: " << this->getId() << "\n";
+	// cout << "facing: " << ((this->facing == Player::Orientation::NORTH) ? "North" : "South") << "\n";
+	// cout << "xCenter, yCenter: " << this->getRefPointX()<< ", " << this->getRefPointY() << "\n";
+	// cout << "Cannon l, w, a: " << this->getCannonLength() << ", " << this->getCannonWidth() << ", " << this->getCannonAngle() << "\n";
+	// cout << "Color r, g, b: " << this->getColor().r << ", " << this->getColor().g << ", " << this->getColor().b << "\n";
 }
 
 // Constructor vacío
@@ -150,10 +150,8 @@ void Player::draw() {
 	ofPushMatrix();
 	{ // Desplazamiento de la base del cañón, el nuevo 0, 0 es el centro
 		ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
-		// Descomentar líneas siguientes para ver el punto de referencia
-		// de la matriz
-		// ofSetColor(ofColor::lightYellow);
-		// ofDrawCircle(0, 0, 15);
+		ofSetColor(ofColor::lightYellow);
+		ofDrawCircle(0, 0, 15);
 
 		// Por defecto dibujamos hacia abajo. La orientación norte gira 180º
 		if (this->facing == Orientation::NORTH) {
@@ -198,8 +196,17 @@ void Player::moveRight(){
 };
 
 Bullet * Player::shoot() {
-	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius, radius + cannonLength - 5, 0);
+	int sign = (facing == Orientation::NORTH) ? -1 : 1;
+	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius,
+									this->getRefPointY() + (sign * (radius + cannonLength)), 0);
 	
-	Bullet *b = new Bullet(bulletInitial, 1, 1);
+	float sx = sin(cannonAngle);
+	float sy = cos(cannonAngle);
+
+	sx = sign * sx;
+	sy = sign * sy;
+
+	Bullet *b = new Bullet(bulletInitial, sx, sy);
+	b->setColor(ofColor::white);
 	return b;
 }
