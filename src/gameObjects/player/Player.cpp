@@ -150,8 +150,10 @@ void Player::draw() {
 	ofPushMatrix();
 	{ // Desplazamiento de la base del cañón, el nuevo 0, 0 es el centro
 		ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
-		ofSetColor(ofColor::lightYellow);
-		ofDrawCircle(0, 0, 15);
+		// Descomentar líneas siguientes para ver el punto de referencia
+		// de la matriz
+		// ofSetColor(ofColor::lightYellow);
+		// ofDrawCircle(0, 0, 15);
 
 		// Por defecto dibujamos hacia abajo. La orientación norte gira 180º
 		if (this->facing == Orientation::NORTH) {
