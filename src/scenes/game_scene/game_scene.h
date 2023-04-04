@@ -21,11 +21,17 @@ class Game_scene: public AbstractScene {
 		unsigned lifeBarWidth;
 		unsigned lifeBarHeight;
 
-        Player player_up;
-        Player player_down;
+        Player playerUp;
+        Player playerDown;
 
 		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()*0.8) };
 		vector<GameObject*> objectList;
+
+		bool shootingPlayerUp;
+		int lastPressedShootUp;
+
+		bool shootingPlayerDown;
+		int lastPressedShootDown;
 
 	public:
 		const string nameScene{ "Game_scene" };
@@ -54,5 +60,6 @@ class Game_scene: public AbstractScene {
 		unsigned getLifeBarHeight();
 		void setLifeBarHeight(unsigned value);
 
+		bool checkOutOfBounds(GameObject* object);
 
 };

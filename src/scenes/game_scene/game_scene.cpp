@@ -17,12 +17,13 @@
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
 
-        player_up = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
-        player_up.facing = Player::Orientation::SOUTH;
-        player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
+        playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
+        playerUp.facing = Player::Orientation::SOUTH;
+        playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
 		// player_down.facing = Player::Orientation::NORTH;
 
 		// spawner = BuilderEnemies;
+
 
         return;
     }
@@ -49,33 +50,72 @@
 		for (auto e : objectList)
 		{
 			e->update();
+			//checkOutOfBounds(e);
 		}
+
+		/*
+		for (int i = 0; i < objectList.size(); i++) {
+			if (checkOutOfBounds(objectList[i])) {
+				objectList.erase(objectList.begin() + i);
+			}
+		}
+		*/
 
         // TODO: Pasar a funcion (simplemente encapsular)
 		// Jugador up
         if (ofGetKeyPressed('a')){
-            player_up.moveLeft();
+            playerUp.moveLeft();
         }
 
         if (ofGetKeyPressed('d')){
-            player_up.moveRight();
+            playerUp.moveRight();
         }
 
+		/* Disparo semiautomatico:
+			- Dispara una vez cada vez que se pulsa la tecla (s en este caso)
+			- Dispara cada x segundos si se mantiene pulsado
+		*/
 		if (ofGetKeyPressed('s')) {
-			objectList.push_back(player_up.shoot());
+			if (!shootingPlayerUp) {
+				shootingPlayerUp = true;
+				objectList.push_back(playerUp.shoot());
+			} 
+			else if (ofGetElapsedTimeMillis() - lastPressedShootUp > 500) 
+			{
+				lastPressedShootUp = ofGetElapsedTimeMillis();
+				objectList.push_back(playerUp.shoot());
+			}
+		}
+		else 
+		{
+			shootingPlayerUp = false;
+			lastPressedShootUp = ofGetElapsedTimeMillis();
 		}
 
 		// Jugador down
         if (ofGetKeyPressed('j')){
-            player_down.moveLeft();
+            playerDown.moveLeft();
         }
 
         if (ofGetKeyPressed('l')){
-            player_down.moveRight();
+            playerDown.moveRight();
         }
 
 		if (ofGetKeyPressed('k')) {
-			objectList.push_back(player_down.shoot());
+			if (!shootingPlayerDown) {
+				shootingPlayerDown = true;
+				objectList.push_back(playerDown.shoot());
+			}
+			else if (ofGetElapsedTimeMillis() - lastPressedShootDown > 500)
+			{
+				lastPressedShootDown = ofGetElapsedTimeMillis();
+				objectList.push_back(playerDown.shoot());
+			}
+		}
+		else
+		{
+			shootingPlayerDown = false;
+			lastPressedShootDown = ofGetElapsedTimeMillis();
 		}
 
 
@@ -111,8 +151,8 @@
 
 
     void Game_scene::drawPlayers(){
-        player_up.draw();
-        player_down.draw();
+        playerUp.draw();
+        playerDown.draw();
     }
 
 
@@ -187,3 +227,13 @@
         this->lifeBarHeight = value;
         return;
     }
+
+	bool Game_scene::checkOutOfBounds(GameObject * object) {
+		int oPosX = object->getRefPointX();
+		int oPosY = object->getRefPointY();
+
+		return (oPosX < getLimitGameLeft() ||
+			oPosX > getLimitGameRight() ||
+			oPosY < getLimitGameUp() ||
+			oPosY > getLimitGameDown());
+	}
