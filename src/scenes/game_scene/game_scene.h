@@ -7,12 +7,10 @@
 #include "../../gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h"
 #include "../../gameObjects/player/Player.h"
 #include "../abstractScene.h"
+#include "../../builders/builderEnemies/BuilderEnemies.h"
 using namespace std;
 
 class Game_scene: public AbstractScene {
-	public:
-		const string nameScene="Game_scene";
-
 	private:
 		unsigned limitGameUp;
 		unsigned limitGameDown;
@@ -26,7 +24,12 @@ class Game_scene: public AbstractScene {
         Player player_up;
         Player player_down;
 
+		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()*0.8) };
+		vector<RectangleEnemy> enemyList;
+
 	public:
+		const string nameScene{ "Game_scene" };
+
 		virtual void setupScene() override;
 		virtual void drawScene() override;
 		virtual void updateScene() override;

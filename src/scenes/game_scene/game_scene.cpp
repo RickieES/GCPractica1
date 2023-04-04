@@ -1,4 +1,4 @@
-#include "game_scene.h" 
+#include "game_scene.h"
  
 
         //SetupScene function
@@ -22,6 +22,8 @@
         player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
 //        player_down.facing = Player::Orientation::NORTH;
 
+		//spawner = BuilderEnemies;
+
         return;
     }
 
@@ -32,6 +34,21 @@
     //*****************************************************
     void Game_scene::updateScene(){
         AbstractScene::updateScene();
+
+		// Generar enemigos
+		if (enemyList.size() < 10){
+			RectangleEnemy e = spawner.build(BuilderEnemies::ColorType::color1, 
+											BuilderEnemies::EnemyType::square,
+											BuilderEnemies::SizeType::small,
+											BuilderEnemies::SpeedType::normal);
+
+			enemyList.push_back(e);
+		}
+
+		for (auto &e : enemyList)
+		{
+			e.update();
+		}
 
         // TODO: Pasar a funcion (simplemente encapsular)
         if (ofGetKeyPressed('a')){
@@ -62,11 +79,10 @@
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
 
-
-
-
-
- 
+		for each (RectangleEnemy e in enemyList)
+		{
+			e.draw();
+		}
 
 //        ofSetColor(0);
 //        ofDrawRectangle(this->getLimitGameLeft(), 0, ofGetWidth(), this->getLimitGameUp());
