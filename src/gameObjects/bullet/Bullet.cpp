@@ -4,10 +4,15 @@
 Bullet::Bullet(ofPoint initialPos, float speedX, float speedY) {
     this->setRefPointX(initialPos.x);
     this->setRefPointY(initialPos.y);
-    floatPosX = initialPos.x;
-    floatPosY = initialPos.y;
+    this->floatPosX = initialPos.x;
+    this->floatPosY = initialPos.y;
     this->setSpeedX(speedX);
     this->setSpeedY(speedY);
+
+	// cout << "Bullet ID: " << this->getId() << "\n";
+	// cout << "xCenter, yCenter: " << this->getRefPointX()<< ", " << this->getRefPointY() << "\n";
+	// cout << "Color r, g, b: " << this->getColor().r << ", " << this->getColor().g << ", " << this->getColor().b << "\n";
+    // cout << "Speed x, y: " << this->getSpeedX() << ", " << this->getSpeedY() << "\n";
 }
 
 void Bullet::setSpeedX(float sx) {
@@ -29,14 +34,14 @@ float Bullet::getSpeedY() {
 void Bullet::update() {
     this->floatPosX += this->speedX;
     this->floatPosY += this->speedY;
+    cout << "floatPosX, floatPosY: " << floatPosX << ", " << floatPosY << "\n";
 
     this->setRefPointX((int) this->floatPosX);
     this->setRefPointY((int) this->floatPosY);
 }
 
-// pmDraw Function
-//*************************************************************
 void Bullet::draw() {
+    cout << "Bullet x, y: " << this->getRefPointX() << ", " << this->getRefPointY() << "\n";
 	ofPushMatrix();
 	ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
 
