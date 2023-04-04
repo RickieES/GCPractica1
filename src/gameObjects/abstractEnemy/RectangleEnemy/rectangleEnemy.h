@@ -19,7 +19,7 @@ class RectangleEnemy: public AbstractEnemy{
 			this->setId("Rect");
 
 			this->setPosX(nLimitRight);
-			this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);
+			this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitUp);
 
 			this->setHeight(nHeight);
 			this->setWidth(nWidth);
