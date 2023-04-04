@@ -11,9 +11,9 @@
 
         //setupBuilder function 2
     //*****************************************************
-    GameObject BuilderEnemies::build(ColorType colorType, EnemyType enemyType, SizeType sizeType, SpeedType speedType) {
+    AbstractEnemy * BuilderEnemies::build(ColorType colorType, EnemyType enemyType, SizeType sizeType, SpeedType speedType) {
         
-        GameObject *result;
+        AbstractEnemy * result;
         
         switch (enemyType){
             case EnemyType::square:
@@ -26,7 +26,7 @@
                 break;
         }
 
-        return *result;
+        return result;
     }
 
 
@@ -98,8 +98,8 @@
     int BuilderEnemies::selectSpeed(SpeedType speedType){     
         int result=0;
         switch (speedType){
-            case SpeedType::low:
-                result = this->speed_low;
+            case SpeedType::slow:
+                result = this->speed_slow;
                 break;
             case SpeedType::normal:
                 result = this->speed_normal;

@@ -37,7 +37,7 @@
 
 		// Generar enemigos
 		if (objectList.size() < 10){
-			RectangleEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
+			AbstractEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
 											BuilderEnemies::EnemyType::square,
 											BuilderEnemies::SizeType::small,
 											BuilderEnemies::SpeedType::normal);

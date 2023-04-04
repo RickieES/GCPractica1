@@ -15,6 +15,7 @@
         //Update function
     //*****************************************************
     void AbstractEnemy::update(){
+		posX -= getSpeed();
         return;
     }
 

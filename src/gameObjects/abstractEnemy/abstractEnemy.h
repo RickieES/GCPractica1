@@ -19,7 +19,9 @@ class AbstractEnemy: public GameObject {
 
 
 	public:
-		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed):
+		AbstractEnemy() : GameObject() {};
+
+		AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed) :
 			GameObject(){
 
 			this->setColor(nColor);

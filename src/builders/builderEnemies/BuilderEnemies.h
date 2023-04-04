@@ -9,14 +9,16 @@ class BuilderEnemies {
 		enum class EnemyType {square, triangle, circle};
 		enum class ColorType {color1, color2};
 		enum class SizeType {small, medium, large};
-		enum class SpeedType {low, normal, fast};
+		enum class SpeedType {slow, normal, fast};
 
 		BuilderEnemies(ofColor nColor1, ofColor nColor2, int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight){
-			
-			this->setLimitUp(nLimitUp);
-			this->setLimitDown(nLimitDown);
-			this->setLimitRight(nLimitRight);
-			this->setLimitLeft(nLimitLeft);			
+			setColor1(nColor1);
+			setColor2(nColor2);
+
+			setLimitUp(nLimitUp);
+			setLimitDown(nLimitDown);
+			setLimitRight(nLimitRight);
+			setLimitLeft(nLimitLeft);			
 		}
 	
 	private:
@@ -39,7 +41,7 @@ class BuilderEnemies {
 		const int squareSize_large_height = 25;
 		int selectSquareSize_height(SizeType sizeType);
 
-		const int speed_low = 2;
+		const int speed_slow = 2;
 		const int speed_normal = 4;
 		const int speed_fast = 6;
 		int selectSpeed(SpeedType speedType);
@@ -47,7 +49,7 @@ class BuilderEnemies {
     public:
 		// FIXME: constructor por defecto comentado porque no devuelve objeto
         // GameObject build();
-        GameObject build(ColorType colourType, EnemyType enemyType, SizeType sizeType, SpeedType speedType);
+        AbstractEnemy * build(ColorType colourType, EnemyType enemyType, SizeType sizeType, SpeedType speedType);
 
 		ofColor getColor1();
 		void setColor1(ofColor value);	

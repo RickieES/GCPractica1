@@ -11,11 +11,18 @@ class RectangleEnemy: public AbstractEnemy{
 		float heigth;
 
 	public:
+		RectangleEnemy() : AbstractEnemy() {};
+
 		RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed, float nWidth, float nHeight):
 			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed){
 				
-				this->setPosX(nLimitRight);
-				this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);          		
+			this->setId("Rect");
+
+			this->setPosX(nLimitRight);
+			this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);
+
+			this->setHeight(nHeight);
+			this->setWidth(nWidth);
 		}
 
 		virtual void setup() override;

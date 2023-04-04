@@ -18,12 +18,12 @@
     void RectangleEnemy::draw(){
         printf("HOLA RectangleEnemy Draw\n");
  
-        ofSetColor(255, 0, 0);
-        ofNoFill();
+        ofSetColor(this->getColor());
+        ofFill();
         
         ofPushMatrix();
             ofTranslate(this->getPosX(), this->getPosY());
-            ofDrawRectangle(this->getPosX(), this->getPosY(), this->getWidth(), this->getHeight());
+            ofDrawRectangle(0, 0, this->getWidth(), this->getHeight());
         ofPopMatrix();
         
 
@@ -34,6 +34,7 @@
         //Update function
     //*****************************************************
     void RectangleEnemy::update(){
+		AbstractEnemy::update();
         return;
     }
 
