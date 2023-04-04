@@ -47,8 +47,7 @@
 		}
 
 		// https://stackoverflow.com/questions/30926577/c-call-a-childs-method-from-a-vector-of-parents
-		for (auto e : objectList)
-		{
+		for (auto e : objectList){
 			e->update();
 			//checkOutOfBounds(e);
 		}
@@ -129,8 +128,7 @@
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
 		
-		for each (auto e in objectList)
-		{
+		for (auto e : objectList){
 			e->draw();
 		}
 		

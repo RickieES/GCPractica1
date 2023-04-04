@@ -16,7 +16,6 @@
         //Draw function
     //*****************************************************
     void RectangleEnemy::draw(){
-        printf("HOLA RectangleEnemy Draw\n");
  
         ofSetColor(this->getColor());
         ofFill();
