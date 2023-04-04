@@ -20,9 +20,9 @@
         player_up = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
         player_up.facing = Player::Orientation::SOUTH;
         player_down = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
-//        player_down.facing = Player::Orientation::NORTH;
+		// player_down.facing = Player::Orientation::NORTH;
 
-		//spawner = BuilderEnemies;
+		// spawner = BuilderEnemies;
 
         return;
     }
@@ -36,21 +36,23 @@
         AbstractScene::updateScene();
 
 		// Generar enemigos
-		if (enemyList.size() < 10){
-			RectangleEnemy e = spawner.build(BuilderEnemies::ColorType::color1, 
+		if (objectList.size() < 10){
+			RectangleEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
 											BuilderEnemies::EnemyType::square,
 											BuilderEnemies::SizeType::small,
 											BuilderEnemies::SpeedType::normal);
 
-			enemyList.push_back(e);
+			objectList.push_back(e);
 		}
 
-		for (auto &e : enemyList)
+		// https://stackoverflow.com/questions/30926577/c-call-a-childs-method-from-a-vector-of-parents
+		for (auto e : objectList)
 		{
-			e.update();
+			e->update();
 		}
 
         // TODO: Pasar a funcion (simplemente encapsular)
+		// Jugador up
         if (ofGetKeyPressed('a')){
             player_up.moveLeft();
         }
@@ -59,6 +61,11 @@
             player_up.moveRight();
         }
 
+		if (ofGetKeyPressed('s')) {
+			objectList.push_back(player_up.shoot());
+		}
+
+		// Jugador down
         if (ofGetKeyPressed('j')){
             player_down.moveLeft();
         }
@@ -66,9 +73,12 @@
         if (ofGetKeyPressed('l')){
             player_down.moveRight();
         }
-/* 
-        RectangleEnemy *enemy = new RectangleEnemy(100, 1500, 0, ofGetWidth(), 1, 200, 100);
-        gameObjectList.push_back( enemy ); */
+
+		if (ofGetKeyPressed('k')) {
+			objectList.push_back(player_down.shoot());
+		}
+
+
 
         return;
     }
@@ -78,18 +88,17 @@
     //*****************************************************
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
-
-		for each (RectangleEnemy e in enemyList)
+		
+		for each (auto e in objectList)
 		{
-			e.draw();
+			e->draw();
 		}
-
+		
 //        ofSetColor(0);
 //        ofDrawRectangle(this->getLimitGameLeft(), 0, ofGetWidth(), this->getLimitGameUp());
 //        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameDown(), ofGetWidth(), ofGetHeight()-this->getLimitGameDown());
 
-//        ofSetColor(255, 0, 0);
-//        ofDrawRectangle(this->getLifeBarCoords().x, this->getLifeBarCoords().y, this->getLifeBarWidth(), this->getLifeBarHeight());
+//        ofSetColor(255, 0, 0);g//        ofDrawRectangle(this->getLifeBarCoords().x, this->getLifeBarCoords().y, this->getLifeBarWidth(), this->getLifeBarHeight());
 
         drawPlayers();
 //        drawUI();

@@ -25,7 +25,7 @@ class Game_scene: public AbstractScene {
         Player player_down;
 
 		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()*0.8) };
-		vector<RectangleEnemy> enemyList;
+		vector<GameObject*> objectList;
 
 	public:
 		const string nameScene{ "Game_scene" };
