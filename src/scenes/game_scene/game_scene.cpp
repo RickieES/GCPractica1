@@ -24,6 +24,9 @@
 
 		// spawner = BuilderEnemies;
 
+		lastEnemyWave = ofGetElapsedTimeMillis();
+		lastPressedShootDown = ofGetElapsedTimeMillis();
+		lastPressedShootUp = ofGetElapsedTimeMillis();
 
         return;
     }
@@ -37,13 +40,23 @@
         AbstractScene::updateScene();
 
 		// Generar enemigos
-		if (objectList.size() < 10){
-			AbstractEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
-											BuilderEnemies::EnemyType::square,
-											BuilderEnemies::SizeType::small,
-											BuilderEnemies::SpeedType::normal);
+		if (ofGetElapsedTimeMillis() - lastEnemyWave > 2000) {
 
-			objectList.push_back(e);
+			// Reinicia el "timer"
+			lastEnemyWave = ofGetElapsedTimeMillis();
+
+			int nEnemies = rand() % 5 + 1;
+		
+			// TODO: Generar aleatoriamente todas las propiedades de los ememigos (en cada wave)
+
+			for (int i = 0; i < nEnemies; i++) {
+				AbstractEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
+												  BuilderEnemies::EnemyType::square,
+												  BuilderEnemies::SizeType::small,
+												  BuilderEnemies::SpeedType::normal);
+
+				objectList.push_back(e);
+			}
 		}
 
 		// https://stackoverflow.com/questions/30926577/c-call-a-childs-method-from-a-vector-of-parents

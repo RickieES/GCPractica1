@@ -24,7 +24,7 @@ class Game_scene: public AbstractScene {
         Player playerUp;
         Player playerDown;
 
-		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()*0.8) };
+		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()) };
 		vector<GameObject*> objectList;
 
 		bool shootingPlayerUp;
@@ -32,6 +32,8 @@ class Game_scene: public AbstractScene {
 
 		bool shootingPlayerDown;
 		int lastPressedShootDown;
+
+		int lastEnemyWave;
 
 	public:
 		const string nameScene{ "Game_scene" };
