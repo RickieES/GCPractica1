@@ -2,7 +2,9 @@
 #include "Player.h"
 #include "ofMain.h"
 #include "../bullet/Bullet.h"
-
+#ifndef M_PI
+#define M_PI 3.141592653589
+#endif
 
 void Player::initMembers(int ca) {
 	this->rotationSpeed = 2;
@@ -201,11 +203,11 @@ void Player::moveRight(){
 Bullet * Player::shoot() {
 	int signX = (facing == Orientation::NORTH) ? 1 : -1;
 	int signY = (facing == Orientation::NORTH) ? -1 : 1;
-	ofPoint bulletInitial = ofPoint(this->getRefPointX(),
-									this->getRefPointY() + (signY * (radius + cannonLength)), 0);
-	
 	float sx = sin(cannonAngle * M_PI / 180);
 	float sy = cos(cannonAngle * M_PI / 180);
+	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * radius),
+									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
+	
 
 	sx = signX * sx * 2;
 	sy = signY * sy * 2;
