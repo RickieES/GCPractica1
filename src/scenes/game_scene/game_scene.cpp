@@ -6,16 +6,18 @@
     void Game_scene::setupScene(){
         AbstractScene::setupScene();
 
-        ofSetBackgroundColor(118);
+        ofBackground(bgMain);
 
         this->setLimitGameUp((ofGetHeight()*25)/100);
         this->setLimitGameDown((ofGetHeight()*75)/100);
         this->setLimitGameLeft(0);
         this->setLimitGameRight(ofGetWidth());
 
-        this->setLifeBarCoords((ofGetWidth()*10)/100, (ofGetHeight()*10)/100, 0 );
+        this->setLifeBarCoords(ofGetWidth()*0.55, ofGetHeight()*0.02, 0);
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
+
+		healthPoints = 100;
 
         playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
         playerUp.facing = Player::Orientation::SOUTH;
@@ -139,16 +141,15 @@
     //*****************************************************
     void Game_scene::drawScene(){
         AbstractScene::drawScene();
+	
+		drawBackground();
 		
 		for (auto e : objectList){
 			e->draw();
 		}
 		
         drawPlayers();
-//        drawUI();
-
-        ofSetColor(ofColor::white);
-        ofDrawBitmapString(ofGetFrameRate(), 20, 20);
+	    drawUI();
 
         return;
     }
@@ -160,8 +161,26 @@
     }
 
 
-    void Game_scene::drawUI(){
-		// TODO:
+	void Game_scene::drawUI() {
+		
+		// Barra de vida
+		ofSetColor(ofColor::black);
+		ofDrawRectangle(lifeBarCoords.x - 10, lifeBarCoords.y + 10, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
+
+		if (healthPoints < 20) {
+			ofSetColor(ofColor::red);
+		} else {
+			ofSetColor(ofColor::green);
+		}
+
+		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
+
+		ofSetColor(ofColor::white);
+		// Puntuacion
+		ofDrawBitmapString(score, ofGetWidth() - 50, 20);
+
+		// Framerate (opcional)
+		ofDrawBitmapString(ofGetFrameRate(), 20, 20);
     }
 
 
@@ -241,4 +260,15 @@
 				oPosX > (int)getLimitGameRight() + boundsMargin ||
 				oPosY < - boundsMargin ||
 				oPosY > ofGetHeight() + boundsMargin);
+	}
+
+	void Game_scene::drawBackground() {
+		// TODO: Hacer relativo
+		ofSetColor(bgSecondary);
+		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.2);
+		ofDrawRectangle(0, ofGetHeight()*0.8, ofGetWidth(), ofGetHeight()*0.2);
+
+		ofSetColor(bgTertiary);
+		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.1);
+		ofDrawRectangle(0, ofGetHeight()*0.9, ofGetWidth(), ofGetHeight()*0.1);
 	}

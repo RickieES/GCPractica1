@@ -8,6 +8,7 @@
 #include "../../gameObjects/player/Player.h"
 #include "../abstractScene.h"
 #include "../../builders/builderEnemies/BuilderEnemies.h"
+#include "../game_colorPalette.h"
 using namespace std;
 
 class Game_scene: public AbstractScene {
@@ -20,6 +21,9 @@ class Game_scene: public AbstractScene {
 		ofPoint lifeBarCoords;
 		unsigned lifeBarWidth;
 		unsigned lifeBarHeight;
+		int healthPoints;
+
+		int score;
 
         Player playerUp;
         Player playerDown;
@@ -65,5 +69,7 @@ class Game_scene: public AbstractScene {
 		void setLifeBarHeight(unsigned value);
 
 		bool checkOutOfBounds(GameObject* object);
+
+		void drawBackground();
 
 };
