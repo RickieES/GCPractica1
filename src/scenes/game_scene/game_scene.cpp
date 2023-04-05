@@ -65,13 +65,12 @@
 			//checkOutOfBounds(e);
 		}
 
-		/*
 		for (int i = 0; i < objectList.size(); i++) {
 			if (checkOutOfBounds(objectList[i])) {
 				objectList.erase(objectList.begin() + i);
 			}
 		}
-		*/
+		
 
         // TODO: Pasar a funcion (simplemente encapsular)
 		// Jugador up
@@ -145,12 +144,6 @@
 			e->draw();
 		}
 		
-//        ofSetColor(0);
-//        ofDrawRectangle(this->getLimitGameLeft(), 0, ofGetWidth(), this->getLimitGameUp());
-//        ofDrawRectangle(this->getLimitGameLeft(), this->getLimitGameDown(), ofGetWidth(), ofGetHeight()-this->getLimitGameDown());
-
-//        ofSetColor(255, 0, 0);g//        ofDrawRectangle(this->getLifeBarCoords().x, this->getLifeBarCoords().y, this->getLifeBarWidth(), this->getLifeBarHeight());
-
         drawPlayers();
 //        drawUI();
 
@@ -168,7 +161,7 @@
 
 
     void Game_scene::drawUI(){
-
+		// TODO:
     }
 
 
@@ -243,8 +236,9 @@
 		int oPosX = object->getRefPointX();
 		int oPosY = object->getRefPointY();
 
-		return (oPosX < getLimitGameLeft() ||
-			oPosX > getLimitGameRight() ||
-			oPosY < getLimitGameUp() ||
-			oPosY > getLimitGameDown());
+		// FIXME: Revisar inconsistencia entre limites del juego y de la ventana
+		return (oPosX < (int)getLimitGameLeft() - boundsMargin ||
+				oPosX > (int)getLimitGameRight() + boundsMargin ||
+				oPosY < - boundsMargin ||
+				oPosY > ofGetHeight() + boundsMargin);
 	}
