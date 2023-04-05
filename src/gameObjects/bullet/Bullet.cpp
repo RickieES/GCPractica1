@@ -34,14 +34,12 @@ float Bullet::getSpeedY() {
 void Bullet::update() {
     this->floatPosX += this->speedX;
     this->floatPosY += this->speedY;
-    cout << "floatPosX, floatPosY: " << floatPosX << ", " << floatPosY << "\n";
 
     this->setRefPointX((int) this->floatPosX);
     this->setRefPointY((int) this->floatPosY);
 }
 
 void Bullet::draw() {
-    cout << "Bullet x, y: " << this->getRefPointX() << ", " << this->getRefPointY() << "\n";
 	ofPushMatrix();
 	ofTranslate(this->getRefPointX(), this->getRefPointY(), 0);
 

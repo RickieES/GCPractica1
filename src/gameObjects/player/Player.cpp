@@ -1,3 +1,4 @@
+#include <math.h>
 #include "Player.h"
 #include "ofMain.h"
 #include "../bullet/Bullet.h"
@@ -198,15 +199,16 @@ void Player::moveRight(){
 };
 
 Bullet * Player::shoot() {
-	int sign = (facing == Orientation::NORTH) ? -1 : 1;
-	ofPoint bulletInitial = ofPoint(this->getRefPointX() + radius,
-									this->getRefPointY() + (sign * (radius + cannonLength)), 0);
+	int signX = (facing == Orientation::NORTH) ? 1 : -1;
+	int signY = (facing == Orientation::NORTH) ? -1 : 1;
+	ofPoint bulletInitial = ofPoint(this->getRefPointX(),
+									this->getRefPointY() + (signY * (radius + cannonLength)), 0);
 	
-	float sx = sin(cannonAngle);
-	float sy = cos(cannonAngle);
+	float sx = sin(cannonAngle * M_PI / 180);
+	float sy = cos(cannonAngle * M_PI / 180);
 
-	sx = sign * sx;
-	sy = sign * sy;
+	sx = signX * sx * 2;
+	sy = signY * sy * 2;
 
 	Bullet *b = new Bullet(bulletInitial, sx, sy);
 	b->setColor(ofColor::white);
