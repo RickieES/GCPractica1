@@ -35,6 +35,8 @@ class Game_scene: public AbstractScene {
 
 		int lastEnemyWave;
 
+		const int boundsMargin{ 20 };
+
 	public:
 		const string nameScene{ "Game_scene" };
 
