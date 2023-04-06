@@ -205,7 +205,7 @@ Bullet * Player::shoot() {
 	int signY = (facing == Orientation::NORTH) ? -1 : 1;
 	float sx = sin(cannonAngle * M_PI / 180);
 	float sy = cos(cannonAngle * M_PI / 180);
-	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * radius),
+	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
 									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
 	
 
