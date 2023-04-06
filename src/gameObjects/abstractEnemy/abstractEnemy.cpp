@@ -16,6 +16,7 @@
     //*****************************************************
     void AbstractEnemy::update(){
 		posX -= getSpeed();
+        setRefPointX(posX);
         return;
     }
 
@@ -46,6 +47,7 @@
     }
     void AbstractEnemy::setPosX(int value){
         this->posX = value;
+        this->setRefPointX(value);
         return;
     }
 
@@ -54,6 +56,7 @@
     }
     void AbstractEnemy::setPosY(int value){
         this->posY = value;
+        this->setRefPointY(value);
         return;
     }
 
