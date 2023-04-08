@@ -3,37 +3,46 @@
 #include "ofMain.h"
 using namespace std;
 
-class GameObject {
-	
-	private: 
-		string id;
-		ofPoint refPoint;
-		ofColor color;
+class GameObject
+{
+public:
+	enum class ColorType
+	{
+		Color1,
+		Color2
+	};
 
-	public:
-		GameObject(){
-			this->setId("pepe");
-		}
+	GameObject()
+	{
+		this->setId("pepe");
+	}
 
-		virtual void setup();
-		virtual void draw();
-		virtual void update();
+	virtual void setup();
+	virtual void draw();
+	virtual void update();
 
-		string getId();
-		void setId(string value);
+	string getId();
+	void setId(string value);
 
-        ofPoint getRefPoint();
-        void setRefPoint(ofPoint rp);
-        int getRefPointX();
-        void setRefPointX(int x);
-        int getRefPointY();
-        void setRefPointY(int y);
+	ofPoint getRefPoint();
+	void setRefPoint(ofPoint rp);
+	int getRefPointX();
+	void setRefPointX(int x);
+	int getRefPointY();
+	void setRefPointY(int y);
 
-		ofColor getColor();
-		void setColor(ofColor value);
-		void setColor(int r, int g, int b);
+	ColorType getColorType();
+	void setColorType(ColorType value);
 
-		virtual bool collidesWith(GameObject ogo);
+	static void setMainColor(ColorType ct, int r, int g, int b);
+	static void setMainColor(ColorType ct, ofColor ofc);
+	ofColor getMainColor();
 
-		
+	virtual bool collidesWith(GameObject ogo);
+
+private:
+	string id;
+	ofPoint refPoint;
+	GameObject::ColorType color;
+	static ofColor mainColor1, mainColor2;
 };

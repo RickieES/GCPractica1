@@ -4,42 +4,36 @@
 #include "../abstractEnemy.h"
 using namespace std;
 
-class RectangleEnemy: public AbstractEnemy{
-	
-	private: 
-		float width;
-		float heigth;
+class RectangleEnemy : public AbstractEnemy
+{
 
-	public:
-		RectangleEnemy() : AbstractEnemy() {};
+private:
+	float width;
+	float heigth;
 
-		RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, ofColor nColor, int nSpeed, float nWidth, float nHeight):
-			AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed){
-				
-			this->setId("Rect");
+public:
+	RectangleEnemy() : AbstractEnemy(){};
 
-			this->setPosX(nLimitRight);
-			this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitUp);
+	RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
+					GameObject::ColorType nColor, int nSpeed, float nWidth, float nHeight) :
+					AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed)
+	{
 
-			this->setHeight(nHeight);
-			this->setWidth(nWidth);
-		}
+		this->setId("Rect");
 
-		virtual void setup() override;
-		virtual void draw() override;
-		virtual void update() override;
+		this->setPosX(nLimitRight);
+		this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitUp);
 
-		float getWidth();
-		void setWidth(float value);
-		float getHeight();
-		void setHeight(float value);
+		this->setHeight(nHeight);
+		this->setWidth(nWidth);
+	}
 
+	virtual void setup() override;
+	virtual void draw() override;
+	virtual void update() override;
 
-
-
-
-	
-
-
-
+	float getWidth();
+	void setWidth(float value);
+	float getHeight();
+	void setHeight(float value);
 };

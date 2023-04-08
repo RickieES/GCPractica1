@@ -18,4 +18,5 @@ class Bullet: public GameObject {
         float getSpeedY();
         void draw();
         void update();
+        ofColor getMainColor();
 };

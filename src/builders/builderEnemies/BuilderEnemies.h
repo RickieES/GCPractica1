@@ -3,67 +3,76 @@
 #include "../../gameObjects/gameObject.h"
 #include "../../gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h"
 
-class BuilderEnemies {
+class BuilderEnemies
+{
 
-	public:
-		enum class EnemyType {square, triangle, circle};
-		enum class ColorType {color1, color2};
-		enum class SizeType {small, medium, large};
-		enum class SpeedType {slow, normal, fast};
+public:
+	enum class EnemyType
+	{
+		square,
+		triangle,
+		circle
+	};
+	enum class SizeType
+	{
+		small,
+		medium,
+		large
+	};
+	enum class SpeedType
+	{
+		slow,
+		normal,
+		fast
+	};
 
-		BuilderEnemies(ofColor nColor1, ofColor nColor2, int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight){
-			setColor1(nColor1);
-			setColor2(nColor2);
+	BuilderEnemies(ofColor nColor1, ofColor nColor2, int nLimitUp, int nLimitDown,
+				   int nLimitLeft, int nLimitRight)
+	{
+		GameObject::setMainColor(GameObject::ColorType::Color1, nColor1);
+		GameObject::setMainColor(GameObject::ColorType::Color2, nColor2);
 
-			setLimitUp(nLimitUp);
-			setLimitDown(nLimitDown);
-			setLimitRight(nLimitRight);
-			setLimitLeft(nLimitLeft);			
-		}
-	
-	private:
-		ofColor color1;
-		ofColor color2;
-		int limitUp;
-		int limitDown;
-		int limitLeft;
-		int limitRight;
+		setLimitUp(nLimitUp);
+		setLimitDown(nLimitDown);
+		setLimitRight(nLimitRight);
+		setLimitLeft(nLimitLeft);
+	}
 
-		ofColor selectColor(ColorType colourType);
-		
-		const int squareSize_small_width = 10;
-		const int squareSize_medium_width = 20;
-		const int squareSize_large_width = 30;
-		int selectSquareSize_width(SizeType sizeType);
+private:
+	int limitUp;
+	int limitDown;
+	int limitLeft;
+	int limitRight;
 
-		const int squareSize_small_height = 5;
-		const int squareSize_medium_height = 10;
-		const int squareSize_large_height = 25;
-		int selectSquareSize_height(SizeType sizeType);
+	// ofColor selectColor(GameObject::ColorType colourType);
 
-		const int speed_slow = 2;
-		const int speed_normal = 4;
-		const int speed_fast = 6;
-		int selectSpeed(SpeedType speedType);
-		
-    public:
-		// FIXME: constructor por defecto comentado porque no devuelve objeto
-        // GameObject build();
-        AbstractEnemy * build(ColorType colourType, EnemyType enemyType, SizeType sizeType, SpeedType speedType);
+	const int squareSize_small_width = 10;
+	const int squareSize_medium_width = 20;
+	const int squareSize_large_width = 30;
+	int selectSquareSize_width(SizeType sizeType);
 
-		ofColor getColor1();
-		void setColor1(ofColor value);	
-		ofColor getColor2();
-		void setColor2(ofColor value);	
+	const int squareSize_small_height = 5;
+	const int squareSize_medium_height = 10;
+	const int squareSize_large_height = 25;
+	int selectSquareSize_height(SizeType sizeType);
 
-		int getLimitUp();
-		void setLimitUp(int value);
-		int getLimitDown();
-		void setLimitDown(int value);
-		int getLimitLeft();
-		void setLimitLeft(int value);
-		int getLimitRight();
-		void setLimitRight(int value);
+	const int speed_slow = 2;
+	const int speed_normal = 4;
+	const int speed_fast = 6;
+	int selectSpeed(SpeedType speedType);
 
+public:
+	// FIXME: constructor por defecto comentado porque no devuelve objeto
+	// GameObject build();
+	AbstractEnemy *build(GameObject::ColorType colourType, EnemyType enemyType, SizeType sizeType,
+						 SpeedType speedType);
 
+	int getLimitUp();
+	void setLimitUp(int value);
+	int getLimitDown();
+	void setLimitDown(int value);
+	int getLimitLeft();
+	void setLimitLeft(int value);
+	int getLimitRight();
+	void setLimitRight(int value);
 };
