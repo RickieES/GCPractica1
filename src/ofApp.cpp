@@ -15,9 +15,11 @@ void ofApp::setup(){
 	this->pause_scene.setupScene();
 	this->score_scene.setupScene();
 
-    this->mainMenu_scene.startGame_button.addListener(this, &ofApp::changeScene_eventFunction);
+    //this->mainMenu_scene.startGame_button.addListener(this, &ofApp::changeScene_eventFunction);
+	
+	ofAddListener(mainMenu_scene.onStartGame, this, &ofApp::changeScene_eventFunction);
+	ofAddListener(game_scene.onDeath, this, &ofApp::changeScene_eventFunction);
 
-	//ofAddListener(redCircle.clickedInside,this,&ofApp::onMouseInCircle);
 	return;
 }
 
@@ -63,6 +65,6 @@ void ofApp::mousePressed(int x, int y, int button) {
 
 
 
-void ofApp::changeScene_eventFunction(){
-    this->controller = game;
+void ofApp::changeScene_eventFunction(int & targetScene){
+	this->controller = (ControllerScenes) targetScene;
 }

@@ -13,7 +13,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-		void changeScene_eventFunction();
+		void changeScene_eventFunction(int & targetScene);
 		void mousePressed(int x, int y, int button);
 		
 		MainMenu_scene mainMenu_scene;

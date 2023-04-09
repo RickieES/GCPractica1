@@ -7,8 +7,10 @@
 
         //startGame_button.addListener(this, &MainMenu_scene::test);
 
-        mainPanel.setup();
-        mainPanel.add(startGame_button.setup("start", 200, 200));
+        /*mainPanel.setup();
+        mainPanel.add(startGame_button.setup("start", 200, 200));*/
+
+
 
 
         this->signTitleWidht = 5*(ofGetWidth()/10);
@@ -83,7 +85,10 @@
         //UpdateScene function
     //*****************************************************
     void MainMenu_scene::updateScene(){
-        
+		if (ofGetKeyPressed()) {
+			int targetScene = 1;
+			ofNotifyEvent(onStartGame, targetScene);
+		}
     }
 
 

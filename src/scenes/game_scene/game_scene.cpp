@@ -84,6 +84,23 @@
 			}
 		}
 
+		// Recibir daño
+		for (int i = 0; i < enemyList.size(); i++) {
+			GameObject * enem = enemyList[i];
+
+			if (enem->getRefPointX() < hitThreshold) {
+				enemyList.erase(enemyList.begin() + i);
+
+				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
+				healthPoints = max(0, healthPoints - 5);
+
+				if (healthPoints == 0) {
+					int targetScene = 2;
+					ofNotifyEvent(onDeath, targetScene);
+				}
+			}
+		}
+
 		// Jugador up
         if (ofGetKeyPressed('a')){
             playerUp.moveLeft();
@@ -170,10 +187,11 @@
 
 
 	void Game_scene::drawUI() {
+		float percentageHP = healthPoints / 100.0;
 
 		// Barra de vida
 		ofSetColor(ofColor::black);
-		ofDrawRectangle(lifeBarCoords.x - 10, lifeBarCoords.y + 10, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
+		ofDrawRectangle(lifeBarCoords.x - 10, lifeBarCoords.y + 10, lifeBarWidth*percentageHP, lifeBarHeight);
 
 		if (healthPoints < 20) {
 			ofSetColor(ofColor::red);
@@ -181,7 +199,10 @@
 			ofSetColor(ofColor::green);
 		}
 
-		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
+		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*percentageHP, lifeBarHeight);
+
+		ofSetColor(ofColor::black);
+		ofDrawBitmapString(healthPoints, lifeBarCoords.x + 10, lifeBarCoords.y + 20);
 
 		ofSetColor(ofColor::white);
 

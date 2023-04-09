@@ -43,8 +43,12 @@ class Game_scene: public AbstractScene {
 		const int boundsMargin{ 20 };
 		const int nMaxEnemy{ 5 };
 
+		const double hitThreshold{ ofGetWidth()*0.05 };
+
 	public:
 		const string nameScene{ "Game_scene" };
+
+		ofEvent<int> onDeath;
 
 		virtual void setupScene() override;
 		virtual void drawScene() override;

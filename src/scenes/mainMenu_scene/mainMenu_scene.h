@@ -11,6 +11,8 @@ class MainMenu_scene {
 
 		const string nameScene = "mainMenu_scene";
 
+		ofEvent<int> onStartGame;
+
 		void setupScene();
 		void drawScene();
 		void updateScene();
