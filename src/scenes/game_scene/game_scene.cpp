@@ -24,8 +24,6 @@
         playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
 		// player_down.facing = Player::Orientation::NORTH;
 
-		// spawner = BuilderEnemies;
-
 		lastEnemyWave = ofGetElapsedTimeMillis();
 		lastPressedShootDown = ofGetElapsedTimeMillis();
 		lastPressedShootUp = ofGetElapsedTimeMillis();
@@ -57,24 +55,19 @@
 												  BuilderEnemies::SizeType::small,
 												  BuilderEnemies::SpeedType::normal);
 
-				objectList.push_back(e);
+				enemyList.push_back(e);
 			}
 		}
 
+		// Actualizar la posicion de todos los objetos en la lista
 		// https://stackoverflow.com/questions/30926577/c-call-a-childs-method-from-a-vector-of-parents
-		for (auto e : objectList){
-			e->update();
-			//checkOutOfBounds(e);
-		}
+		updateGameObjectVector(&bulletList);
+		updateGameObjectVector(&enemyList);
 
-		for (int i = 0; i < objectList.size(); i++) {
-			if (checkOutOfBounds(objectList[i])) {
-				objectList.erase(objectList.begin() + i);
-			}
-		}
+
+
 		
-
-        // TODO: Pasar a funcion (simplemente encapsular)
+		// Controles
 		// Jugador up
         if (ofGetKeyPressed('a')){
             playerUp.moveLeft();
@@ -91,12 +84,12 @@
 		if (ofGetKeyPressed('s')) {
 			if (!shootingPlayerUp) {
 				shootingPlayerUp = true;
-				objectList.push_back(playerUp.shoot());
+				bulletList.push_back(playerUp.shoot());
 			} 
 			else if (ofGetElapsedTimeMillis() - lastPressedShootUp > 500) 
 			{
 				lastPressedShootUp = ofGetElapsedTimeMillis();
-				objectList.push_back(playerUp.shoot());
+				bulletList.push_back(playerUp.shoot());
 			}
 		}
 		else 
@@ -117,12 +110,12 @@
 		if (ofGetKeyPressed('k')) {
 			if (!shootingPlayerDown) {
 				shootingPlayerDown = true;
-				objectList.push_back(playerDown.shoot());
+				bulletList.push_back(playerDown.shoot());
 			}
 			else if (ofGetElapsedTimeMillis() - lastPressedShootDown > 500)
 			{
 				lastPressedShootDown = ofGetElapsedTimeMillis();
-				objectList.push_back(playerDown.shoot());
+				bulletList.push_back(playerDown.shoot());
 			}
 		}
 		else
@@ -144,9 +137,8 @@
 	
 		drawBackground();
 		
-		for (auto e : objectList){
-			e->draw();
-		}
+		drawGameObjectVector(&bulletList);
+		drawGameObjectVector(&enemyList);
 		
         drawPlayers();
 	    drawUI();
@@ -162,7 +154,7 @@
 
 
 	void Game_scene::drawUI() {
-		
+
 		// Barra de vida
 		ofSetColor(ofColor::black);
 		ofDrawRectangle(lifeBarCoords.x - 10, lifeBarCoords.y + 10, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
@@ -176,6 +168,7 @@
 		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*(healthPoints / 100), lifeBarHeight);
 
 		ofSetColor(ofColor::white);
+
 		// Puntuacion
 		ofDrawBitmapString(score, ofGetWidth() - 50, 20);
 
@@ -260,6 +253,27 @@
 				oPosX > (int)getLimitGameRight() + boundsMargin ||
 				oPosY < - boundsMargin ||
 				oPosY > ofGetHeight() + boundsMargin);
+	}
+
+	void Game_scene::updateGameObjectVector(vector<GameObject*>* objList) {
+		//for (auto e : objList) {
+		//	e->update();
+		//}
+
+		// Actualiza y comprueba si esta fuera de la pantalla
+		for (int i = 0; i < objList->size(); i++) {
+			(*objList)[i]->update();
+
+			if (checkOutOfBounds((*objList)[i])) {
+				objList->erase(objList->begin() + i);
+			}
+		}
+	}
+
+	void Game_scene::drawGameObjectVector(vector<GameObject*>* objList) {
+		for (auto e : (*objList)) {
+			e->draw();
+		}
 	}
 
 	void Game_scene::drawBackground() {

@@ -29,7 +29,8 @@ class Game_scene: public AbstractScene {
         Player playerDown;
 
 		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()) };
-		vector<GameObject*> objectList;
+		vector<GameObject*> bulletList;
+		vector<GameObject*> enemyList;
 
 		bool shootingPlayerUp;
 		int lastPressedShootUp;
@@ -69,6 +70,9 @@ class Game_scene: public AbstractScene {
 		void setLifeBarHeight(unsigned value);
 
 		bool checkOutOfBounds(GameObject* object);
+
+		void updateGameObjectVector(vector<GameObject*>* objList);
+		void drawGameObjectVector(vector<GameObject*>* objList);
 
 		void drawBackground();
 
