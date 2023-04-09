@@ -45,17 +45,18 @@
 			// Reinicia el "timer"
 			lastEnemyWave = ofGetElapsedTimeMillis();
 
-			int nEnemies = rand() % 5 + 1;
-		
-			// TODO: Generar aleatoriamente todas las propiedades de los ememigos (en cada wave)
+			// Genera de 1 a 5 enemigos
+			int nEnemies = rand() % nMaxEnemy + 1;
 
 			for (int i = 0; i < nEnemies; i++) {
-				GameObject::ColorType randColor = (GameObject::ColorType) (rand() % 2);
 
-				AbstractEnemy * e = spawner.build(randColor,
-												  BuilderEnemies::EnemyType::square,
-												  BuilderEnemies::SizeType::small,
-												  BuilderEnemies::SpeedType::normal);
+				// Si se quieren añadir mas propiedades a los enemigos o añadir tipos, esto no sirve
+				GameObject::ColorType randColor = (GameObject::ColorType) (rand() % 2);
+				BuilderEnemies::EnemyType randEnemy = (BuilderEnemies::EnemyType) (rand() % 3);
+				BuilderEnemies::SizeType randSize = (BuilderEnemies::SizeType) (rand() % 3);
+				BuilderEnemies::SpeedType randSpeed = (BuilderEnemies::SpeedType) (rand() % 3);
+
+				AbstractEnemy * e = spawner.build(randColor, randEnemy, randSize, randSpeed);
 
 				enemyList.push_back(e);
 			}
