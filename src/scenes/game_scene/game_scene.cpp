@@ -50,7 +50,9 @@
 			// TODO: Generar aleatoriamente todas las propiedades de los ememigos (en cada wave)
 
 			for (int i = 0; i < nEnemies; i++) {
-				AbstractEnemy * e = spawner.build(GameObject::ColorType::Color1,
+				GameObject::ColorType randColor = (GameObject::ColorType) (rand() % 2);
+
+				AbstractEnemy * e = spawner.build(randColor,
 												  BuilderEnemies::EnemyType::square,
 												  BuilderEnemies::SizeType::small,
 												  BuilderEnemies::SpeedType::normal);
@@ -69,7 +71,10 @@
 			GameObject * enem = enemyList[i];
 
 			for (int j = 0; j < bulletList.size(); j++) {
-				if (enem->collidesWith(*bulletList[j])) {
+				GameObject * bullet = bulletList[j];
+
+				if (enem->getColorType() == bullet->getColorType() && enem->collidesWith(*bullet)) {
+
 					enemyList.erase(enemyList.begin() + i);
 					bulletList.erase(bulletList.begin() + j);
 
