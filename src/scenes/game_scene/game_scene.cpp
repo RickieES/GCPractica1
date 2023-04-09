@@ -19,9 +19,9 @@
 
 		healthPoints = 100;
 
-        playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, ofColor::red);
+        playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, GameObject::ColorType::Color1);
         playerUp.facing = Player::Orientation::SOUTH;
-        playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, ofColor::blue);
+        playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, GameObject::ColorType::Color2);
 		// player_down.facing = Player::Orientation::NORTH;
 
 		lastEnemyWave = ofGetElapsedTimeMillis();
@@ -50,7 +50,7 @@
 			// TODO: Generar aleatoriamente todas las propiedades de los ememigos (en cada wave)
 
 			for (int i = 0; i < nEnemies; i++) {
-				AbstractEnemy * e = spawner.build(BuilderEnemies::ColorType::color1, 
+				AbstractEnemy * e = spawner.build(GameObject::ColorType::Color1,
 												  BuilderEnemies::EnemyType::square,
 												  BuilderEnemies::SizeType::small,
 												  BuilderEnemies::SpeedType::normal);
@@ -64,10 +64,6 @@
 		updateGameObjectVector(&bulletList);
 		updateGameObjectVector(&enemyList);
 
-
-
-		
-		// Controles
 		// Jugador up
         if (ofGetKeyPressed('a')){
             playerUp.moveLeft();

@@ -4,6 +4,7 @@
 
 class Bullet: public GameObject {
     private:
+        const int radius = 10;
         float speedX;
         float speedY;
         float floatPosX;
@@ -16,6 +17,8 @@ class Bullet: public GameObject {
         float getSpeedX();
         void setSpeedY(float sy);
         float getSpeedY();
-        void draw();
-        void update();
+        virtual void draw() override;
+        virtual void update() override;
+	    virtual vector<ofRectangle> getEnclosingRectangleList() override;
+        ofColor getMainColor();
 };

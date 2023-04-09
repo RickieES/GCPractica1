@@ -12,6 +12,9 @@ void Player::initMembers(int ca) {
     this->cannonLength = 50;
     this->cannonWidth = 8;
     this->cannonAngle = ca;
+	ofColor ac = ofColor(this->getMainColor());
+	ac.setBrightness(ac.getBrightness() * 0.8);
+	this->setAltColor(ac);
 
 	// La posición de la forma ofPath influye en su dibujo
 	// this->cannonBase.lineTo(0, 0);
@@ -19,13 +22,7 @@ void Player::initMembers(int ca) {
 	this->cannonBase.lineTo(0 - radius * 2, 0);
 	ofPoint point2(0, 0);
 	this->cannonBase.arc(point2, radius, radius, 0, 180);
-	this->cannonBase.setColor(this->getColor());
-
-	// cout << "Player ID: " << this->getId() << "\n";
-	// cout << "facing: " << ((this->facing == Player::Orientation::NORTH) ? "North" : "South") << "\n";
-	// cout << "xCenter, yCenter: " << this->getRefPointX()<< ", " << this->getRefPointY() << "\n";
-	// cout << "Cannon l, w, a: " << this->getCannonLength() << ", " << this->getCannonWidth() << ", " << this->getCannonAngle() << "\n";
-	// cout << "Color r, g, b: " << this->getColor().r << ", " << this->getColor().g << ", " << this->getColor().b << "\n";
+	this->cannonBase.setColor(this->getMainColor());
 }
 
 // Constructor vacío
@@ -34,22 +31,20 @@ Player::Player() {
 
 // Constructor con tipos simples
 //*************************************************************
-Player::Player(int xCenter, int yCenter, int cannonAngle, int r, int g, int b,
-				Orientation initFacing) {
+Player::Player(int xCenter, int yCenter, int cannonAngle, ColorType ct, Orientation initFacing) {
 	this->facing = initFacing;
 	this->setRefPointX(xCenter);
 	this->setRefPointY(yCenter);
-	this->setColor(r, g , b);
+	this->setColorType(ct);
 	initMembers(cannonAngle);
 }
 
 // Constructor con tipos reales
 //*************************************************************
-Player::Player(ofPoint playerPos, int cannonAngle, ofColor mainColor,
-				Orientation initFacing) {
+Player::Player(ofPoint playerPos, int cannonAngle, ColorType ct, Orientation initFacing) {
 	this->facing = initFacing;
 	this->setRefPoint(playerPos);
-    this->setColor(mainColor);
+    this->setColorType(ct);
 	initMembers(cannonAngle);
 }
 
@@ -173,7 +168,7 @@ void Player::draw() {
 		}
 		ofPopMatrix();
 
-		ofSetColor(this->getColor());
+		ofSetColor(this->getMainColor());
 		this->cannonBase.draw();
 	}
 	ofPopMatrix();
@@ -200,6 +195,35 @@ void Player::moveRight(){
     this->cannonAngle =  min(80, this->cannonAngle + this->getRotationSpeed());
 };
 
+vector<ofRectangle> Player::getEnclosingRectangleList() {
+    vector<ofRectangle> l;
+	int signX = (facing == Orientation::NORTH) ? 1 : -1;
+	int signY = (facing == Orientation::NORTH) ? -1 : 1;
+	float sx = sin(cannonAngle * M_PI / 180);
+	float sy = cos(cannonAngle * M_PI / 180);
+	int x, y, w, h;
+	
+	// Rectángulo de la base del cañón
+	y = this->getRefPointY() - ((this->facing == Orientation::NORTH) ? this->radius : 0);
+    ofRectangle baseBox = ofRectangle(this->getRefPointX() - this->radius, y,
+                                  	  this->radius * 2, this->radius);
+
+	// Punta del cañón
+	ofPoint cannonTip = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
+								this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
+	x = (this->getRefPointX() < cannonTip.x) ? this->getRefPointX() - cannonWidth :
+											   cannonTip.x;
+	w = sx * cannonLength + cannonWidth; // No es exacto, pero suficiente
+	y = (this->getRefPointY() < cannonTip.y) ? this->getRefPointY() + radius - 5 :
+											   cannonTip.y;
+	h = sy * cannonLength;
+
+	ofRectangle cannonBox = ofRectangle(x, y, w, h);
+    l.insert(l.begin(), baseBox);
+    l.insert(l.begin() + 1, cannonBox);
+	return l;
+}
+
 Bullet * Player::shoot() {
 	int signX = (facing == Orientation::NORTH) ? 1 : -1;
 	int signY = (facing == Orientation::NORTH) ? -1 : 1;
@@ -207,12 +231,12 @@ Bullet * Player::shoot() {
 	float sy = cos(cannonAngle * M_PI / 180);
 	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
 									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
-	
 
+	// Velocidad horizontal y vertical de la bala
 	sx = signX * sx * 2;
 	sy = signY * sy * 2;
 
 	Bullet *b = new Bullet(bulletInitial, sx, sy);
-	b->setColor(ofColor::white);
+	b->setColorType(this->getColorType());
 	return b;
 }
