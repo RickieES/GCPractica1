@@ -4,10 +4,10 @@
 using namespace std;
 
 
-class Score_scene {
+class End_scene {
 	public:
 
-		const string nameScene="score_scene";
+		const string nameScene="end_scene";
 
 		void setupScene();
 		void drawScene();

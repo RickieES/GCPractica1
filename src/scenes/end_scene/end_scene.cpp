@@ -1,22 +1,22 @@
-#include "score_scene.h" 
+#include "end_scene.h" 
  
 
         //SetupScene function
     //*****************************************************
-    void Score_scene::setupScene(){
+    void End_scene::setupScene(){
 
     }
 
 
         //DrawScene function
     //*****************************************************
-    void Score_scene::drawScene(){
-
+    void End_scene::drawScene(){
+        
     }
 
 
-        //ScoreScene function
+        //UpdateScene function
     //*****************************************************
-    void Score_scene::updateScene(){
+    void End_scene::updateScene(){
         
     }

@@ -5,18 +5,16 @@
 //*****************************************************
 void ofApp::setup(){
 
-	ofBackground(0, 0, 0);
 	ofSetWindowTitle("Defend Death Star");
 	ofSetFrameRate(60);
 	
     this->controller = mainMenu;
+
 	this->mainMenu_scene.setupScene();
 	this->game_scene.setupScene();
-	this->pause_scene.setupScene();
-	this->score_scene.setupScene();
+	this->end_scene.setupScene();
 
-    //this->mainMenu_scene.startGame_button.addListener(this, &ofApp::changeScene_eventFunction);
-	
+	// Escuchar eventos de cambio de escena	
 	ofAddListener(mainMenu_scene.onStartGame, this, &ofApp::changeScene_eventFunction);
 	ofAddListener(game_scene.onDeath, this, &ofApp::changeScene_eventFunction);
 
@@ -28,14 +26,12 @@ void ofApp::setup(){
 //*****************************************************
 void ofApp::update(){
 
-    if(this->controller==mainMenu){
+    if(this->controller == mainMenu){
         this->mainMenu_scene.updateScene();
-    }else if(this->controller==game){
+    }else if(this->controller == game){
         this->game_scene.updateScene();
-    }else if(this->controller==pause){
-        this->pause_scene.updateScene();
-    }else if(this->controller==score){
-        this->score_scene.updateScene();
+    }else if(this->controller == endscreen){
+        this->end_scene.updateScene();
     }
 
 	return;
@@ -46,23 +42,16 @@ void ofApp::update(){
 //*****************************************************
 void ofApp::draw(){
 
-	if(this->controller==mainMenu){
+	if(this->controller == mainMenu){
 		this->mainMenu_scene.drawScene();
-	}else if(this->controller==game){
+	}else if(this->controller == game){
 		this->game_scene.drawScene();
-	}else if(this->controller==pause){
-		this->pause_scene.drawScene();
-	}else if(this->controller==score){
-		this->score_scene.drawScene();
+	}else if(this->controller == endscreen){
+		this->end_scene.drawScene();
 	}
 
 	return;
 }
-
-void ofApp::mousePressed(int x, int y, int button) {
-	
-}
-
 
 
 void ofApp::changeScene_eventFunction(int & targetScene){
