@@ -195,6 +195,35 @@ void Player::moveRight(){
     this->cannonAngle =  min(80, this->cannonAngle + this->getRotationSpeed());
 };
 
+vector<ofRectangle> Player::getEnclosingRectangleList() {
+    vector<ofRectangle> l;
+	int signX = (facing == Orientation::NORTH) ? 1 : -1;
+	int signY = (facing == Orientation::NORTH) ? -1 : 1;
+	float sx = sin(cannonAngle * M_PI / 180);
+	float sy = cos(cannonAngle * M_PI / 180);
+	int x, y, w, h;
+	
+	// Rectángulo de la base del cañón
+	y = this->getRefPointY() - ((this->facing == Orientation::NORTH) ? this->radius : 0);
+    ofRectangle baseBox = ofRectangle(this->getRefPointX() - this->radius, y,
+                                  	  this->radius * 2, this->radius);
+
+	// Punta del cañón
+	ofPoint cannonTip = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
+								this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
+	x = (this->getRefPointX() < cannonTip.x) ? this->getRefPointX() - cannonWidth :
+											   cannonTip.x;
+	w = sx * cannonLength + cannonWidth; // No es exacto, pero suficiente
+	y = (this->getRefPointY() < cannonTip.y) ? this->getRefPointY() + radius - 5 :
+											   cannonTip.y;
+	h = sy * cannonLength;
+
+	ofRectangle cannonBox = ofRectangle(x, y, w, h);
+    l.insert(l.begin(), baseBox);
+    l.insert(l.begin() + 1, cannonBox);
+	return l;
+}
+
 Bullet * Player::shoot() {
 	int signX = (facing == Orientation::NORTH) ? 1 : -1;
 	int signY = (facing == Orientation::NORTH) ? -1 : 1;
@@ -202,8 +231,8 @@ Bullet * Player::shoot() {
 	float sy = cos(cannonAngle * M_PI / 180);
 	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
 									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
-	
 
+	// Velocidad horizontal y vertical de la bala
 	sx = signX * sx * 2;
 	sy = signY * sy * 2;
 

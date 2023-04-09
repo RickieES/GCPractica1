@@ -37,6 +37,16 @@ void RectangleEnemy::update()
     return;
 }
 
+vector<ofRectangle> RectangleEnemy::getEnclosingRectangleList() {
+    vector<ofRectangle> l;
+    ofRectangle box = ofRectangle(this->getRefPointX(), this->getRefPointY(),
+                                  this->getWidth(), this->getHeight());
+    l.insert(l.begin(), box);
+    return l;
+}
+
+
+
 //*****************************************************
 // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
 //*****************************************************

@@ -54,6 +54,14 @@ void Bullet::draw() {
     // Please keep in mind that drawing circle with different outline color and fill
     // requires calling ofNoFill and ofSetColor for drawing stroke and ofFill and
     // again ofSetColor for filled solid color circle.
-    ofDrawCircle(0, 0 , 10);
+    ofDrawCircle(0, 0 , this->radius);
 	ofPopMatrix();
+}
+
+vector<ofRectangle> Bullet::getEnclosingRectangleList() {
+    vector<ofRectangle> l;
+    ofRectangle box = ofRectangle(this->getRefPointX() - this->radius, this->getRefPointY() - this->radius,
+                                  this->radius * 2, this->radius * 2);
+    l.insert(l.begin(), box);
+    return l;
 }

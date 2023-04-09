@@ -26,6 +26,14 @@ void GameObject::update()
     return;
 }
 
+vector<ofRectangle> GameObject::getEnclosingRectangleList() {
+    vector<ofRectangle> l;
+    ofRectangle box = ofRectangle(this->getRefPointX(), this->getRefPointY(), 1, 1);
+    l.insert(l.begin(), box);
+    return l;
+}
+
+
 //*****************************************************
 // ACCESS FUNCTIONS TO PRIVATE ATRIBUTES
 //*****************************************************
@@ -70,11 +78,6 @@ int GameObject::getRefPointY()
     return this->refPoint.y;
 }
 
-bool GameObject::collidesWith(GameObject ogo)
-{
-    return ((this->refPoint.x == ogo.getRefPointX()) && (this->refPoint.y == ogo.getRefPointY()));
-}
-
 GameObject::ColorType GameObject::getColorType()
 {
     return this->color;
@@ -92,18 +95,46 @@ void GameObject::setMainColor(GameObject::ColorType ct, int r, int g, int b)
     return;
 }
 
-void GameObject::setMainColor(GameObject::ColorType ct, ofColor ofc) {
-    if (ct == ColorType::Color1) {
+void GameObject::setMainColor(GameObject::ColorType ct, ofColor ofc)
+{
+    if (ct == ColorType::Color1)
+    {
         GameObject::mainColor1 = ofc;
-    } else {
+    }
+    else
+    {
         GameObject::mainColor2 = ofc;
     }
     return;
 }
 
-ofColor GameObject::getMainColor() {
+ofColor GameObject::getMainColor()
+{
     return (this->color == ColorType::Color1) ? GameObject::mainColor1 : GameObject::mainColor2;
 }
 
+bool GameObject::collidesWith(GameObject go)
+{
+    vector<ofRectangle> me, other;
+    me = this->getEnclosingRectangleList();
+    other = go.getEnclosingRectangleList();
 
-
+    bool result = false;
+    for (auto r : me)
+    {
+        for (auto s : other)
+        {
+            result = (r.getLeft() < s.getRight() && r.getRight() > s.getLeft() &&
+                      r.getTop() < s.getBottom() && r.getBottom() > s.getTop());
+            if (result)
+            {
+                break;
+            }
+        }
+        if (result)
+        {
+            break;
+        }
+    }
+    return result;
+}

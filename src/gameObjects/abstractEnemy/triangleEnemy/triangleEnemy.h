@@ -22,6 +22,7 @@ public:
 	virtual void setup() override;
 	virtual void draw() override;
 	virtual void update() override;
+	virtual vector<ofRectangle> getEnclosingRectangleList() override;
 
 	long getLongSide();
 	void setLongSide(long value);

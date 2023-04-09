@@ -45,9 +45,10 @@ public:
     [[deprecated]] void setCanyonAngle(int ca);
     [[deprecated]] int getCanyonAngle();
 
-    void draw();
-    void update();
+    virtual void draw() override;
+    virtual void update() override;
     void moveLeft();
     void moveRight();
+    virtual vector<ofRectangle> getEnclosingRectangleList() override;
     Bullet *shoot();
 };

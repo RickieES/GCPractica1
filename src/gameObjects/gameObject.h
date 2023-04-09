@@ -20,6 +20,7 @@ public:
 	virtual void setup();
 	virtual void draw();
 	virtual void update();
+	virtual vector<ofRectangle> getEnclosingRectangleList();
 
 	string getId();
 	void setId(string value);
@@ -38,7 +39,7 @@ public:
 	static void setMainColor(ColorType ct, ofColor ofc);
 	ofColor getMainColor();
 
-	virtual bool collidesWith(GameObject ogo);
+	bool collidesWith(GameObject go);
 
 private:
 	string id;
