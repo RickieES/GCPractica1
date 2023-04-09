@@ -64,6 +64,20 @@
 		updateGameObjectVector(&bulletList);
 		updateGameObjectVector(&enemyList);
 
+		// Colisiones
+		for (int i = 0; i < enemyList.size(); i++) {
+			GameObject * enem = enemyList[i];
+
+			for (int j = 0; j < bulletList.size(); j++) {
+				if (enem->collidesWith(*bulletList[j])) {
+					enemyList.erase(enemyList.begin() + i);
+					bulletList.erase(bulletList.begin() + j);
+
+					// TODO: Añadir puntuacion
+				}
+			}
+		}
+
 		// Jugador up
         if (ofGetKeyPressed('a')){
             playerUp.moveLeft();
