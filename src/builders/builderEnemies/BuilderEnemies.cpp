@@ -24,7 +24,7 @@ AbstractEnemy *BuilderEnemies::build(GameObject::ColorType colorType, EnemyType 
     default:
         result = new RectangleEnemy(this->getLimitUp(), this->getLimitDown(),
                                     this->getLimitLeft(), this->getLimitRight(),
-                                    colorType, this->selectSpeed(speedType),
+                                    colorType, speedType, sizeType,
                                     this->selectSquareSize_width(sizeType),
                                     this->selectSquareSize_height(sizeType));
         break;

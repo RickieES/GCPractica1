@@ -1,13 +1,16 @@
 #pragma once
 #include <string>
 #include "ofMain.h"
-#include "../gameObject.h"
+#include "gameObject.h"
+#include "../enemyProperties.h"
 using namespace std;
 
 class AbstractEnemy : public GameObject
 {
 
 private:
+	SizeType sizeType;
+	SpeedType speedType;
 	int speed;
 
 	int posX;
@@ -21,7 +24,7 @@ public:
 	AbstractEnemy() : GameObject(){};
 
 	AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
-				  GameObject::ColorType nColor, int nSpeed) : GameObject()
+				  GameObject::ColorType nColor, SpeedType nSpeed, SizeType nSize) : GameObject()
 	{
 
 		this->setColorType(nColor);
@@ -38,7 +41,11 @@ public:
 	virtual void update() override;
 
 	int getSpeed();
-	void setSpeed(int value);
+	void setSpeed(SpeedType st);
+	SpeedType getSpeedType();
+
+	void setSizeType(SizeType st);
+	SizeType getSizeType();
 
 	int getPosX();
 	void setPosX(int value);

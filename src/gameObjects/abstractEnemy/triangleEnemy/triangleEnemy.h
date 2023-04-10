@@ -11,9 +11,9 @@ private:
 	long longSide;
 
 public:
-	TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed,
+	TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, SpeedType nSpeed, SizeType nSize,
 				  GameObject::ColorType nColor, unsigned nWidth, unsigned nHeight) :
-				  AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed)
+				  AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed, nSize)
 	{
 		this->setPosX(nLimitRight);
 		this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);

@@ -2,29 +2,12 @@
 #include "ofMain.h"
 #include "../../gameObjects/gameObject.h"
 #include "../../gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h"
+#include "../enemyProperties.h"
 
 class BuilderEnemies
 {
 
 public:
-	enum class EnemyType
-	{
-		square,
-		triangle,
-		circle
-	};
-	enum class SizeType
-	{
-		small,
-		medium,
-		large
-	};
-	enum class SpeedType
-	{
-		slow,
-		normal,
-		fast
-	};
 
 	BuilderEnemies(ofColor nColor1, ofColor nColor2, int nLimitUp, int nLimitDown,
 				   int nLimitLeft, int nLimitRight)
@@ -64,8 +47,7 @@ private:
 public:
 	// FIXME: constructor por defecto comentado porque no devuelve objeto
 	// GameObject build();
-	AbstractEnemy *build(GameObject::ColorType colourType, EnemyType enemyType, SizeType sizeType,
-						 SpeedType speedType);
+	AbstractEnemy *build(GameObject::ColorType colourType, EnemyType enemyType, SizeType sizeType, SpeedType speedType);
 
 	int getLimitUp();
 	void setLimitUp(int value);

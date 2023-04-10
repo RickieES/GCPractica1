@@ -52,9 +52,9 @@
 
 				// Si se quieren añadir mas propiedades a los enemigos o añadir tipos, esto no sirve
 				GameObject::ColorType randColor = (GameObject::ColorType) (rand() % 2);
-				BuilderEnemies::EnemyType randEnemy = (BuilderEnemies::EnemyType) (rand() % 3);
-				BuilderEnemies::SizeType randSize = (BuilderEnemies::SizeType) (rand() % 3);
-				BuilderEnemies::SpeedType randSpeed = (BuilderEnemies::SpeedType) (rand() % 3);
+				EnemyType randEnemy = (EnemyType) (rand() % 3);
+				SizeType randSize = (SizeType) (rand() % 3);
+				SpeedType randSpeed = (SpeedType) (2*(rand() % 3 + 1));
 
 				AbstractEnemy * e = spawner.build(randColor, randEnemy, randSize, randSpeed);
 
@@ -69,35 +69,45 @@
 
 		// Colisiones
 		for (int i = 0; i < enemyList.size(); i++) {
-			GameObject * enem = enemyList[i];
+			AbstractEnemy * enem = (AbstractEnemy*) enemyList[i];
 
 			for (int j = 0; j < bulletList.size(); j++) {
 				GameObject * bullet = bulletList[j];
 
 				if (enem->getColorType() == bullet->getColorType() && enem->collidesWith(*bullet)) {
 
+					// Puntuacion
+					SizeType enemSize = enem->getSizeType();
+					SpeedType enemSpeed = enem->getSpeedType();
+					int basePoints = 10 * ((int)enemSize + 1);
+					float speedMult = ((int)enemSpeed) / 2.0;
+
+					int finalPoints = (int)(basePoints * speedMult);
+					score += finalPoints;
+
+					// Quitar elementos de las listas
 					enemyList.erase(enemyList.begin() + i);
 					bulletList.erase(bulletList.begin() + j);
-
-					// TODO: Añadir puntuacion
 				}
 			}
 		}
 
 		// Recibir daño
 		for (int i = 0; i < enemyList.size(); i++) {
-			GameObject * enem = enemyList[i];
+			AbstractEnemy * enem = (AbstractEnemy*) enemyList[i];
 
 			if (enem->getRefPointX() < hitThreshold) {
 				enemyList.erase(enemyList.begin() + i);
 
 				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
-				healthPoints = max(0, healthPoints - 5);
+				SizeType enemSize = enem->getSizeType();
+				int dmg = ((int)enemSize) + 3;
+				healthPoints = max(0, healthPoints - dmg);
 
-				if (healthPoints == 0) {
+				/*if (healthPoints == 0) {
 					int targetScene = 2;
 					ofNotifyEvent(onDeath, targetScene);
-				}
+				}*/
 			}
 		}
 

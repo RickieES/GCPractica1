@@ -15,8 +15,8 @@ public:
 	RectangleEnemy() : AbstractEnemy(){};
 
 	RectangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
-					GameObject::ColorType nColor, int nSpeed, float nWidth, float nHeight) :
-					AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed)
+					GameObject::ColorType nColor, SpeedType nSpeed, SizeType nSize, float nWidth, float nHeight) :
+					AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed, nSize)
 	{
 
 		this->setId("Rect");

@@ -31,11 +31,29 @@ int AbstractEnemy::getSpeed()
     return this->speed;
 }
 
-void AbstractEnemy::setSpeed(int value)
+void AbstractEnemy::setSpeed(SpeedType st)
 {
-    this->speed = value;
+	this->speedType = st;
+    this->speed = (int) st;
+
     return;
 }
+
+SpeedType AbstractEnemy::getSpeedType() {
+	return this->speedType;
+}
+
+
+void AbstractEnemy::setSizeType(SizeType st) {
+	this->sizeType = st;
+
+	return;
+}
+
+SizeType AbstractEnemy::getSizeType() {
+	return this->sizeType;
+}
+
 
 int AbstractEnemy::getPosX()
 {

@@ -9,6 +9,7 @@
 #include "../abstractScene.h"
 #include "../../builders/builderEnemies/BuilderEnemies.h"
 #include "../game_colorPalette.h"
+#include "../enemyProperties.h"
 using namespace std;
 
 class Game_scene: public AbstractScene {
