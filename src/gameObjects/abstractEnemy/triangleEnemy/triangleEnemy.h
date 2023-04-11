@@ -16,6 +16,8 @@ public:
 				  AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed)
 	{
 		this->setId("TriangleEnemy");
+
+		this->setLongSide(nHeight);
 	}
 
 	virtual void setup() override;

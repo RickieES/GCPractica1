@@ -8,15 +8,13 @@ void TriangleEnemy::setup(){}
 //*****************************************************
 void TriangleEnemy::draw()
 {
-    printf("HOLAAAAA\n");
+    //printf("HOLAAAAA\n");
     ofSetColor(this->getMainColor());
     ofFill();
 
     ofPushMatrix();
         ofTranslate(this->getPosX(), this->getPosY());
-        ofDrawTriangle(this->getPosX(), this->getPosY(), 
-                        this->getPosX()+this->heigth, this->getPosY()-this->heigth, 
-                        this->getPosX()+this->heigth, this->getPosY()+this->heigth);
+        ofDrawTriangle(0, 0, this->heigth, -this->heigth, this->heigth, this->heigth);
     ofPopMatrix();
 
     return;

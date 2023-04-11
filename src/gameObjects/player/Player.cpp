@@ -233,8 +233,9 @@ Bullet * Player::shoot() {
 									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
 
 	// Velocidad horizontal y vertical de la bala
-	sx = signX * sx * 2;
-	sy = signY * sy * 2;
+	int speedMult = 2;
+	sx = signX * sx * 2 * speedMult;
+	sy = signY * sy * 2 * speedMult;
 
 	Bullet *b = new Bullet(bulletInitial, sx, sy);
 	b->setColorType(this->getColorType());

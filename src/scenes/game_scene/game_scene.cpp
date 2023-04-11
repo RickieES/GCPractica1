@@ -65,7 +65,9 @@
 		// Actualizar la posicion de todos los objetos en la lista
 		// https://stackoverflow.com/questions/30926577/c-call-a-childs-method-from-a-vector-of-parents
 		updateGameObjectVector(&bulletList);
-		updateGameObjectVector(&enemyList);
+		updateGameObjectVector(&enemyList);		
+
+		// TODO: Creo que se puede reducir el numero de bucles entre las colisiones y el recibir daño
 
 		// Colisiones
 		for (int i = 0; i < enemyList.size(); i++) {
@@ -76,10 +78,12 @@
 
 				if (enem->getColorType() == bullet->getColorType() && enem->collidesWith(*bullet)) {
 
+					// FIXME: Problema random al quitar elementos del vector
 					enemyList.erase(enemyList.begin() + i);
 					bulletList.erase(bulletList.begin() + j);
 
-					// TODO: Añadir puntuacion
+					// TODO: Añadir puntuacion segun tamaño y demás
+					score += 1;
 				}
 			}
 		}
@@ -88,7 +92,7 @@
 		for (int i = 0; i < enemyList.size(); i++) {
 			GameObject * enem = enemyList[i];
 
-			if (enem->getRefPointX() < hitThreshold) {
+			if (home.collidesWith(*enem)) {
 				enemyList.erase(enemyList.begin() + i);
 
 				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
@@ -174,6 +178,7 @@
 		drawGameObjectVector(&enemyList);
 		
         drawPlayers();
+		home.draw();
 	    drawUI();
 
         return;
@@ -191,7 +196,8 @@
 
 		// Barra de vida
 		ofSetColor(ofColor::black);
-		ofDrawRectangle(lifeBarCoords.x - 10, lifeBarCoords.y + 10, lifeBarWidth*percentageHP, lifeBarHeight);
+		//int offset = 10; // Por si fuese necesario en un futuro
+		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth, lifeBarHeight);
 
 		if (healthPoints < 20) {
 			ofSetColor(ofColor::red);
@@ -316,10 +322,19 @@
 	void Game_scene::drawBackground() {
 		// TODO: Hacer relativo
 		ofSetColor(bgSecondary);
-		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.2);
-		ofDrawRectangle(0, ofGetHeight()*0.8, ofGetWidth(), ofGetHeight()*0.2);
+		int counter = - ((int)(ofGetElapsedTimeMillis()/10.0) % 200);
+		int bgSectionWidth = 100;
 
+		for (int i = 0; i <= ofGetWidth()/200 + 1; i++) {
+			ofDrawRectangle(counter + i*(bgSectionWidth*2), 0, bgSectionWidth, ofGetHeight());
+		}
+
+		/*
+		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.2);
+		ofDrawRectangle(0, ofGetHeight()*0.8, ofGetWidth(), ofGetHeight()*0.2);*/
+
+/*
 		ofSetColor(bgTertiary);
 		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.1);
-		ofDrawRectangle(0, ofGetHeight()*0.9, ofGetWidth(), ofGetHeight()*0.1);
+		ofDrawRectangle(0, ofGetHeight()*0.9, ofGetWidth(), ofGetHeight()*0.1);*/
 	}

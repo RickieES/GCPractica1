@@ -8,7 +8,8 @@
 #include "../../gameObjects/player/Player.h"
 #include "../abstractScene.h"
 #include "../../builders/builderEnemies/BuilderEnemies.h"
-#include "../game_colorPalette.h"
+#include "game_colorPalette.h"
+#include "../home/Home.h"
 using namespace std;
 
 class Game_scene: public AbstractScene {
@@ -28,9 +29,10 @@ class Game_scene: public AbstractScene {
         Player playerUp;
         Player playerDown;
 
-		BuilderEnemies spawner{ BuilderEnemies(ofColor::green, ofColor::purple, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()) };
+		BuilderEnemies spawner{ BuilderEnemies(ofColor::blueViolet, ofColor::yellowGreen, ofGetHeight()*0.2, ofGetHeight()*0.8, 0, ofGetWidth()) };
 		vector<GameObject*> bulletList;
 		vector<GameObject*> enemyList;
+		Home home;
 
 		bool shootingPlayerUp;
 		int lastPressedShootUp;
@@ -42,8 +44,6 @@ class Game_scene: public AbstractScene {
 
 		const int boundsMargin{ 20 };
 		const int nMaxEnemy{ 5 };
-
-		const double hitThreshold{ ofGetWidth()*0.05 };
 
 	public:
 		const string nameScene{ "Game_scene" };
