@@ -2,6 +2,7 @@
 #include "ofMain.h"
 #include "../../gameObjects/gameObject.h"
 #include "../../gameObjects/abstractEnemy/RectangleEnemy/rectangleEnemy.h"
+#include "../../gameObjects/abstractEnemy/triangleEnemy/triangleEnemy.h"
 
 class BuilderEnemies
 {
@@ -9,7 +10,7 @@ class BuilderEnemies
 public:
 	enum class EnemyType
 	{
-		square,
+		rectangle,
 		triangle,
 		circle
 	};
@@ -46,24 +47,28 @@ private:
 
 	// ofColor selectColor(GameObject::ColorType colourType);
 
-	const int squareSize_small_width = 10;
-	const int squareSize_medium_width = 20;
-	const int squareSize_large_width = 30;
+	const int squareSize_small_width = 40;
+	const int squareSize_medium_width = 60;
+	const int squareSize_large_width = 100;
 	int selectSquareSize_width(SizeType sizeType);
 
-	const int squareSize_small_height = 5;
-	const int squareSize_medium_height = 10;
-	const int squareSize_large_height = 25;
+	const int squareSize_small_height = 20;
+	const int squareSize_medium_height = 30;
+	const int squareSize_large_height = 50;
 	int selectSquareSize_height(SizeType sizeType);
 
+	const int triangleSize_small = 30;
+	const int triangleSize_medium = 40;
+	const int triangleSize_large = 70;
+	int selectTriamgleSize(SizeType sizeType);
+
 	const int speed_slow = 2;
-	const int speed_normal = 4;
-	const int speed_fast = 6;
+	const int speed_normal = 3;
+	const int speed_fast = 4;
 	int selectSpeed(SpeedType speedType);
 
 public:
-	// FIXME: constructor por defecto comentado porque no devuelve objeto
-	// GameObject build();
+	AbstractEnemy *build();
 	AbstractEnemy *build(GameObject::ColorType colourType, EnemyType enemyType, SizeType sizeType,
 						 SpeedType speedType);
 

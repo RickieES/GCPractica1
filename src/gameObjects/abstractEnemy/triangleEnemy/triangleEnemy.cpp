@@ -2,29 +2,21 @@
 
 // Setup function
 //*****************************************************
-void TriangleEnemy::setup()
-{
-    this->setPosX(this->getPosX() - this->getSpeed());
-    if (this->getPosX() + this->getLongSide() <= this->getLimitLeft())
-    {
-        // TODO lanzar excepción llegada al final
-    }
-
-    return;
-}
+void TriangleEnemy::setup(){}
 
 // Draw function
 //*****************************************************
 void TriangleEnemy::draw()
 {
-    printf("HOLA RectangleEnemy Draw\n");
-
-    ofSetColor(255, 0, 0);
-    ofNoFill();
+    printf("HOLAAAAA\n");
+    ofSetColor(this->getMainColor());
+    ofFill();
 
     ofPushMatrix();
-    ofTranslate(this->getPosX(), this->getPosY());
-    // TODO Pintar triangulo
+        ofTranslate(this->getPosX(), this->getPosY());
+        ofDrawTriangle(this->getPosX(), this->getPosY(), 
+                        this->getPosX()+this->heigth, this->getPosY()-this->heigth, 
+                        this->getPosX()+this->heigth, this->getPosY()+this->heigth);
     ofPopMatrix();
 
     return;
@@ -34,6 +26,7 @@ void TriangleEnemy::draw()
 //*****************************************************
 void TriangleEnemy::update()
 {
+    AbstractEnemy::update();
     return;
 }
 
@@ -51,11 +44,11 @@ vector<ofRectangle> TriangleEnemy::getEnclosingRectangleList() {
 //*****************************************************
 long TriangleEnemy::getLongSide()
 {
-    return this->longSide;
+    return this->heigth;
 }
 
 void TriangleEnemy::setLongSide(long value)
 {
-    this->longSide = value;
+    this->heigth = value;
     return;
 }

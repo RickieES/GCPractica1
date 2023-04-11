@@ -18,12 +18,15 @@ private:
 	int limitRight;
 
 public:
-	AbstractEnemy() : GameObject(){};
+	AbstractEnemy() : GameObject(){
+		this->setId("AbstractEnemy");
+	};
 
 	AbstractEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
 				  GameObject::ColorType nColor, int nSpeed) : GameObject()
 	{
 
+		this->setId("AbstractEnemy");
 		this->setColorType(nColor);
 		this->setSpeed(nSpeed);
 

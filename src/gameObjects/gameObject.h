@@ -14,7 +14,7 @@ public:
 
 	GameObject()
 	{
-		this->setId("pepe");
+		this->setId("GameObject");
 	}
 
 	virtual void setup();

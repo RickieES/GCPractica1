@@ -8,15 +8,14 @@ class TriangleEnemy : public AbstractEnemy
 {
 
 private:
-	long longSide;
+	float heigth;
 
 public:
-	TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight, unsigned nSpeed,
-				  GameObject::ColorType nColor, unsigned nWidth, unsigned nHeight) :
+	TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
+				  GameObject::ColorType nColor,int nSpeed, float nHeight) :
 				  AbstractEnemy(nLimitUp, nLimitDown, nLimitLeft, nLimitRight, nColor, nSpeed)
 	{
-		this->setPosX(nLimitRight);
-		this->setPosY(rand() % (nLimitDown - nLimitUp) + nLimitDown);
+		this->setId("TriangleEnemy");
 	}
 
 	virtual void setup() override;

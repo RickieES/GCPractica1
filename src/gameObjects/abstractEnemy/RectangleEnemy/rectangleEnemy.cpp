@@ -2,16 +2,7 @@
 
 // Setup function
 //*****************************************************
-void RectangleEnemy::setup()
-{
-    this->setPosX(this->getPosX() - this->getSpeed());
-    if (this->getPosX() + this->getWidth() <= this->getLimitLeft())
-    {
-        // TODO lanzar excepción llegada al final
-    }
-
-    return;
-}
+void RectangleEnemy::setup(){}
 
 // Draw function
 //*****************************************************
@@ -22,8 +13,8 @@ void RectangleEnemy::draw()
     ofFill();
 
     ofPushMatrix();
-    ofTranslate(this->getPosX(), this->getPosY());
-    ofDrawRectangle(0, 0, this->getWidth(), this->getHeight());
+        ofTranslate(this->getPosX(), this->getPosY());
+        ofDrawRectangle(0, 0, this->getWidth(), this->getHeight());
     ofPopMatrix();
 
     return;
