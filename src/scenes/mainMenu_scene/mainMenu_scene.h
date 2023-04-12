@@ -24,6 +24,6 @@ class MainMenu_scene {
 
 		string title;
 		ofTrueTypeFont titleFont;
-		ofTrueTypeFont startText;
+		ofTrueTypeFont startTextFont;
 
 };

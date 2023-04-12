@@ -8,13 +8,13 @@
 		ofBackground(bgMain);
 
         this->title="Defend\nDeath Star";
-        this->titleFont.load("V5PRC.ttf", 60, true, true);
+        this->titleFont.load("V5PRC.TTF", 60, true, true);
         this->titleFont.setLineHeight(70.0f);
         this->titleFont.setLetterSpacing(1.035);
 
-		this->startText.load("V5PRC.ttf", 30, true, true);
-		this->startText.setLineHeight(40.0f);
-		this->startText.setLetterSpacing(1.035);
+		this->startTextFont.load("V5PRC.TTF", 30, true, true);
+		this->startTextFont.setLineHeight(40.0f);
+		this->startTextFont.setLetterSpacing(1.035);
 
         return;
     }
@@ -27,7 +27,7 @@
 
 		this->drawTitle();
 
-		startText.drawString("Press any\n   key to play", 100, 450);
+		startTextFont.drawString("Press any\n   key to play", 100, 450);
 
         return;
     }
