@@ -5,12 +5,14 @@
     //*****************************************************
     void End_scene::setupScene(){
 		ofBackground(ofColor::black);
+		int wh;
+		wh = 200 * ofGetWindowHeight() / 1800;
 
-		this->gameOverFont.load("V5PRC.TTF", 200, true, true);
+		this->gameOverFont.load("V5PRC.TTF", wh, true, true);
 		this->gameOverFont.setLineHeight(70.0f);
 		this->gameOverFont.setLetterSpacing(1.035);
 
-		this->gameOverBgFont.load("V5PRC.TTF", 150, true, true);
+		this->gameOverBgFont.load("V5PRC.TTF", wh * 0.75, true, true);
 		this->gameOverBgFont.setLineHeight(55.0f);
 		this->gameOverBgFont.setLetterSpacing(1.035);
     }
@@ -37,8 +39,6 @@
 
 		int counter = (int) (ofGetElapsedTimeMillis() / 5.0) % (ofGetWidth() + stringWidth + 100);
 
-		ofPushMatrix();
-
 		ofColor bgtest = bgSecondary;
 		bgtest.setBrightness(bgSecondary.getBrightness() + 2);
 
@@ -54,8 +54,6 @@
 		int stringWidthMain = gameOverFont.stringWidth("GAME OVER");
 		int stringHeightMain = gameOverFont.stringHeight("GAME OVER");
 		gameOverFont.drawString("GAME OVER", ofGetWidth() / 2 - stringWidthMain / 2, ofGetHeight() / 2 - stringHeightMain / 2);
-
-		ofPopMatrix();
 
 		return;
 	}
