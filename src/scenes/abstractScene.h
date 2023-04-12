@@ -9,12 +9,15 @@ using namespace std;
 class AbstractScene {
 	
 	private: 
-		list<GameObject*> gameObjectList;
 
 	public:
+		vector<ofSoundPlayer*> soundPlayer;
+
 		virtual void setupScene();
 		virtual void drawScene();
 		virtual void updateScene();
+
+		virtual void loadSounds();
 
 
 	public:

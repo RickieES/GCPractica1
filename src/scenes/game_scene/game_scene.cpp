@@ -28,6 +28,8 @@
 		lastPressedShootDown = ofGetElapsedTimeMillis();
 		lastPressedShootUp = ofGetElapsedTimeMillis();
 
+		loadSounds();
+
         return;
     }
 
@@ -82,6 +84,8 @@
 					enemyList.erase(enemyList.begin() + i);
 					bulletList.erase(bulletList.begin() + j);
 
+					soundPlayer[2]->play();
+
 					// TODO: Añadir puntuacion segun tamaño y demás
 					score += 1;
 				}
@@ -94,6 +98,8 @@
 
 			if (home.collidesWith(*enem)) {
 				enemyList.erase(enemyList.begin() + i);
+
+				soundPlayer[3]->play();
 
 				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
 				healthPoints = max(0, healthPoints - 5);
@@ -122,11 +128,15 @@
 			if (!shootingPlayerUp) {
 				shootingPlayerUp = true;
 				bulletList.push_back(playerUp.shoot());
+
+				soundPlayer[1]->play();
 			} 
 			else if (ofGetElapsedTimeMillis() - lastPressedShootUp > 500) 
 			{
 				lastPressedShootUp = ofGetElapsedTimeMillis();
 				bulletList.push_back(playerUp.shoot());
+
+				soundPlayer[1]->play();
 			}
 		}
 		else 
@@ -148,11 +158,15 @@
 			if (!shootingPlayerDown) {
 				shootingPlayerDown = true;
 				bulletList.push_back(playerDown.shoot());
+
+				soundPlayer[1]->play();
 			}
 			else if (ofGetElapsedTimeMillis() - lastPressedShootDown > 500)
 			{
 				lastPressedShootDown = ofGetElapsedTimeMillis();
 				bulletList.push_back(playerDown.shoot());
+
+				soundPlayer[1]->play();
 			}
 		}
 		else
@@ -218,6 +232,38 @@
 		// Framerate (opcional)
 		ofDrawBitmapString(ofGetFrameRate(), 20, 20);
     }
+
+
+	void Game_scene::loadSounds() {
+		// Cargar sonidos y efectos
+		ofSoundPlayer * soundtrack = new ofSoundPlayer();
+		soundtrack->load("vvvvvv_positive_force.mp3", true);
+		soundtrack->setLoop(true);
+		soundtrack->play();
+
+		soundPlayer.push_back(soundtrack);
+
+		// cañon
+		ofSoundPlayer * cannon_shoot = new ofSoundPlayer();
+		cannon_shoot->load("audio/sound_effects/cannon_shoot.wav");
+		cannon_shoot->setMultiPlay(true);
+
+		soundPlayer.push_back(cannon_shoot);
+
+		// eliminar enemigo
+		ofSoundPlayer * enemy_destroyed = new ofSoundPlayer();
+		enemy_destroyed->load("audio/sound_effects/enemy_destroyed.wav");
+		enemy_destroyed->setMultiPlay(true);
+
+		soundPlayer.push_back(enemy_destroyed);
+
+		// recibir daño
+		ofSoundPlayer * home_damage = new ofSoundPlayer();
+		home_damage->load("audio/sound_effects/home_damage.wav");
+		home_damage->setMultiPlay(true);
+
+		soundPlayer.push_back(home_damage);
+	}
 
 
 

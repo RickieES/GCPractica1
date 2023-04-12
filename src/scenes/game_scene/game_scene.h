@@ -54,6 +54,8 @@ class Game_scene: public AbstractScene {
 		virtual void drawScene() override;
 		virtual void updateScene() override;
 
+		virtual void loadSounds() override;
+
         void drawPlayers();
         void drawUI();
 
