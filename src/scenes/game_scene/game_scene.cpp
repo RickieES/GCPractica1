@@ -237,7 +237,7 @@
 	void Game_scene::loadSounds() {
 		// Cargar sonidos y efectos
 		ofSoundPlayer * soundtrack = new ofSoundPlayer();
-		soundtrack->load("vvvvvv_positive_force.mp3", true);
+		soundtrack->load("audio/soundtracks/vvvvvv_positive_force.mp3", true);
 		soundtrack->setLoop(true);
 		soundtrack->play();
 
