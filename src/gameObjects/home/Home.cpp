@@ -21,3 +21,21 @@ vector<ofRectangle> Home::getEnclosingRectangleList() {
 
 	return vRect;
 }
+
+
+void Home::setHealth(int hp) {
+	this->health = hp;
+
+	return;
+}
+
+int Home::getHealth() {
+	return this->health;
+}
+
+
+void Home::takeDamage(int dmg) {
+	this->setHealth(max(0, this->getHealth() - dmg));
+
+	return;
+}

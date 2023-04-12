@@ -17,8 +17,6 @@
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
 
-		healthPoints = 100;
-
         playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, GameObject::ColorType::Color1);
         playerUp.facing = Player::Orientation::SOUTH;
         playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, GameObject::ColorType::Color2);
@@ -102,9 +100,9 @@
 				soundPlayer[3]->play();
 
 				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
-				healthPoints = max(0, healthPoints - 5);
+				home.takeDamage(5);
 
-				if (healthPoints == 0) {
+				if (home.getHealth() == 0) {
 					int targetScene = 2;
 					ofNotifyEvent(onDeath, targetScene);
 				}
@@ -206,14 +204,14 @@
 
 
 	void Game_scene::drawUI() {
-		float percentageHP = healthPoints / 100.0;
+		float percentageHP = home.getHealth() / 100.0;
 
 		// Barra de vida
 		ofSetColor(ofColor::black);
 		//int offset = 10; // Por si fuese necesario en un futuro
 		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth, lifeBarHeight);
 
-		if (healthPoints < 20) {
+		if (home.getHealth() < 20) {
 			ofSetColor(ofColor::red);
 		} else {
 			ofSetColor(ofColor::green);
@@ -222,7 +220,7 @@
 		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*percentageHP, lifeBarHeight);
 
 		ofSetColor(ofColor::black);
-		ofDrawBitmapString(healthPoints, lifeBarCoords.x + 10, lifeBarCoords.y + 20);
+		ofDrawBitmapString(home.getHealth(), lifeBarCoords.x + 10, lifeBarCoords.y + 20);
 
 		ofSetColor(ofColor::white);
 

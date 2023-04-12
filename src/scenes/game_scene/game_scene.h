@@ -22,7 +22,6 @@ class Game_scene: public AbstractScene {
 		ofPoint lifeBarCoords;
 		unsigned lifeBarWidth;
 		unsigned lifeBarHeight;
-		int healthPoints;
 
 		int score;
 

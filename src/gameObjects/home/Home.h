@@ -10,8 +10,12 @@ class Home : public GameObject
 
 		const double homeWidth{ ofGetWidth()*0.1 };
 
+		int health;
+
 	public:
-		Home() : GameObject() {};
+		Home() : GameObject() {
+			this->setHealth(100);
+		};
 
 		virtual void draw() override;
 		
@@ -20,5 +24,11 @@ class Home : public GameObject
 		*/
 
 		virtual vector<ofRectangle> getEnclosingRectangleList() override;
+
+		void setHealth(int hp);
+		int getHealth();
+
+		void takeDamage(int dmg);
+
 };
 
