@@ -11,8 +11,6 @@ void ofApp::setup(){
     this->controller = mainMenu;
 
 	this->mainMenu_scene.setupScene();
-	this->game_scene.setupScene();
-	this->end_scene.setupScene();
 
 	// Escuchar eventos de cambio de escena	
 	ofAddListener(mainMenu_scene.onStartGame, this, &ofApp::changeScene_eventFunction);
@@ -56,4 +54,18 @@ void ofApp::draw(){
 
 void ofApp::changeScene_eventFunction(int & targetScene){
 	this->controller = (ControllerScenes) targetScene;
+
+	switch (this->controller) {
+	case mainMenu:
+		this->mainMenu_scene.setupScene();
+		break;
+	case game:
+		this->game_scene.setupScene();
+		break;
+	case endscreen:
+		this->end_scene.setupScene();
+		break;
+	default:
+		break;
+	}
 }

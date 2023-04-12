@@ -5,49 +5,16 @@
     //*****************************************************
     void MainMenu_scene::setupScene(){
 
-        //startGame_button.addListener(this, &MainMenu_scene::test);
+		ofBackground(bgMain);
 
-        /*mainPanel.setup();
-        mainPanel.add(startGame_button.setup("start", 200, 200));*/
-
-
-
-
-        this->signTitleWidht = 5*(ofGetWidth()/10);
-        this->signTitleHeight = 1*(ofGetHeight()/10);
-        this->signTitlePosX = 2.5*(ofGetWidth()/10);
-        this->signTitlePosY = 1*(ofGetHeight()/10);
-        this->title="DEFEND DEATH START";
-        this->titleFont.load("verdana.ttf", 30, true, true);
-        this->titleFont.setLineHeight(34.0f);
+        this->title="Defend\nDeath Star";
+        this->titleFont.load("V5PRC.ttf", 60, true, true);
+        this->titleFont.setLineHeight(70.0f);
         this->titleFont.setLetterSpacing(1.035);
 
-        this->signMenuWidht = 4*(ofGetWidth()/10);
-        this->signMenuHeight = 5*(ofGetHeight()/10);
-        this->signMenuPosX = 3*(ofGetWidth()/10);
-        this->signMenuPosY = 3*(ofGetHeight()/10);
-
-            this->buttonFont.load("verdana.ttf", 18, true, true);
-            this->buttonFont.setLineHeight(34.0f);
-            this->buttonFont.setLetterSpacing(1.035);
-
-            this->playButton = "Scenary";
-			this->signPlayButtonWidht = 3*(ofGetWidth()/10);
-			this->signPlayButtonHeight = 0.5*(ofGetHeight()/10);
-			this->signPlayButtonPosX = 3.5*(ofGetWidth()/10);
-			this->signPlayButtonPosY = 3.5*(ofGetHeight()/10);
-
-            this->pauseButton = "Enemy";
-			this->signPauseButtonWidht = 3*(ofGetWidth()/10);
-			this->signPauseButtonHeight = 0.5*(ofGetHeight()/10);
-			this->signPauseButtonPosX = 3.5*(ofGetWidth()/10);
-			this->signPauseButtonPosY = 4.0*(ofGetHeight()/10);
-
-            this->scoreButton = "Player";
-			this->signScoreButtonWidht = 3*(ofGetWidth()/10);
-			this->signScoreButtonHeight = 0.5*(ofGetHeight()/10);
-			this->signScoreButtonPosX = 3.5*(ofGetWidth()/10);
-			this->signScoreButtonPosY = 4.5*(ofGetHeight()/10);
+		this->startText.load("V5PRC.ttf", 30, true, true);
+		this->startText.setLineHeight(40.0f);
+		this->startText.setLetterSpacing(1.035);
 
         return;
     }
@@ -56,27 +23,11 @@
         //DrawScene function
     //*****************************************************
     void MainMenu_scene::drawScene(){
-        mainPanel.draw();
-//        ofSetColor(ofColor::red);
-//        ofDrawRectangle(0, 0, 200, 200);
+		this->drawBackground();
 
+		this->drawTitle();
 
-//        ofBackground(114, 156, 212);
-//        ofFill();
-//        ofSetColor(160, 171, 43);
-//        ofDrawRectangle(this->signTitlePosX, this->signTitlePosY, this->signTitleWidht, this->signTitleHeight);
-//        ofDrawRectangle(this->signMenuPosX, this->signMenuPosY, this->signMenuWidht, this->signMenuHeight);
-        
-//        ofSetColor(145, 65, 12);
-//        ofDrawRectangle(this->signPlayButtonPosX, this->signPlayButtonPosY, this->signPlayButtonWidht, this->signPlayButtonHeight);
-//        ofDrawRectangle(this->signPauseButtonPosX, this->signPauseButtonPosY, this->signPauseButtonWidht, this->signPauseButtonHeight);
-//        ofDrawRectangle(this->signScoreButtonPosX, this->signScoreButtonPosY, this->signScoreButtonWidht, this->signScoreButtonHeight);
-       
-//        ofSetColor(0,0,0);
-//        this->titleFont.drawString(this->title, this->signTitlePosX + this->signTitlePosX/10, this->signTitlePosY + this->signTitleHeight/1.5 );
-//        this->titleFont.drawString(this->playButton, this->signPlayButtonPosX, this->signPlayButtonPosY + this->signPlayButtonHeight);
-//        this->titleFont.drawString(this->pauseButton, this->signPauseButtonPosX, this->signPauseButtonPosY + this->signPauseButtonWidht);
-//        this->titleFont.drawString(this->scoreButton, this->signScoreButtonPosX, this->signScoreButtonPosY + this->signScoreButtonHeight);
+		startText.drawString("Press any\n   key to play", 100, 450);
 
         return;
     }
@@ -92,6 +43,51 @@
     }
 
 
-    void MainMenu_scene::test(){
-        ofBackground(ofColor::red);
-    }
+	void MainMenu_scene::drawBackground() {
+		int halfWidth = (int) (ofGetWidth() / 2.0);
+		float counter = ((int)(ofGetElapsedTimeMillis() / 3.0) % halfWidth) / (float)halfWidth;
+		float nStrips = 2;
+
+		ofSetColor(bgSecondary);
+
+		ofPushMatrix();
+
+		ofTranslate(ofGetWidth() / 2.0, 0);
+		for (int i = 0; i < nStrips; i++) {
+
+			float shift = i / nStrips;
+			float widthShift = shift + 1 /(2*nStrips);
+
+			float pos = (counter + shift) - floor(counter + shift);
+			float nextPos = counter + widthShift-floor(counter + widthShift);
+
+			int initPos = (int)(halfWidth * (pow(pos, 2)));
+			int widthStrip = (int)(halfWidth * (pow(nextPos, 2)) - initPos);
+
+			if (nextPos < pos) {
+				widthStrip = halfWidth;
+			}
+
+			ofDrawRectangle(initPos, 0, widthStrip, ofGetHeight());
+
+			ofScale(-1, 1);
+			ofDrawRectangle(initPos, 0, widthStrip, ofGetHeight());
+			ofScale(-1, 1);
+
+		}
+
+		ofPopMatrix();
+
+	}
+
+
+	void MainMenu_scene::drawTitle() {
+
+		float counter = ofGetElapsedTimeMillis() / 20.0;
+
+		ofSetColor(bgMain);
+		titleFont.drawString(title, 100, 130 + 5 * sin((counter + 2) / (2 * 3.14)));
+		ofSetColor(ofColor::white);
+		titleFont.drawString(title, 100, 125 + 5 * sin(counter / (2 * 3.14)));
+
+	}
