@@ -1,3 +1,4 @@
+#include "ofMain.h"
 #include "game_scene.h"
  
 
@@ -50,7 +51,7 @@
 
 			for (int i = 0; i < nEnemies; i++) {
 
-				// Si se quieren añadir mas propiedades a los enemigos o añadir tipos, esto no sirve
+				// Si se quieren aï¿½adir mas propiedades a los enemigos o aï¿½adir tipos, esto no sirve
 				GameObject::ColorType randColor = (GameObject::ColorType) (rand() % 2);
 				BuilderEnemies::EnemyType randEnemy = (BuilderEnemies::EnemyType) (rand() % 3);
 				BuilderEnemies::SizeType randSize = (BuilderEnemies::SizeType) (rand() % 3);
@@ -67,7 +68,7 @@
 		updateGameObjectVector(&bulletList);
 		updateGameObjectVector(&enemyList);		
 
-		// TODO: Creo que se puede reducir el numero de bucles entre las colisiones y el recibir daño
+		// TODO: Creo que se puede reducir el numero de bucles entre las colisiones y el recibir daï¿½o
 
 		// Colisiones
 		for (int i = 0; i < enemyList.size(); i++) {
@@ -84,13 +85,13 @@
 
 					soundPlayer[2]->play();
 
-					// TODO: Añadir puntuacion segun tamaño y demás
+					// TODO: Aï¿½adir puntuacion segun tamaï¿½o y demï¿½s
 					score += 1;
 				}
 			}
 		}
 
-		// Recibir daño
+		// Recibir daï¿½o
 		for (int i = 0; i < enemyList.size(); i++) {
 			GameObject * enem = enemyList[i];
 
@@ -99,7 +100,7 @@
 
 				soundPlayer[3]->play();
 
-				// TODO: Comprobar tamaño del enemigo para recibir mas o menos daño
+				// TODO: Comprobar tamaï¿½o del enemigo para recibir mas o menos daï¿½o
 				home.takeDamage(5);
 
 				if (home.getHealth() == 0) {
@@ -235,13 +236,13 @@
 	void Game_scene::loadSounds() {
 		// Cargar sonidos y efectos
 		ofSoundPlayer * soundtrack = new ofSoundPlayer();
-		soundtrack->load("audio/soundtracks/vvvvvv_positive_force.mp3", true);
+		soundtrack->load("audio/soundtracks/vvvvvv_positive_force.mp3", false);
 		soundtrack->setLoop(true);
 		soundtrack->play();
 
 		soundPlayer.push_back(soundtrack);
 
-		// cañon
+		// caï¿½on
 		ofSoundPlayer * cannon_shoot = new ofSoundPlayer();
 		cannon_shoot->load("audio/sound_effects/cannon_shoot.wav");
 		cannon_shoot->setMultiPlay(true);
@@ -255,7 +256,7 @@
 
 		soundPlayer.push_back(enemy_destroyed);
 
-		// recibir daño
+		// recibir daï¿½o
 		ofSoundPlayer * home_damage = new ofSoundPlayer();
 		home_damage->load("audio/sound_effects/home_damage.wav");
 		home_damage->setMultiPlay(true);
