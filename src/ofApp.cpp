@@ -8,13 +8,18 @@ void ofApp::setup(){
 	ofSetWindowTitle("Defend Death Star");
 	ofSetFrameRate(60);
 	
-    this->controller = mainMenu;
+	this->controller = mainMenu;
+
+	//this->controller = endscreen;
+	//this->end_scene.setupScene();
+	//end_scene.score = 20;
 
 	this->mainMenu_scene.setupScene();
 
 	// Escuchar eventos de cambio de escena	
 	ofAddListener(mainMenu_scene.onStartGame, this, &ofApp::changeScene_eventFunction);
 	ofAddListener(game_scene.onDeath, this, &ofApp::changeScene_eventFunction);
+	ofAddListener(end_scene.onRestart, this, &ofApp::changeScene_eventFunction);
 
 	return;
 }
@@ -64,6 +69,8 @@ void ofApp::changeScene_eventFunction(int & targetScene){
 		break;
 	case endscreen:
 		this->end_scene.setupScene();
+		this->end_scene.setScore(this->game_scene.getScore());
+
 		break;
 	default:
 		break;

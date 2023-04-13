@@ -332,6 +332,12 @@
         return;
     }
 
+
+	int Game_scene::getScore() {
+		return this->score;
+	}
+
+
 	bool Game_scene::checkOutOfBounds(GameObject * object) {
 		int oPosX = object->getRefPointX();
 		int oPosY = object->getRefPointY();

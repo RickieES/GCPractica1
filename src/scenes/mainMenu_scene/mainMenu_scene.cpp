@@ -7,13 +7,16 @@
 
 		ofBackground(bgMain);
 
+		int wh;
+		wh = 60 * ofGetWindowHeight() / 768;
+
         this->title="Defend\nDeath Star";
-        this->titleFont.load("V5PRC.TTF", 60, true, true);
-        this->titleFont.setLineHeight(70.0f);
+        this->titleFont.load("V5PRC.TTF", wh, true, true);
+        this->titleFont.setLineHeight(wh * 1.05);
         this->titleFont.setLetterSpacing(1.035);
 
-		this->startTextFont.load("V5PRC.TTF", 30, true, true);
-		this->startTextFont.setLineHeight(40.0f);
+		this->startTextFont.load("V5PRC.TTF", wh * 0.55, true, true);
+		this->startTextFont.setLineHeight(wh * 1.05);
 		this->startTextFont.setLetterSpacing(1.035);
 
         return;
@@ -27,7 +30,7 @@
 
 		this->drawTitle();
 
-		startTextFont.drawString("Press any\n   key to play", 100, 450);
+		startTextFont.drawString("Press space to play", 100, ofGetHeight()*0.4);
 
         return;
     }
@@ -36,7 +39,7 @@
         //UpdateScene function
     //*****************************************************
     void MainMenu_scene::updateScene(){
-		if (ofGetKeyPressed()) {
+		if (ofGetKeyPressed(' ')) {
 			int targetScene = 1;
 			ofNotifyEvent(onStartGame, targetScene);
 		}
@@ -59,7 +62,7 @@
 			float widthShift = shift + 1 /(2*nStrips);
 
 			float pos = (counter + shift) - floor(counter + shift);
-			float nextPos = counter + widthShift-floor(counter + widthShift);
+			float nextPos = counter + widthShift - floor(counter + widthShift);
 
 			int initPos = (int)(halfWidth * (pow(pos, 2)));
 			int widthStrip = (int)(halfWidth * (pow(nextPos, 2)) - initPos);
@@ -85,9 +88,7 @@
 
 		float counter = ofGetElapsedTimeMillis() / 20.0;
 
-		ofSetColor(bgMain);
-		titleFont.drawString(title, 100, 130 + 5 * sin((counter + 2) / (2 * 3.14)));
 		ofSetColor(ofColor::white);
-		titleFont.drawString(title, 100, 125 + 5 * sin(counter / (2 * 3.14)));
+		titleFont.drawString(title, 100, ofGetHeight() * 0.15 + 5 * sin(counter / (2 * 3.14)));
 
 	}

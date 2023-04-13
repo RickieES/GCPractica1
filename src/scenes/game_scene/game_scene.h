@@ -75,6 +75,8 @@ class Game_scene: public AbstractScene {
 		unsigned getLifeBarHeight();
 		void setLifeBarHeight(unsigned value);
 
+		int getScore();
+
 		bool checkOutOfBounds(GameObject* object);
 
 		void updateGameObjectVector(vector<GameObject*>* objList);

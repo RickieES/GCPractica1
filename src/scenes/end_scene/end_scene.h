@@ -18,4 +18,10 @@ class End_scene {
 
 		ofTrueTypeFont gameOverFont;
 		ofTrueTypeFont gameOverBgFont;
+		ofTrueTypeFont subtitleFont;
+
+		int score;
+		void setScore(int value);
+
+		ofEvent<int> onRestart;
 };
