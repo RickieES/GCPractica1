@@ -112,6 +112,8 @@
 				home.takeDamage(5);
 
 				if (home.getHealth() == 0) {
+					soundPlayer[0]->stop();
+
 					int targetScene = 2;
 					ofNotifyEvent(onDeath, targetScene);
 				}

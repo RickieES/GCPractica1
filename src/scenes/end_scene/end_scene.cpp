@@ -20,6 +20,9 @@
 		this->subtitleFont.load("pixelmix.TTF", wh * 0.4, true, true);
 		this->subtitleFont.setLineHeight(wh * 0.6 * 1.05);
 		this->subtitleFont.setLetterSpacing(1.035);
+
+		this->gameOverAudio.load("audio/soundtracks/game_over.mp3");
+		this->gameOverAudio.play();
     }
 
 
@@ -35,6 +38,8 @@
     //*****************************************************
     void End_scene::updateScene(){
 		if (ofGetKeyPressed('r')){
+			gameOverAudio.stop();
+
 			int targetScene = 0;
 			ofNotifyEvent(onRestart, targetScene);
 		}

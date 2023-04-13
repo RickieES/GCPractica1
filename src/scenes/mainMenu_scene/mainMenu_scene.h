@@ -26,4 +26,5 @@ class MainMenu_scene {
 		ofTrueTypeFont titleFont;
 		ofTrueTypeFont startTextFont;
 
+		ofSoundPlayer soundtrack;
 };

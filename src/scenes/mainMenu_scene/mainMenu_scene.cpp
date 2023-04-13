@@ -19,6 +19,11 @@
 		this->startTextFont.setLineHeight(wh * 1.05);
 		this->startTextFont.setLetterSpacing(1.035);
 
+		this->soundtrack.load("audio/soundtracks/vvvvvv_passion_for_exploring.mp3");
+		this->soundtrack.setLoop(true);
+		this->soundtrack.setVolume(0.8f);
+		this->soundtrack.play();
+
         return;
     }
 
@@ -38,6 +43,8 @@
     //*****************************************************
     void MainMenu_scene::updateScene(){
 		if (ofGetKeyPressed(' ')) {
+			soundtrack.stop();
+
 			int targetScene = 1;
 			ofNotifyEvent(onStartGame, targetScene);
 		}

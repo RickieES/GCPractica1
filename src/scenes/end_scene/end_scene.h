@@ -24,4 +24,6 @@ class End_scene {
 		void setScore(int value);
 
 		ofEvent<int> onRestart;
+
+		ofSoundPlayer gameOverAudio;
 };
