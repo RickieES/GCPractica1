@@ -19,10 +19,7 @@
 		this->startTextFont.setLineHeight(wh * 1.05);
 		this->startTextFont.setLetterSpacing(1.035);
 
-		this->soundtrack.load("audio/soundtracks/vvvvvv_passion_for_exploring.mp3");
-		this->soundtrack.setLoop(true);
-		this->soundtrack.setVolume(0.8f);
-		this->soundtrack.play();
+		loadSounds();
 
         return;
     }
@@ -43,12 +40,25 @@
     //*****************************************************
     void MainMenu_scene::updateScene(){
 		if (ofGetKeyPressed(' ')) {
-			soundtrack.stop();
+			soundPlayer[0]->stop();
 
 			int targetScene = 1;
 			ofNotifyEvent(onStartGame, targetScene);
 		}
     }
+
+
+	void MainMenu_scene::loadSounds() {
+		ofSoundPlayer * soundtrack = new ofSoundPlayer();
+
+		soundPlayer = vector<ofSoundPlayer*>();
+		soundPlayer.push_back(soundtrack);
+
+		soundPlayer[0]->load("audio/soundtracks/vvvvvv_passion_for_exploring.mp3");
+		soundPlayer[0]->setLoop(true);
+		soundPlayer[0]->setVolume(0.8f);
+		soundPlayer[0]->play();
+	}
 
 
 	void MainMenu_scene::drawBackground() {

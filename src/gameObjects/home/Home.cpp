@@ -24,6 +24,13 @@ vector<ofRectangle> Home::getEnclosingRectangleList() {
 }
 
 
+void Home::reset() {
+	this->setHealth(100);
+
+	return;
+}
+
+
 void Home::setHealth(int hp) {
 	this->health = hp;
 
@@ -33,7 +40,6 @@ void Home::setHealth(int hp) {
 int Home::getHealth() {
 	return this->health;
 }
-
 
 void Home::drawHPBar() {
 	float percentageHP = health / 100.0;

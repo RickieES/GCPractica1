@@ -10,10 +10,6 @@ void ofApp::setup(){
 	
 	this->controller = mainMenu;
 
-	//this->controller = endscreen;
-	//this->end_scene.setupScene();
-	//end_scene.score = 20;
-
 	this->mainMenu_scene.setupScene();
 
 	// Escuchar eventos de cambio de escena	

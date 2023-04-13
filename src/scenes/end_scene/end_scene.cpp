@@ -4,6 +4,8 @@
         //SetupScene function
     //*****************************************************
     void End_scene::setupScene(){
+		ofResetElapsedTimeCounter();
+
 		ofBackground(bgMain);
 
 		int wh;
@@ -21,8 +23,8 @@
 		this->subtitleFont.setLineHeight(wh * 0.6 * 1.05);
 		this->subtitleFont.setLetterSpacing(1.035);
 
-		this->gameOverAudio.load("audio/soundtracks/game_over.mp3");
-		this->gameOverAudio.play();
+		loadSounds();
+
     }
 
 
@@ -37,13 +39,24 @@
         //UpdateScene function
     //*****************************************************
     void End_scene::updateScene(){
-		if (ofGetKeyPressed('r')){
-			gameOverAudio.stop();
+		if (ofGetKeyPressed('r') || ofGetElapsedTimeMillis() > 30000){
+			soundPlayer[0]->stop();
 
 			int targetScene = 0;
 			ofNotifyEvent(onRestart, targetScene);
 		}
     }
+
+
+	void End_scene::loadSounds() {
+		ofSoundPlayer * soundtrack = new ofSoundPlayer();
+
+		soundPlayer = vector<ofSoundPlayer*>();
+		soundPlayer.push_back(soundtrack);
+
+		soundPlayer[0]->load("audio/soundtracks/game_over.mp3");
+		soundPlayer[0]->play();
+	}
 
 
 	void End_scene::setScore(int value) {

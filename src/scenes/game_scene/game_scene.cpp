@@ -14,17 +14,11 @@
         this->setLimitGameLeft(0);
         this->setLimitGameRight(ofGetWidth());
 
-        this->setLifeBarCoords(ofGetWidth()*0.55, ofGetHeight()*0.02, 0);
-        this->setLifeBarWidth((ofGetWidth()*30)/100);
-        this->setLifeBarHeight((ofGetHeight()*5)/100);
-
-
 		int wh = 60 * ofGetWindowHeight() / 1800;
 
 		this->uiFont.load("pixelmix.TTF", wh, true, true);
 		this->uiFont.setLineHeight(wh*1.05);
 		this->uiFont.setLetterSpacing(1.035);
-
 
         playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, GameObject::ColorType::Color1);
         playerUp.facing = Player::Orientation::SOUTH;
@@ -36,6 +30,13 @@
 		lastPressedShootUp = ofGetElapsedTimeMillis();
 
 		loadSounds();
+
+		bulletList = vector<GameObject*>();
+		enemyList = vector<GameObject*>();
+
+		home.reset();
+
+		score = 0;
 
         return;
     }
@@ -226,6 +227,8 @@
 
 
 	void Game_scene::loadSounds() {
+		soundPlayer = vector<ofSoundPlayer*>();
+
 		// Cargar sonidos y efectos
 		ofSoundPlayer * soundtrack = new ofSoundPlayer();
 		soundtrack->load("audio/soundtracks/vvvvvv_positive_force.mp3", false);
@@ -291,36 +294,6 @@
     }
 	void Game_scene::setLimitGameRight(unsigned value){
         this->limitGameRight = value;
-        return;
-    }
-
-
-	ofPoint Game_scene::getLifeBarCoords(){
-        return this->lifeBarCoords;
-    }
-	void Game_scene::setLifeBarCoords(ofPoint value){
-        this->lifeBarCoords = value;
-        return;
-    }
-	void Game_scene::setLifeBarCoords(int x, int y, int z){
-        this->lifeBarCoords = ofPoint(x, y, 0);
-        return;
-    }
-
-
-	unsigned Game_scene::getLifeBarWidth(){
-        return this->lifeBarWidth;
-    }
-	void Game_scene::setLifeBarWidth(unsigned value){
-        this->lifeBarWidth = value;
-        return;
-    }
-    
-	unsigned Game_scene::getLifeBarHeight(){
-        return this->lifeBarHeight;
-    }
-	void Game_scene::setLifeBarHeight(unsigned value){
-        this->lifeBarHeight = value;
         return;
     }
 

@@ -3,6 +3,7 @@
         //Setup function
     //*****************************************************
     void AbstractScene::setupScene(){
+		ofResetElapsedTimeCounter();
 
         return;
     }

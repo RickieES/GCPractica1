@@ -21,6 +21,8 @@ class Home : public GameObject
 
 		virtual vector<ofRectangle> getEnclosingRectangleList() override;
 
+		void reset();
+
 		void setHealth(int hp);
 		int getHealth();
 

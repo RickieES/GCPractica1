@@ -18,10 +18,6 @@ class Game_scene: public AbstractScene {
 		unsigned limitGameDown;
 		unsigned limitGameLeft;
 		unsigned limitGameRight;
-		
-		ofPoint lifeBarCoords;
-		unsigned lifeBarWidth;
-		unsigned lifeBarHeight;
 
 		int score;
 
@@ -68,14 +64,6 @@ class Game_scene: public AbstractScene {
 		void setLimitGameLeft(unsigned value);
 		unsigned getLimitGameRight();
 		void setLimitGameRight(unsigned value);
-
-		ofPoint getLifeBarCoords();
-		void setLifeBarCoords(ofPoint value);
-		void setLifeBarCoords(int x, int y, int z);
-		unsigned getLifeBarWidth();
-		void setLifeBarWidth(unsigned value);
-		unsigned getLifeBarHeight();
-		void setLifeBarHeight(unsigned value);
 
 		int getScore();
 

@@ -1,18 +1,21 @@
 #pragma once
 #include <string>
 #include "ofMain.h"
+#include "../abstractScene.h"
 #include "game_colorPalette.h"
 using namespace std;
 
 
-class End_scene {
+class End_scene : public AbstractScene {
 	public:
 
 		const string nameScene="end_scene";
 
-		void setupScene();
-		void drawScene();
-		void updateScene();
+		virtual void setupScene() override;
+		virtual void drawScene() override;
+		virtual void updateScene() override;
+
+		virtual void loadSounds() override;
 
 		void drawBackground();
 
@@ -24,6 +27,4 @@ class End_scene {
 		void setScore(int value);
 
 		ofEvent<int> onRestart;
-
-		ofSoundPlayer gameOverAudio;
 };
