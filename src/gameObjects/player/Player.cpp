@@ -8,9 +8,9 @@
 
 void Player::initMembers(int ca) {
 	this->rotationSpeed = 2;
-	this->radius = 50;
-    this->cannonLength = 50;
-    this->cannonWidth = 8;
+	this->radius = 80;
+    this->cannonLength = 60;
+    this->cannonWidth = 20;
     this->cannonAngle = ca;
 	ofColor ac = ofColor(this->getMainColor());
 	ac.setBrightness(ac.getBrightness() * 0.8);
@@ -160,7 +160,7 @@ void Player::draw() {
 
 		ofPushMatrix();
 		{ // Desplazamiento del cañón en sí
-			ofTranslate(0, radius - 5, 0);
+			ofTranslate(0, radius - 10, 0);
 			ofRotateDeg(this->cannonAngle, 0, 0, 1);
 			ofSetColor(this->altColor);
 			ofFill();
@@ -230,10 +230,10 @@ Bullet * Player::shoot() {
 	float sx = sin(cannonAngle * M_PI / 180);
 	float sy = cos(cannonAngle * M_PI / 180);
 	ofPoint bulletInitial = ofPoint(this->getRefPointX() + (signX * sx * cannonLength),
-									this->getRefPointY() + (signY * radius) + (signY * sy * cannonLength), 0);
+									this->getRefPointY() + (signY * (radius - 10)) + (signY * sy * cannonLength), 0);
 
 	// Velocidad horizontal y vertical de la bala
-	int speedMult = 2;
+	int speedMult = 4;
 	sx = signX * sx * 2 * speedMult;
 	sy = signY * sy * 2 * speedMult;
 

@@ -138,7 +138,7 @@
 
 				soundPlayer[1]->play();
 			} 
-			else if (ofGetElapsedTimeMillis() - lastPressedShootUp > 500) 
+			else if (ofGetElapsedTimeMillis() - lastPressedShootUp > 200) 
 			{
 				lastPressedShootUp = ofGetElapsedTimeMillis();
 				bulletList.push_back(playerUp.shoot());
@@ -168,7 +168,7 @@
 
 				soundPlayer[1]->play();
 			}
-			else if (ofGetElapsedTimeMillis() - lastPressedShootDown > 500)
+			else if (ofGetElapsedTimeMillis() - lastPressedShootDown > 200)
 			{
 				lastPressedShootDown = ofGetElapsedTimeMillis();
 				bulletList.push_back(playerDown.shoot());
