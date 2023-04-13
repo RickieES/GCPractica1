@@ -8,13 +8,12 @@ void TriangleEnemy::setup(){}
 //*****************************************************
 void TriangleEnemy::draw()
 {
-    //printf("HOLAAAAA\n");
     ofSetColor(this->getMainColor());
     ofFill();
 
     ofPushMatrix();
         ofTranslate(this->getPosX(), this->getPosY());
-        ofDrawTriangle(0, 0, this->heigth, -this->heigth, this->heigth, this->heigth);
+        ofDrawTriangle(0, 0, this->height, -this->height/2, this->height, this->height/2);
     ofPopMatrix();
 
     return;
@@ -42,11 +41,11 @@ vector<ofRectangle> TriangleEnemy::getEnclosingRectangleList() {
 //*****************************************************
 long TriangleEnemy::getLongSide()
 {
-    return this->heigth;
+    return this->height;
 }
 
 void TriangleEnemy::setLongSide(long value)
 {
-    this->heigth = value;
+    this->height = value;
     return;
 }

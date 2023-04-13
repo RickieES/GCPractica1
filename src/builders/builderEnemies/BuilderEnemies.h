@@ -57,8 +57,8 @@ private:
 	const int squareSize_large_height = 50;
 	int selectSquareSize_height(SizeType sizeType);
 
-	const int triangleSize_small = 10;
-	const int triangleSize_medium = 25;
+	const int triangleSize_small = 30;
+	const int triangleSize_medium = 40;
 	const int triangleSize_large = 50;
 	int selectTriamgleSize(SizeType sizeType);
 

@@ -44,6 +44,8 @@ class Game_scene: public AbstractScene {
 		const int boundsMargin{ 20 };
 		const int nMaxEnemy{ 5 };
 
+		ofTrueTypeFont uiFont;
+
 	public:
 		const string nameScene{ "Game_scene" };
 

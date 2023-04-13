@@ -15,7 +15,7 @@
         this->titleFont.setLineHeight(wh * 1.05);
         this->titleFont.setLetterSpacing(1.035);
 
-		this->startTextFont.load("V5PRC.TTF", wh * 0.55, true, true);
+		this->startTextFont.load("pixelmix.TTF", wh * 0.4, true, true);
 		this->startTextFont.setLineHeight(wh * 1.05);
 		this->startTextFont.setLetterSpacing(1.035);
 
@@ -29,8 +29,6 @@
 		this->drawBackground();
 
 		this->drawTitle();
-
-		startTextFont.drawString("Press space to play", 100, ofGetHeight()*0.4);
 
         return;
     }
@@ -90,5 +88,8 @@
 
 		ofSetColor(ofColor::white);
 		titleFont.drawString(title, 100, ofGetHeight() * 0.15 + 5 * sin(counter / (2 * 3.14)));
+
+
+		startTextFont.drawString("Press space to play", 100, ofGetHeight()*0.5);
 
 	}

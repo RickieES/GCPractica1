@@ -18,6 +18,14 @@
         this->setLifeBarWidth((ofGetWidth()*30)/100);
         this->setLifeBarHeight((ofGetHeight()*5)/100);
 
+
+		int wh = 60 * ofGetWindowHeight() / 1800;
+
+		this->uiFont.load("pixelmix.TTF", wh, true, true);
+		this->uiFont.setLineHeight(wh*1.05);
+		this->uiFont.setLetterSpacing(1.035);
+
+
         playerUp = Player(ofPoint(ofGetWidth()*0.3, 0), 0, GameObject::ColorType::Color1);
         playerUp.facing = Player::Orientation::SOUTH;
         playerDown = Player(ofPoint(ofGetWidth()*0.3, ofGetHeight()), 0, GameObject::ColorType::Color2);
@@ -205,31 +213,13 @@
 
 
 	void Game_scene::drawUI() {
-		float percentageHP = home.getHealth() / 100.0;
-
-		// Barra de vida
-		ofSetColor(ofColor::black);
-		//int offset = 10; // Por si fuese necesario en un futuro
-		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth, lifeBarHeight);
-
-		if (home.getHealth() < 20) {
-			ofSetColor(ofColor::red);
-		} else {
-			ofSetColor(ofColor::green);
-		}
-
-		ofDrawRectangle(lifeBarCoords.x, lifeBarCoords.y, lifeBarWidth*percentageHP, lifeBarHeight);
-
-		ofSetColor(ofColor::black);
-		ofDrawBitmapString(home.getHealth(), lifeBarCoords.x + 10, lifeBarCoords.y + 20);
 
 		ofSetColor(ofColor::white);
 
-		// Puntuacion
-		ofDrawBitmapString(score, ofGetWidth() - 50, 20);
+		uiFont.drawString("Score: " + ofToString(score), ofGetWidth()*0.7, 2 * uiFont.getSize());
 
 		// Framerate (opcional)
-		ofDrawBitmapString(ofGetFrameRate(), 20, 20);
+		/*ofDrawBitmapString(ofGetFrameRate(), 20, 20);*/
     }
 
 
@@ -242,7 +232,7 @@
 
 		soundPlayer.push_back(soundtrack);
 
-		// ca�on
+		// cañon
 		ofSoundPlayer * cannon_shoot = new ofSoundPlayer();
 		cannon_shoot->load("audio/sound_effects/cannon_shoot.wav");
 		cannon_shoot->setMultiPlay(true);
@@ -256,7 +246,7 @@
 
 		soundPlayer.push_back(enemy_destroyed);
 
-		// recibir da�o
+		// recibir daño
 		ofSoundPlayer * home_damage = new ofSoundPlayer();
 		home_damage->load("audio/sound_effects/home_damage.wav");
 		home_damage->setMultiPlay(true);
@@ -350,10 +340,6 @@
 	}
 
 	void Game_scene::updateGameObjectVector(vector<GameObject*>* objList) {
-		//for (auto e : objList) {
-		//	e->update();
-		//}
-
 		// Actualiza y comprueba si esta fuera de la pantalla
 		for (int i = 0; i < objList->size(); i++) {
 			(*objList)[i]->update();
@@ -371,21 +357,12 @@
 	}
 
 	void Game_scene::drawBackground() {
-		// TODO: Hacer relativo
 		ofSetColor(bgSecondary);
-		int counter = - ((int)(ofGetElapsedTimeMillis()/10.0) % 200);
-		int bgSectionWidth = 100;
 
-		for (int i = 0; i <= ofGetWidth()/200 + 1; i++) {
+		int bgSectionWidth = ofGetWidth()/10.0;
+		int counter = - (int)(ofGetElapsedTimeMillis()/10.0) % (2*bgSectionWidth);
+
+		for (int i = 0; i <= ofGetWidth()/(2*bgSectionWidth) + 1; i++) {
 			ofDrawRectangle(counter + i*(bgSectionWidth*2), 0, bgSectionWidth, ofGetHeight());
 		}
-
-		/*
-		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.2);
-		ofDrawRectangle(0, ofGetHeight()*0.8, ofGetWidth(), ofGetHeight()*0.2);*/
-
-/*
-		ofSetColor(bgTertiary);
-		ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight()*0.1);
-		ofDrawRectangle(0, ofGetHeight()*0.9, ofGetWidth(), ofGetHeight()*0.1);*/
 	}

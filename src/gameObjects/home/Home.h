@@ -18,15 +18,13 @@ class Home : public GameObject
 		};
 
 		virtual void draw() override;
-		
-		/*
-		virtual void update() override;
-		*/
 
 		virtual vector<ofRectangle> getEnclosingRectangleList() override;
 
 		void setHealth(int hp);
 		int getHealth();
+
+		void drawHPBar();
 
 		void takeDamage(int dmg);
 

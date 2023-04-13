@@ -17,7 +17,7 @@
 		this->gameOverBgFont.setLineHeight(wh * 0.75 * 1.05);
 		this->gameOverBgFont.setLetterSpacing(1.035);
 
-		this->subtitleFont.load("V5PRC.TTF", wh * 0.6, true, true);
+		this->subtitleFont.load("pixelmix.TTF", wh * 0.4, true, true);
 		this->subtitleFont.setLineHeight(wh * 0.6 * 1.05);
 		this->subtitleFont.setLetterSpacing(1.035);
     }

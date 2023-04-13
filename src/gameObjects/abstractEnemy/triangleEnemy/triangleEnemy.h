@@ -8,7 +8,7 @@ class TriangleEnemy : public AbstractEnemy
 {
 
 private:
-	float heigth;
+	float height;
 
 public:
 	TriangleEnemy(int nLimitUp, int nLimitDown, int nLimitLeft, int nLimitRight,
